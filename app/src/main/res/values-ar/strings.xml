@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Welcome_to_the_program_guide_smart_to_serve_pilgrims">اهلا بكم فى برنامج المرشد الذكى لخدمة الحجاج</string>
+    <string name="UserName">اسم المستخدم</string>
+    <string name="Password">كلمة المرور</string>
+    <string name="Register">تسجيل</string>
+    <string name="Follow_the_flights">Follow the flights</string>
+    <string name="Search_bus_number">Search bus number</string>
+</resources>

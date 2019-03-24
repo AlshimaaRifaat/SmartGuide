@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/row_follow_flights_image"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:src="@drawable/group118"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_57sdp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:background="#154677"
+
+        >
+
+        <TextView
+            android:id="@+id/row_follow_flights_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+            android:text="سلطه خضراء"
+            android:textColor="#fff"
+            android:textSize="@dimen/_11sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/row_follow_flights_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row_follow_flights_title"
+            android:layout_centerHorizontal="true"
+            android:text="50 dollar"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="#fff"
+           />
+    </RelativeLayout>
+
+</RelativeLayout>

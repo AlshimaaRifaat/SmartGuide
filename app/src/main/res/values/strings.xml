@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SmartGuide</string>
+    <string name="Welcome_to_the_program_guide_smart_to_serve_pilgrims">Welcome to the program of smart guide to serve pilgrims</string>
+    <string name="UserName">User Name</string>
+    <string name="Password">Password</string>
+    <string name="Register">Register</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Follow_the_flights">Follow the flights</string>
+    <string name="Search_bus_number">Search bus number</string>
+</resources>

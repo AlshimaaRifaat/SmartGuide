@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fcf9f9"
+    tools:context=".fragment.LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/login_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Welcome_to_the_program_guide_smart_to_serve_pilgrims"
+        android:textColor="#4175a3"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_147sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        />
+    <android.support.v7.widget.CardView
+        android:id="@+id/login_cardV_user_name"
+        android:layout_below="@+id/login_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/UserName"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_13sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/login_cardV_password"
+        android:layout_below="@+id/login_cardV_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Password"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_15sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/login_btn_register"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@drawable/btn_register"
+        android:layout_marginTop="@dimen/_55sdp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_13sdp"
+        android:textColor="#fff"
+        android:text="@string/Register"
+        android:textAllCaps="false"
+        android:layout_below="@id/login_cardV_password"
+        android:layout_marginBottom="@dimen/_32sdp"
+        />
+
+</RelativeLayout>
