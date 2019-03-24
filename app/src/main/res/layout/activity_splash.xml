@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
+    android:background="#ece9e6"
     tools:context=".SplashActivity">
 
 
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_12sdp"
+    android:layout_marginRight="@dimen/_12sdp"
+    android:background="@drawable/logo3"
+    android:layout_centerInParent="true"/>
 </RelativeLayout>
