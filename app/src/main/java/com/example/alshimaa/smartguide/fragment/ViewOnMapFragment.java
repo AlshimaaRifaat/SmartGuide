@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.alshimaa.smartguide.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback {
 GoogleMap mGoogleMap;
 MapView mapView;
+ImageView iconPlus;
 
 View view;
     public ViewOnMapFragment() {
@@ -37,7 +39,24 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_view_on_map, container, false);
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        init();
+
+        iconPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             getFragmentManager().beginTransaction().replace(R.id.content_navigation,new
+                       NewTripFragment()).commit();
+            }
+        });
         return view;
+
+    }
+
+    private void init() {
+        iconPlus=view.findViewById(R.id.view_on_map_icon_plus);
     }
 
     @Override

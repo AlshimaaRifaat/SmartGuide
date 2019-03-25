@@ -29,10 +29,18 @@
                  android:background="@drawable/favorite_heart_button"
                  />-->
             <ImageView
+                android:id="@+id/follow_flights_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-
+                android:src="@drawable/notifications_button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/follow_flights_notification"
+                android:layout_marginLeft="@dimen/_14sdp"
+                android:src="@drawable/group153"
                 />
             <TextView
                 android:layout_width="wrap_content"
