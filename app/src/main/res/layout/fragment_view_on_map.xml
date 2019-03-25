@@ -6,11 +6,9 @@
     tools:context=".fragment.ViewOnMapFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:textSize="@dimen/_40sdp"
-        android:text="ViewOnMap" />
+  <com.google.android.gms.maps.MapView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/map"></com.google.android.gms.maps.MapView>
 
 </FrameLayout>
