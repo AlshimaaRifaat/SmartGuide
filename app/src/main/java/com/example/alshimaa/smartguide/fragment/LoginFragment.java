@@ -1,6 +1,7 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.activity.NavigationActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,8 +40,9 @@ View view;
     }
 
     private void performRegister() {
-        getFragmentManager().beginTransaction().replace(R.id.main_frame_container,new FollowFlightsFragment())
-                .commit();
+        Intent i = new Intent(getActivity(), NavigationActivity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0,0);
     }
 
     private void init() {

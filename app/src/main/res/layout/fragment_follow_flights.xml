@@ -13,7 +13,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/card_tool_bar"
+        android:id="@+id/follow_flights_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_42sdp"
         android:background="#154677">
