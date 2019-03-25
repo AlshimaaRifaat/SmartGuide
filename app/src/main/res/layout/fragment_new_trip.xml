@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    tools:context=".fragment.NewTripFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="اسم الرحله"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_13sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/new_trip_guide_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_22sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_below="@id/new_trip_cardV_user_name"
+        >
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/call_us_reason_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_55sdp"
+
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            app:backgroundTint="#1c98df"
+
+
+            ></android.support.v7.widget.AppCompatSpinner>
+    </RelativeLayout>
+</RelativeLayout>
