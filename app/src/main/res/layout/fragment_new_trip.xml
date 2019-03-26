@@ -10,9 +10,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.CardView
-        android:id="@+id/new_trip_cardV_user_name"
+        android:id="@+id/new_trip_cardV_trip_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_37sdp"
         android:layout_marginTop="@dimen/_37sdp"
         android:layout_marginStart="@dimen/_14sdp"
         android:layout_marginEnd="@dimen/_14sdp"
@@ -22,35 +22,171 @@
         >
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_37sdp"
             android:hint="اسم الرحله"
             android:textColorHint="#bababa"
             android:textColor="#bababa"
             android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
     </android.support.v7.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/new_trip_guide_name"
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_guide_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_47sdp"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:layout_below="@id/new_trip_cardV_user_name"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_trip_name"
         >
 
         <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/call_us_reason_spinner"
+            android:id="@+id/new_trip_spinner_guide_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_55sdp"
-
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            app:backgroundTint="#1c98df"
-
+            android:layout_height="@dimen/_37sdp"
+            app:backgroundTint="#b7b7b7"
 
             ></android.support.v7.widget.AppCompatSpinner>
-    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_bus_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_guide_name"
+        >
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/new_trip_spinner_bus_number"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            app:backgroundTint="#b7b7b7"
+
+            ></android.support.v7.widget.AppCompatSpinner>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_driver_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_bus_number"
+        >
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/new_trip_spinner_driver_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            app:backgroundTint="#b7b7b7"
+
+            ></android.support.v7.widget.AppCompatSpinner>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_receipt_Place_of_pilgrims"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_driver_name"
+        >
+        <EditText
+            android:id="@+id/new_trip_Etext_receipt_Place_of_pilgrims"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            android:hint="@string/Place_of_receipt_of_pilgrims"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_download_Place_of_pilgrims"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_receipt_Place_of_pilgrims"
+        >
+        <EditText
+            android:id="@+id/new_trip_Etext_download_Place_of_pilgrims"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            android:hint="@string/Download_place_of_pilgrims"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/new_trip_cardV_trip_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_18sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_below="@+id/new_trip_cardV_receipt_Place_of_pilgrims"
+        >
+        <EditText
+            android:id="@+id/new_trip_Etext_trip_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            android:hint="@string/The_date_of_the_trip"
+            android:textColorHint="#bababa"
+            android:textColor="#bababa"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
+            android:textSize="@dimen/_13sdp"
+            android:backgroundTint="#fff"
+            />
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/new_trip_btn_Create_atrip"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@drawable/btn_register"
+        android:layout_marginTop="@dimen/_55sdp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_13sdp"
+        android:textColor="#fff"
+        android:text="@string/Create_atrip"
+        android:textAllCaps="false"
+        android:layout_below="@id/new_trip_cardV_trip_date"
+        android:layout_marginBottom="@dimen/_32sdp"
+        />
 </RelativeLayout>

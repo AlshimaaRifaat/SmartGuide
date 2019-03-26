@@ -6,4 +6,8 @@
     <string name="Register">تسجيل</string>
     <string name="Follow_the_flights">Follow the flights</string>
     <string name="Search_bus_number">Search bus number</string>
+    <string name="Place_of_receipt_of_pilgrims">مكان استلام الحجاج</string>
+    <string name="Download_place_of_pilgrims">مكان تنزيل الحجاج</string>
+    <string name="The_date_of_the_trip">ميعاد الرحله</string>
+    <string name="Create_atrip">انشاء رحله</string>
 </resources>

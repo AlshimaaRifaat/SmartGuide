@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SmartGuide</string>
     <string name="Welcome_to_the_program_guide_smart_to_serve_pilgrims">Welcome to the program of smart guide to serve pilgrims</string>
-    <string name="UserName">User Name</string>
-    <string name="Password">Password</string>
-    <string name="Register">Register</string>
+    <string name="UserName">اسم المستخدم</string>
+    <string name="Password">كلمة المرور</string>
+    <string name="Register">تسجيل</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,4 +16,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="Place_of_receipt_of_pilgrims">مكان استلام الحجاج</string>
+    <string name="Download_place_of_pilgrims">مكان تنزيل الحجاج</string>
+    <string name="The_date_of_the_trip">ميعاد الرحله</string>
+    <string name="Create_atrip">انشاء رحله</string>
 </resources>

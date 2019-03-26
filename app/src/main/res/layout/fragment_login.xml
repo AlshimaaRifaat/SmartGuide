@@ -41,6 +41,7 @@
             android:textColorHint="#bababa"
             android:textColor="#bababa"
             android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
@@ -64,7 +65,8 @@
             android:hint="@string/Password"
             android:textColorHint="#bababa"
             android:textColor="#bababa"
-            android:paddingStart="@dimen/_15sdp"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
