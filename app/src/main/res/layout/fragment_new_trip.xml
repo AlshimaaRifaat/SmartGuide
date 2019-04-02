@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_37sdp"
             app:backgroundTint="#b7b7b7"
-
+            android:prompt="@string/GuideName"
             ></android.support.v7.widget.AppCompatSpinner>
     </android.support.v7.widget.CardView>
 

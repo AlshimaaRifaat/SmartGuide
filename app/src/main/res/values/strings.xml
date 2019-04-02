@@ -21,5 +21,6 @@
     <string name="The_date_of_the_trip">ميعاد الرحله</string>
     <string name="Create_atrip">انشاء رحله</string>
     <string name="Old_trip">رحلة قديمة</string>
-    <string name="Email">Email</string>
+    <string name="Email">البريد الالكترونى</string>
+    <string name="GuideName">اسم المرشد</string>
 </resources>
