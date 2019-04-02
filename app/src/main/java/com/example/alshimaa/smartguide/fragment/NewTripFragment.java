@@ -3,6 +3,9 @@ package com.example.alshimaa.smartguide.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +14,14 @@ import android.widget.Spinner;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.adapter.BusNumberSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.GuideNameSpinnerAdapter;
+import com.example.alshimaa.smartguide.model.GetBusNumberData;
 import com.example.alshimaa.smartguide.model.GetGuideNameData;
+import com.example.alshimaa.smartguide.presenter.GetBusNumberPresenter;
 import com.example.alshimaa.smartguide.presenter.GetGuideNamePresenter;
+import com.example.alshimaa.smartguide.view.GetBusNumberView;
 import com.example.alshimaa.smartguide.view.GetGuideNameView;
 
 import java.util.ArrayList;
@@ -22,7 +30,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewTripFragment extends Fragment implements GetGuideNameView{
+public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView{
 
     GetGuideNamePresenter getGuideNamePresenter;
     Spinner guideNameSpinner;
@@ -30,7 +38,14 @@ public class NewTripFragment extends Fragment implements GetGuideNameView{
     String GuideNameModel;
     GuideNameSpinnerAdapter guideNameSpinnerAdapter;
 
+    GetBusNumberPresenter getBusNumberPresenter;
+    Spinner busNumberSpinner;
+    Integer BusNumberModelID;
+    String BusNumberModel;
+    BusNumberSpinnerAdapter busNumberSpinnerAdapter;
+
     NetworkConnection networkConnection;
+    Toolbar toolbar;
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -42,10 +57,36 @@ View view;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_new_trip, container, false);
         init();
+        NavigationActivity.toggle = new ActionBarDrawerToggle(
+                getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
+        NavigationActivity.toggle.syncState();
+
+        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.group151);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
+                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
         networkConnection=new NetworkConnection( getContext() );
         GuideName();
+        BusNumber();
 
         return view;
+    }
+
+    private void BusNumber() {
+        getBusNumberPresenter=new GetBusNumberPresenter(getContext(),this);
+        getBusNumberPresenter.getBusNumberResult( "ar" );
     }
 
     private void GuideName() {
@@ -55,6 +96,8 @@ View view;
 
     private void init() {
         guideNameSpinner=view.findViewById( R.id.new_trip_spinner_guide_name );
+        toolbar=view.findViewById( R.id.new_trip_tool_bar );
+        busNumberSpinner=view.findViewById( R.id.new_trip_spinner_bus_number );
     }
 
     @Override
@@ -64,7 +107,6 @@ View view;
         {
             locations.add( getGuideNameDataList.get( i ).getName() );
         }
-
         guideNameSpinnerAdapter =new GuideNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
         guideNameSpinnerAdapter.addAll( locations );
         guideNameSpinnerAdapter.add( "اسم المرشد");
@@ -81,6 +123,48 @@ View view;
                 else
                 {
                     GuideNameModel=guideNameSpinner.getSelectedItem().toString();
+                    /*for (i=0;i<locationDatalist.size();i++)
+                    {
+                        if(locationDatalist.get(i).getCountry().equals( LocationModel ))
+                        {
+                            LocationModelID=locationDatalist.get(i).getId();
+                        }
+                    }*/
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        } );
+
+    }
+
+    @Override
+    public void showBusNumberList(List<GetBusNumberData> getBusNumberDataListt) {
+        ArrayList<String> buses=new ArrayList<>(  );
+        for(int i=0;i<getBusNumberDataListt.size();i++)
+        {
+            buses.add( getBusNumberDataListt.get( i ).getName() );
+        }
+        busNumberSpinnerAdapter =new BusNumberSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
+        busNumberSpinnerAdapter.addAll( buses );
+        busNumberSpinnerAdapter.add( "رقم الحافلة");
+        busNumberSpinner.setAdapter( busNumberSpinnerAdapter );
+        busNumberSpinner.setPrompt("رقم الحافلة");
+        busNumberSpinner.setSelection( busNumberSpinnerAdapter.getCount() );
+        busNumberSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (busNumberSpinner.getSelectedItem()=="رقم الحافلة")
+                {
+
+                }
+                else
+                {
+                    BusNumberModel=busNumberSpinner.getSelectedItem().toString();
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))

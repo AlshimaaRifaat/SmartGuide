@@ -23,4 +23,7 @@
     <string name="Old_trip">رحلة قديمة</string>
     <string name="Email">البريد الالكترونى</string>
     <string name="GuideName">اسم المرشد</string>
+    <string name="NewTrip">رحله جديده</string>
+    <string name="BusNumber">رقم الحافلة</string>
+    <string name="DriverName">اسم السائق</string>
 </resources>
