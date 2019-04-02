@@ -35,9 +35,10 @@
         app:cardElevation="@dimen/_5sdp"
         >
         <EditText
+            android:id="@+id/login_Etext_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/UserName"
+            android:hint="@string/Email"
             android:textColorHint="#bababa"
             android:textColor="#bababa"
             android:paddingStart="@dimen/_13sdp"
@@ -60,6 +61,7 @@
         app:cardElevation="@dimen/_5sdp"
         >
         <EditText
+            android:id="@+id/login_Etext_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Password"

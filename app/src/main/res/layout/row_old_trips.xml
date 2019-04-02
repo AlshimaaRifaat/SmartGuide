@@ -14,31 +14,29 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_43sdp"
         android:background="#fff"
-
        >
 
-
-
         <TextView
-            android:id="@+id/row_card_name"
+            android:id="@+id/row_old_trip_trip_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="سلطه خضراء"
+            android:text="اسم الرحله"
             android:textStyle="bold"
-            android:layout_marginRight="@dimen/_7sdp"
-            android:textColor="#fff"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:textColor="#b3b3b3"
             android:textSize="@dimen/_12sdp"
             android:layout_alignParentRight="true"/>
         <TextView
-            android:id="@+id/row_card_price"
+            android:id="@+id/row_old_trip_driver_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/row_card_name"
+            android:layout_below="@+id/row_old_trip_trip_name"
             android:layout_marginRight="@dimen/_7sdp"
-            android:text="50 dollar"
+            android:text="اسم السائق"
             android:gravity="end"
             android:textSize="@dimen/_12sdp"
-            android:textColor="#fff"
+            android:textColor="#b3b3b3"
             android:layout_alignParentRight="true"/>
 
         <ImageView
