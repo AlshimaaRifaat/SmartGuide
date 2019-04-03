@@ -16,12 +16,16 @@ import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.adapter.BusNumberSpinnerAdapter;
+import com.example.alshimaa.smartguide.adapter.DriverNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.GuideNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.model.GetBusNumberData;
+import com.example.alshimaa.smartguide.model.GetDriverNameData;
 import com.example.alshimaa.smartguide.model.GetGuideNameData;
 import com.example.alshimaa.smartguide.presenter.GetBusNumberPresenter;
+import com.example.alshimaa.smartguide.presenter.GetDriverNamePresenter;
 import com.example.alshimaa.smartguide.presenter.GetGuideNamePresenter;
 import com.example.alshimaa.smartguide.view.GetBusNumberView;
+import com.example.alshimaa.smartguide.view.GetDriverNameView;
 import com.example.alshimaa.smartguide.view.GetGuideNameView;
 
 import java.util.ArrayList;
@@ -30,7 +34,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView{
+public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView
+,GetDriverNameView{
 
     GetGuideNamePresenter getGuideNamePresenter;
     Spinner guideNameSpinner;
@@ -43,6 +48,12 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     Integer BusNumberModelID;
     String BusNumberModel;
     BusNumberSpinnerAdapter busNumberSpinnerAdapter;
+
+    GetDriverNamePresenter getDriverNamePresenter;
+    Spinner driverNameSpinner;
+    Integer DriverNameModelID;
+    String DriverNameModel;
+    DriverNameSpinnerAdapter driverNameSpinnerAdapter;
 
     NetworkConnection networkConnection;
     Toolbar toolbar;
@@ -80,8 +91,14 @@ View view;
         networkConnection=new NetworkConnection( getContext() );
         GuideName();
         BusNumber();
+        driverName();
 
         return view;
+    }
+
+    private void driverName() {
+        getDriverNamePresenter=new GetDriverNamePresenter(getContext(),this);
+        getDriverNamePresenter.getDriverNameResult( "ar" );
     }
 
     private void BusNumber() {
@@ -98,17 +115,18 @@ View view;
         guideNameSpinner=view.findViewById( R.id.new_trip_spinner_guide_name );
         toolbar=view.findViewById( R.id.new_trip_tool_bar );
         busNumberSpinner=view.findViewById( R.id.new_trip_spinner_bus_number );
+        driverNameSpinner=view.findViewById( R.id.new_trip_spinner_driver_name );
     }
 
     @Override
     public void showGuideNameList(List<GetGuideNameData> getGuideNameDataList) {
-        ArrayList<String> locations=new ArrayList<>(  );
+        ArrayList<String> guideNames=new ArrayList<>(  );
         for(int i=0;i<getGuideNameDataList.size();i++)
         {
-            locations.add( getGuideNameDataList.get( i ).getName() );
+            guideNames.add( getGuideNameDataList.get( i ).getName() );
         }
         guideNameSpinnerAdapter =new GuideNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        guideNameSpinnerAdapter.addAll( locations );
+        guideNameSpinnerAdapter.addAll( guideNames );
         guideNameSpinnerAdapter.add( "اسم المرشد");
         guideNameSpinner.setAdapter( guideNameSpinnerAdapter );
         guideNameSpinner.setPrompt("اسم المرشد");
@@ -165,6 +183,48 @@ View view;
                 else
                 {
                     BusNumberModel=busNumberSpinner.getSelectedItem().toString();
+                    /*for (i=0;i<locationDatalist.size();i++)
+                    {
+                        if(locationDatalist.get(i).getCountry().equals( LocationModel ))
+                        {
+                            LocationModelID=locationDatalist.get(i).getId();
+                        }
+                    }*/
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        } );
+
+    }
+
+    @Override
+    public void showDriverNameList(List<GetDriverNameData> getDriverNameDataList) {
+        ArrayList<String> driverNames=new ArrayList<>(  );
+        for(int i=0;i<getDriverNameDataList.size();i++)
+        {
+            driverNames.add( getDriverNameDataList.get( i ).getName() );
+        }
+        driverNameSpinnerAdapter =new DriverNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
+        driverNameSpinnerAdapter.addAll( driverNames );
+        driverNameSpinnerAdapter.add( "اسم السائق");
+        driverNameSpinner.setAdapter(  driverNameSpinnerAdapter );
+        driverNameSpinner.setPrompt("اسم السائق");
+        driverNameSpinner.setSelection(  driverNameSpinnerAdapter.getCount() );
+        driverNameSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if ( driverNameSpinner.getSelectedItem()=="اسم السائق")
+                {
+
+                }
+                else
+                {
+                    DriverNameModel= driverNameSpinner.getSelectedItem().toString();
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))
