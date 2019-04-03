@@ -16,4 +16,5 @@
     <string name="NewTrip">رحله جديده</string>
     <string name="BusNumber">رقم الحافلة</string>
     <string name="DriverName">اسم السائق</string>
+    <string name="MemberName">اسم عضو النقل والتصعيد</string>
 </resources>

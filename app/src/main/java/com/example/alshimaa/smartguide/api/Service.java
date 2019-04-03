@@ -3,6 +3,7 @@ package com.example.alshimaa.smartguide.api;
 import com.example.alshimaa.smartguide.model.GetBusNumberResponse;
 import com.example.alshimaa.smartguide.model.GetDriverNameResponse;
 import com.example.alshimaa.smartguide.model.GetGuideNameResponse;
+import com.example.alshimaa.smartguide.model.GetMemeberNameResponse;
 import com.example.alshimaa.smartguide.model.LoginResponse;
 
 import java.util.Map;
@@ -23,4 +24,7 @@ public interface Service {
 
     @POST("getDriver")
     Call<GetDriverNameResponse> getDriverNameData(@Body Map<String,String> map);
+
+    @POST("getMember")
+    Call<GetMemeberNameResponse> getMemeberNameData(@Body Map<String,String> map);
 }
