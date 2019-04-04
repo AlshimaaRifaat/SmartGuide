@@ -26,4 +26,5 @@
     <string name="pleaseEnterDownloadPlace_of_pilgrims">من فضلك ,ادخل مكان تنزيل الحجاج</string>
     <string name="pleaseEntertripStartDate">من فضلك ,ادخل موعد بدء الرحله</string>
     <string name="pleaseEnterTripEndDate">من فضلك ,ادخل موعد انتهاء الرحله</string>
+    <string name="ViewOnMap">عرض على الخريطه</string>
 </resources>

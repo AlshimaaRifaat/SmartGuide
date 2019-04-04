@@ -175,6 +175,20 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
+        <Button
+            android:id="@+id/details_follow_flights_btn_view_on_map"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:background="@drawable/btn_register"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#fff"
+            android:text="@string/ViewOnMap"
+            android:textAllCaps="false"
+            android:layout_below="@id/details_follow_flights_card_details"
+            android:layout_marginBottom="@dimen/_32sdp"
+            />
         </RelativeLayout>
 
 

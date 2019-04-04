@@ -40,10 +40,10 @@
             android:layout_alignParentRight="true"/>
 
         <ImageView
-            android:id="@+id/row_card_minus"
+            android:id="@+id/row_card_edit"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_20sdp"
-
+            android:background="@drawable/edit"
             android:layout_marginLeft="@dimen/_7sdp"
             android:layout_centerVertical="true"
 
@@ -55,7 +55,7 @@
             android:textColor="#fff"
             android:layout_centerVertical="true"
             android:textSize="@dimen/_18sdp"
-            android:layout_toRightOf="@id/row_card_minus"
+            android:layout_toRightOf="@id/row_card_edit"
             android:layout_marginLeft="@dimen/_12sdp"
 
             />
@@ -66,14 +66,8 @@
             android:layout_toRightOf="@id/row_card_quantity"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_12sdp"
+            android:background="@drawable/rubbish_bin"
             />
-        <ImageView
-            android:id="@+id/row_card_icon_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_toRightOf="@+id/row_card_plus"
-            android:layout_marginLeft="@dimen/_26sdp"
-            android:layout_centerVertical="true"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.alshimaa.smartguide.R;
@@ -25,6 +26,8 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
 
     FollowFlightsData followFlightsData;
     Bundle bundle;
+
+    Button viewOnMapBtn;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -65,6 +68,13 @@ View view;
             logoStatusTxt.setTypeface(customFontBold);
 
         }
+        viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                       new ViewOnMapFragment()).addToBackStack(null).commit();
+            }
+        });
         return view;
     }
 
@@ -79,6 +89,7 @@ View view;
         endDateTxt=view.findViewById(R.id.details_follow_flights_end_date);
         logoBusNumberTxt=view.findViewById(R.id.details_follow_flights_logo_bus_number);
         logoStatusTxt=view.findViewById(R.id.details_follow_flights_logo_satus);
+        viewOnMapBtn=view.findViewById(R.id.details_follow_flights_btn_view_on_map);
     }
 
 }
