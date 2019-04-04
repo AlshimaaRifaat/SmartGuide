@@ -98,7 +98,7 @@
         android:layout_below="@+id/follow_flights_card_edit_text_search"
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         ></android.support.v7.widget.RecyclerView>
     </RelativeLayout>
 </ScrollView>

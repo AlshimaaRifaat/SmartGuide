@@ -46,9 +46,9 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
         // Typeface customFontBold = Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
        /* holder.address.setText(currentExhibtionDataList.get( position ).getAddress());*/
 
-        Typeface customFontMedium = Typeface.createFromAsset( context.getAssets(), "SST Arabic Light.ttf" );
-        holder.busNumber.setTypeface( customFontMedium );
-        holder.status.setTypeface( customFontMedium );
+        Typeface customFontBold= Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
+        holder.busNumber.setTypeface( customFontBold );
+        holder.status.setTypeface( customFontBold );
 
        /* holder.address.setTypeface( customFontRegular );*/
 
