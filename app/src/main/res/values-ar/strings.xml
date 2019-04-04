@@ -4,11 +4,10 @@
     <string name="UserName">اسم المستخدم</string>
     <string name="Password">كلمة المرور</string>
     <string name="Register">تسجيل</string>
-    <string name="Follow_the_flights">Follow the flights</string>
+    <string name="Follow_the_flights">متابعه الرحلات</string>
     <string name="Search_bus_number">Search bus number</string>
     <string name="Place_of_receipt_of_pilgrims">مكان استلام الحجاج</string>
     <string name="Download_place_of_pilgrims">مكان تنزيل الحجاج</string>
-    <string name="The_date_of_the_trip">ميعاد الرحله</string>
     <string name="Create_atrip">انشاء رحله</string>
     <string name="Old_trip">رحلة قديمة</string>
     <string name="Email">البريد الالكترونى</string>
@@ -17,4 +16,14 @@
     <string name="BusNumber">رقم الحافلة</string>
     <string name="DriverName">اسم السائق</string>
     <string name="MemberName">اسم عضو النقل والتصعيد</string>
+    <string name="trip_arabic_name">اسم الرحله عربى</string>
+    <string name="trip_Latin_name">اسم الرحله لاتينى</string>
+    <string name="start_date_of_the_trip">موعد بدء الرحله</string>
+    <string name="end_date_of_the_trip">موعد انتهاء الرحله</string>
+    <string name="pleaseEnterTripArabicName">من فضلك ,ادخل اسم الرحله عربى</string>
+    <string name="pleaseEnterTripLatinName">من فضلك ,ادخل اسم الرحله لاتينى</string>
+    <string name="pleaseEnterReceiptPlace_Of_Pilgrims">من فضلك ,ادخل مكان استلام الحجاج</string>
+    <string name="pleaseEnterDownloadPlace_of_pilgrims">من فضلك ,ادخل مكان تنزيل الحجاج</string>
+    <string name="pleaseEntertripStartDate">من فضلك ,ادخل موعد بدء الرحله</string>
+    <string name="pleaseEnterTripEndDate">من فضلك ,ادخل موعد انتهاء الرحله</string>
 </resources>

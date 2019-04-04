@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.OldTripFragment;
 import com.example.alshimaa.smartguide.fragment.TripsInProgressFragment;
 import com.example.alshimaa.smartguide.fragment.ViewMyGuidesFragment;
@@ -45,7 +46,7 @@ public class NavigationActivity extends AppCompatActivity
         });*/
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
-        onNavigationItemSelected(navigationView.getMenu().getItem(3));
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
         drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
@@ -105,24 +106,25 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (item.getItemId())
         {
-            case R.id.nav_TripsInProgress:
+            case R.id.nav_follow_flights:
                 currentSelectedPosition=0;
+                fragment=new FollowFlightsFragment();
+                break;
+            case R.id.nav_TripsInProgress:
+                currentSelectedPosition=1;
                 fragment=new TripsInProgressFragment();
                 break;
 
             case R.id.nav_OldTrip:
-                currentSelectedPosition=1;
+                currentSelectedPosition=2;
                 fragment=new OldTripFragment();
                 break;
             case R.id.nav_ViewMyGuides:
-                currentSelectedPosition=2;
+                currentSelectedPosition=3;
                 fragment=new ViewMyGuidesFragment();
                 break;
 
-            case R.id.nav_map:
-                currentSelectedPosition=3;
-                fragment=new ViewOnMapFragment();
-                break;
+
             default:
                 currentSelectedPosition=0;
                 break;
