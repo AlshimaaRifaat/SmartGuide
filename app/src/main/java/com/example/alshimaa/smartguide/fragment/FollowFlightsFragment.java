@@ -21,6 +21,7 @@ import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.adapter.FollowFlightsAdapter;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.presenter.FollowFlightsPresenter;
+import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 import com.example.alshimaa.smartguide.view.FollowFlightsView;
 
 import java.util.List;
@@ -30,7 +31,8 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FollowFlightsFragment extends Fragment implements FollowFlightsView {
+public class FollowFlightsFragment extends Fragment implements FollowFlightsView
+        ,DetailsFollowFlightsView {
 EditText searchEtext;
 Toolbar toolbar;
 ImageView iconPlus;
@@ -40,6 +42,7 @@ ImageView iconPlus;
     FollowFlightsPresenter followFlightsPresenter;
 
     NetworkConnection networkConnection;
+
     public FollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -55,25 +58,23 @@ View view;
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
+        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
+        NavigationActivity.toggle.syncState();
 
+        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.group151);
 
-//        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
-//        NavigationActivity.toggle.syncState();
-//
-//        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
-//        toolbar.setNavigationIcon(R.drawable.group151  );
-//
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
-//                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
-//                } else {
-//                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
-//                }
-//            }
-//        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
+                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
         networkConnection=new NetworkConnection( getContext() );
         FollowFlights();
 
@@ -97,12 +98,13 @@ View view;
         toolbar=view.findViewById(R.id.follow_flights_tool_bar);
         iconPlus=view.findViewById(R.id.follow_flights_icon_plus);
         recyclerViewFollowFlights=view.findViewById(R.id.follow_flights_recycler);
+
     }
 
     @Override
     public void showFollowFlightsList(List<FollowFlightsData> followFlightsDataList) {
         followFlightsAdapter=new FollowFlightsAdapter( getContext(),followFlightsDataList );
-       // currentExhibtionAdapter.onClick(this);
+       followFlightsAdapter.onClick(this);
         recyclerViewFollowFlights.setLayoutManager( new GridLayoutManager(getContext(),2));
         recyclerViewFollowFlights.setAdapter( followFlightsAdapter );
     }
@@ -110,5 +112,15 @@ View view;
     @Override
     public void showFollowFlightsError() {
 
+    }
+
+    @Override
+    public void showDetailsFollowFlights(FollowFlightsData followFlightsData) {
+        DetailsFollowFlightsFragment detailsFollowFlightsFragment=new DetailsFollowFlightsFragment();
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("follow_flight_item",followFlightsData);
+        detailsFollowFlightsFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                detailsFollowFlightsFragment).addToBackStack(null).commit();
     }
 }

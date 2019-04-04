@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
     Context context;
     List<FollowFlightsData> followFlightsDataList;
 
-   // DetailsExhibtionView detailsExhibtionView;
+   DetailsFollowFlightsView detailsFollowFlightsView;
 
 
     public FollowFlightsAdapter(Context context, List<FollowFlightsData> followFlightsDataList) {
@@ -27,10 +28,10 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
         this.followFlightsDataList = followFlightsDataList;
     }
 
-   /* public  void onClick(DetailsExhibtionView detailsExhibtionView)
+    public  void onClick(DetailsFollowFlightsView detailsFollowFlightsView)
     {
-        this.detailsExhibtionView=detailsExhibtionView;
-    }*/
+        this.detailsFollowFlightsView=detailsFollowFlightsView;
+    }
     @Override
     public FollowFlightsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from( context ).inflate(R.layout.row_follow_flights,parent,false);
@@ -52,20 +53,21 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
 
        /* holder.address.setTypeface( customFontRegular );*/
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CurrentExhibtionData currentExhibtionData=new CurrentExhibtionData();
-                currentExhibtionData.setYoutube(currentExhibtionDataList.get(position).getYoutube());
-                currentExhibtionData.setTitle(currentExhibtionDataList.get(position).getTitle());
-                currentExhibtionData.setDescription(currentExhibtionDataList.get(position).getDescription());
-                currentExhibtionData.setAddress(currentExhibtionDataList.get(position).getAddress());
-                currentExhibtionData.setId(currentExhibtionDataList.get(position).getId());
-                currentExhibtionData.setIdUser(currentExhibtionDataList.get(position).getIdUser());
-                currentExhibtionData.setLogo(currentExhibtionDataList.get(position).getLogo());
-                detailsExhibtionView.showExhibtionDetails(currentExhibtionData);
+             /*   FollowFlightsData followFlightsData=new FollowFlightsData();
+                followFlightsData.setTripName(followFlightsDataList.get(position).getTripName());
+                followFlightsData.setGuideName(followFlightsDataList.get(position).getGuideName());
+                followFlightsData.setBusName(followFlightsDataList.get(position).getBusName());
+                followFlightsData.setDriverName(followFlightsDataList.get(position).getDriverName());
+                followFlightsData.setFrom(followFlightsDataList.get(position).getFrom());
+                followFlightsData.setTo(followFlightsDataList.get(position).getTo());
+                followFlightsData.setDateStart(followFlightsDataList.get(position).getDateStart());
+                followFlightsData.setDateEnd(followFlightsDataList.get(position).getDateEnd());*/
+                detailsFollowFlightsView.showDetailsFollowFlights(followFlightsDataList.get(position));
             }
-        });*/
+        });
 
     }
 
