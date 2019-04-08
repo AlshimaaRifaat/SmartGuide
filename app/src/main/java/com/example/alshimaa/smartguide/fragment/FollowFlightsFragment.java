@@ -91,7 +91,7 @@ View view;
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,new
                         NewTripFragment()).addToBackStack(null).commit();
-                
+
             }
         });
         return view;

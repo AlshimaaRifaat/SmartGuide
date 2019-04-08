@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f2f2f2"
+    tools:context=".fragment.DetailsNotificationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/details_notification_main_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_37sdp"
+            app:cardCornerRadius="@dimen/_3sdp"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_43sdp"
+                android:background="#fff"
+                >
+
+                <TextView
+                    android:id="@+id/details_notification_notification_text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تم وصول الرحله"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:textColor="#b3b3b3"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_alignParentRight="true"/>
+
+
+                <TextView
+                    android:id="@+id/details_notification_text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:text="7 pm"
+                    android:textColor="#b3b3b3"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_centerVertical="true"
+
+                    />
+
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/details_notification_card_details"
+            android:layout_below="@+id/details_notification_main_card"
+            android:layout_width="@dimen/_272sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_17sdp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_9sdp">
+                <TextView
+                    android:id="@+id/details_notification_trip_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="اسم الرحله"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_alignParentRight="true"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_guide_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="اسم المرشد"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_trip_name"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_bus_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="رقم الحافلة"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_guide_name"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_driver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="اسم السائق"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_bus_number"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_going_down_Place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="مكان النزول"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_driver_name"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_delivery_Place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="مكان الاستلام"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_going_down_Place"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="تاريخ بدايه"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_delivery_Place"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="تاريخ نهايه"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_notification_start_date"
+                    />
+                <TextView
+                    android:id="@+id/details_notification_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="الرساله"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/_9sdp"
+                    android:layout_below="@+id/details_notification_end_date"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/details_notification_btn_contact"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:background="@drawable/btn_register"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#fff"
+            android:text="@string/contactWithGuide"
+            android:textAllCaps="false"
+            android:layout_below="@id/details_notification_card_details"
+            />
+
+        <Button
+            android:id="@+id/details_notification_btn_accept"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:background="@drawable/btn_register"
+            android:layout_marginTop="@dimen/_11sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#fff"
+            android:text="@string/Accept"
+            android:textAllCaps="false"
+            android:layout_below="@id/details_notification_btn_contact"
+            android:layout_marginBottom="@dimen/_32sdp"
+            />
+        <Button
+            android:id="@+id/details_notification_btn_refuse"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:background="@drawable/btn_register"
+            android:layout_marginTop="@dimen/_11sdp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#fff"
+            android:text="@string/Refuse"
+            android:textAllCaps="false"
+            android:layout_below="@id/details_notification_btn_contact"
+            android:layout_marginBottom="@dimen/_32sdp"
+            />
+    </RelativeLayout>
+
+
+
+</ScrollView>
