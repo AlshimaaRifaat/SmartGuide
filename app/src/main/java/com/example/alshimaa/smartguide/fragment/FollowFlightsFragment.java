@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
@@ -26,6 +27,10 @@ import com.example.alshimaa.smartguide.view.FollowFlightsView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolbar;
 
 /**
@@ -33,9 +38,11 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
  */
 public class FollowFlightsFragment extends Fragment implements FollowFlightsView
         ,DetailsFollowFlightsView {
+    @BindView(R.id.follow_flights_icon_plus) ImageView iconPlus;
+    private Unbinder unbinder;
 EditText searchEtext;
 Toolbar toolbar;
-ImageView iconPlus;
+
 
     RecyclerView recyclerViewFollowFlights;
     FollowFlightsAdapter followFlightsAdapter;
@@ -53,6 +60,7 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_follow_flights, container, false);
+        unbinder= ButterKnife.bind(this,view);
         init();
 
         NavigationActivity.toggle = new ActionBarDrawerToggle(
@@ -83,6 +91,7 @@ View view;
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,new
                         NewTripFragment()).addToBackStack(null).commit();
+                
             }
         });
         return view;
@@ -96,7 +105,7 @@ View view;
     private void init() {
         searchEtext=view.findViewById(R.id.follow_flights_edit_text_search);
         toolbar=view.findViewById(R.id.follow_flights_tool_bar);
-        iconPlus=view.findViewById(R.id.follow_flights_icon_plus);
+       // iconPlus=view.findViewById(R.id.follow_flights_icon_plus);
         recyclerViewFollowFlights=view.findViewById(R.id.follow_flights_recycler);
 
     }
