@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -42,11 +43,18 @@ import com.fourhcode.forhutils.FUtilsValidation;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView
 ,GetDriverNameView,GetMemberNameView,AddTripView{
+    @BindView(R.id.new_trip_btn_immediate_trip) Button immediateTripBtn;
+    @BindView(R.id.new_trip_btn_new_trip) Button newTripBtn;
+    private Unbinder unbinder;
 
     GetGuideNamePresenter getGuideNamePresenter;
     Spinner guideNameSpinner;
@@ -79,6 +87,7 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     Button addTripBtn;
     AddTripPresenter addTripPresenter;
 
+
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -89,6 +98,7 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_new_trip, container, false);
+        unbinder= ButterKnife.bind(this,view);
         init();
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -123,6 +133,34 @@ View view;
                 PerformAddingTrip();
             }
         } );
+
+        immediateTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                immediateTripBtn.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                immediateTripBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+
+                newTripBtn.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                newTripBtn.setTextColor(getResources().getColor(R.color.colorBlue));
+
+                getFragmentManager().beginTransaction().replace(R.id.new_trip_frame_layout,
+                        new ImmediateTripFragment()).addToBackStack(null).commit();
+            }
+        });
+        newTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newTripBtn.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                newTripBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+
+                immediateTripBtn.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                immediateTripBtn.setTextColor(getResources().getColor(R.color.colorBlue));
+
+
+                getFragmentManager().beginTransaction().replace(R.id.new_trip_frame_layout,
+                        new AlternativeNewTripFragment()).addToBackStack(null).commit();
+            }
+        });
 
 
         return view;
