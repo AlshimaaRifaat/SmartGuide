@@ -60,6 +60,7 @@ Toolbar toolbar;
     private LatLng currentLocationLatLong;
     private DatabaseReference mDatabase;
 
+
 View view;
     public ViewOnMapFragment() {
         // Required empty public constructor
@@ -265,50 +266,47 @@ View view;
         CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(currentLocationLatLong).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-        LocationData locationData = new LocationData(location.getLatitude(), location.getLongitude());
-        mDatabase.child("location").child(String.valueOf(new Date().getTime())).setValue(locationData);
+        LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude());
+        mDatabase.child("busId").child("1").child("busId").child(String.valueOf(new Date().getTime())).setValue(locationData);
 
         Toast.makeText(getContext(), "Move to new location", Toast.LENGTH_SHORT).show();
         getMarkers();
         
     }
 
-    private void getMarkers() {
-        mDatabase.child("location").addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Get map of users in datasnapshot
-                        if (dataSnapshot.getValue() != null)
-                        {
-                            Toast.makeText(getContext(), "all location getted", Toast.LENGTH_SHORT).show();
-                        }
-                         getAllLocations((Map<String,Object>) dataSnapshot.getValue());
-                    }
+    private void getMarkers(){
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
-                });
+        mDatabase.child("buses").child("1").child("busId").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null)
+                    Toast.makeText(getContext(), dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-   private void getAllLocations(Map<String, Object> locations) {
-        for (Map.Entry<String, Object> entry : locations.entrySet()){
+    private void getAllLocations(Map<String,Object> locations) {
 
-            Date newDate = new Date(Long.valueOf(entry.getKey()));
+
+      /*  for (Map.Entry<String, Object> entry : locations.entrySet()) {
+
+            //Date newDate = new Date(Long.valueOf(entry.getKey()));
             Map singleLocation = (Map) entry.getValue();
-            LatLng latLng = new LatLng((Double) singleLocation.get("latitude"), (Double)singleLocation.get("longitude"));
-            addGreenMarker(newDate, latLng);
+            LatLng latLng = new LatLng((Double) singleLocation.get("lat"), (Double) singleLocation.get("lng"));
+            addGreenMarker( latLng);
 
-        }
+        }*/
     }
-
-    private void addGreenMarker(Date newDate, LatLng latLng) {
-        SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    private void addGreenMarker( LatLng latLng) {
+       // SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title(dt.format(newDate));
+       // markerOptions.title(dt.format(newDate));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mGoogleMap.addMarker(markerOptions);
     }

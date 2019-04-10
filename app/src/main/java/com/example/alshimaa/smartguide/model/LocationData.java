@@ -1,11 +1,13 @@
 package com.example.alshimaa.smartguide.model;
 
 public class LocationData {
-    double latitude;
-    double longitude;
+    double lat;
+    double lng;
+   /* double speed;
+    double status;*/
 
-    public LocationData(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public LocationData(double lat, double lng) {
+        this.lat = lat;
+        this.lng = lng;
     }
 }
