@@ -24,11 +24,11 @@ public class GetBusNumberPresenter {
         this.getBusNumberView = getBusNumberView;
     }
 
-    public void getBusNumberResult(String Lang)
+    public void getBusNumberResult(String Lang,String Driver_Id)
     {
         HashMap<String,String> hashMap=new HashMap<>(  );
         hashMap.put("lang",Lang);
-        //hashMap.put("driver_id",Driver_Id);
+        hashMap.put("driver_id",Driver_Id);
         Service service= Client.getClient().create( Service.class );
         Call<GetBusNumberResponse> call=service.getBusNumberData( hashMap );
 

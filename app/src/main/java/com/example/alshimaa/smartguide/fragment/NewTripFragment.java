@@ -59,7 +59,7 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView
-,GetDriverNameView,GetMemberNameView,AddTripView{
+,GetDriverNameView,AddTripView{
    @BindView(R.id.new_trip_text_start_date) TextView startDateTxt;
   //  @BindView(R.id.new_trip_btn_new_trip) Button newTripBtn;
     private Unbinder unbinder;
@@ -78,7 +78,7 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
 
     GetDriverNamePresenter getDriverNamePresenter;
     Spinner driverNameSpinner;
-    Integer DriverNameModelID;
+    public Integer DriverNameModelID;
     String DriverNameModel;
     DriverNameSpinnerAdapter driverNameSpinnerAdapter;
 
@@ -134,7 +134,7 @@ View view;
         GuideName();
         BusNumber();
         driverName();
-        MemberName();
+       // MemberName();
 
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
 
@@ -270,10 +270,10 @@ View view;
         addTripPresenter=new AddTripPresenter(getContext(),this);
     }
 
-    private void MemberName() {
+    /*private void MemberName() {
         getMemberNamePresenter=new GetMemberNamePresenter(getContext(),this);
         getMemberNamePresenter.getMemberNameResult( "ar" );
-    }
+    }*/
 
     private void driverName() {
         getDriverNamePresenter=new GetDriverNamePresenter(getContext(),this);
@@ -282,7 +282,7 @@ View view;
 
     private void BusNumber() {
         getBusNumberPresenter=new GetBusNumberPresenter(getContext(),this);
-        getBusNumberPresenter.getBusNumberResult( "ar" );
+        //getBusNumberPresenter.getBusNumberResult( "ar",String.valueOf(DriverNameModelID));
     }
 
     private void GuideName() {
@@ -407,8 +407,8 @@ View view;
                         }
                     }
 
-                    Toast.makeText(getContext(),String.valueOf(BusNumberModelID), Toast.LENGTH_SHORT).show();
-
+                   // Toast.makeText(getContext(),"id in bus "+String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
+                   // getBusNumberPresenter.getBusNumberResult("ar",String.valueOf(DriverNameModelID));
 
                 }
             }
@@ -423,13 +423,13 @@ View view;
 
     @Override
     public void showDriverNameList(final List<GetDriverNameData> getDriverNameDataList) {
-        ArrayList<String> driverNames=new ArrayList<>(  );
+        ArrayList<String> DriverNames=new ArrayList<>(  );
         for(int i=0;i<getDriverNameDataList.size();i++)
         {
-            driverNames.add( getDriverNameDataList.get( i ).getName() );
+            DriverNames.add( getDriverNameDataList.get( i ).getName() );
         }
         driverNameSpinnerAdapter =new DriverNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        driverNameSpinnerAdapter.addAll( driverNames );
+        driverNameSpinnerAdapter.addAll( DriverNames );
         driverNameSpinnerAdapter.add( "اسم السائق");
         driverNameSpinner.setAdapter(  driverNameSpinnerAdapter );
         driverNameSpinner.setPrompt("اسم السائق");
@@ -443,22 +443,18 @@ View view;
                 }
                 else
                 {
-                    DriverNameModel= driverNameSpinner.getSelectedItem().toString();
-                    /*for (i=0;i<locationDatalist.size();i++)
-                    {
-                        if(locationDatalist.get(i).getCountry().equals( LocationModel ))
-                        {
-                            LocationModelID=locationDatalist.get(i).getId();
-                        }
-                    }*/
+                    DriverNameModel=driverNameSpinner.getSelectedItem().toString();
                     for ( i=0;i<getDriverNameDataList.size();i++)
                     {
                         if(getDriverNameDataList.get(i).getName().equals(DriverNameModel))
                         {
                             DriverNameModelID=Integer.valueOf(getDriverNameDataList.get(i).getId());
+
                         }
+                        //Toast.makeText(getContext(),String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
                     }
 
+                    getBusNumberPresenter.getBusNumberResult("ar",String.valueOf(DriverNameModelID));
                 }
             }
 
@@ -475,7 +471,7 @@ View view;
 
     }
 
-    @Override
+   /* @Override
     public void showMemeberNameList(final List<GetMemberNameData> getMemberNameDataList) {
         ArrayList<String> memberNames=new ArrayList<>(  );
        for (int i=0;i<getMemberNameDataList.size();i++)
@@ -498,13 +494,13 @@ View view;
                 else
                 {
                     MemberNameModel=memberNameSpinner.getSelectedItem().toString();
-                    /*for (i=0;i<locationDatalist.size();i++)
+                    *//*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))
                         {
                             LocationModelID=locationDatalist.get(i).getId();
                         }
-                    }*/
+                    }*//*
                     for ( i=0;i<getMemberNameDataList.size();i++)
                     {
                         if(getMemberNameDataList.get(i).getName().equals(GuideNameModel))
@@ -515,8 +511,8 @@ View view;
 
                 }
             }
-
-            @Override
+*/
+          /*  @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
@@ -528,7 +524,7 @@ View view;
     @Override
     public void showMemeberNameError() {
 
-    }
+    }*/
 
     @Override
     public void showAddTripResult(String Msg) {
