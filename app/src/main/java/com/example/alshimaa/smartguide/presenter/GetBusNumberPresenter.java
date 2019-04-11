@@ -28,8 +28,7 @@ public class GetBusNumberPresenter {
     {
         HashMap<String,String> hashMap=new HashMap<>(  );
         hashMap.put("lang",Lang);
-        // hashMap.put("id",ID);
-
+        //hashMap.put("driver_id",Driver_Id);
         Service service= Client.getClient().create( Service.class );
         Call<GetBusNumberResponse> call=service.getBusNumberData( hashMap );
 

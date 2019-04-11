@@ -1,6 +1,8 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
@@ -40,8 +45,11 @@ import com.example.alshimaa.smartguide.view.GetGuideNameView;
 import com.example.alshimaa.smartguide.view.GetMemberNameView;
 import com.fourhcode.forhutils.FUtilsValidation;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,8 +60,8 @@ import butterknife.Unbinder;
  */
 public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView
 ,GetDriverNameView,GetMemberNameView,AddTripView{
-    @BindView(R.id.new_trip_btn_immediate_trip) Button immediateTripBtn;
-    @BindView(R.id.new_trip_btn_new_trip) Button newTripBtn;
+   @BindView(R.id.new_trip_text_start_date) TextView startDateTxt;
+  //  @BindView(R.id.new_trip_btn_new_trip) Button newTripBtn;
     private Unbinder unbinder;
 
     GetGuideNamePresenter getGuideNamePresenter;
@@ -87,6 +95,8 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     Button addTripBtn;
     AddTripPresenter addTripPresenter;
 
+    private SimpleDateFormat mSimpleDateFormat;
+    private Calendar mCalendar;
 
     public NewTripFragment() {
         // Required empty public constructor
@@ -126,7 +136,31 @@ View view;
         driverName();
         MemberName();
 
+        mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+
+        startDateTxt.setOnClickListener(startDateTxtListener);
+
         addTrip();
+
+       /* public void showDateTimePicker() {
+            final Calendar currentDate = Calendar.getInstance();
+            date = Calendar.getInstance();
+            new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
+                    date.set(year, monthOfYear, dayOfMonth);
+                    new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                            date.set(Calendar.MINUTE, minute);
+                            textdate.setText(""+year+"-"+monthOfYear+"-"+dayOfMonth+" "+hourOfDay+":"+minute);
+                        }
+                    }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+                }
+            }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE)).show();
+        }*/
+
         addTripBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,7 +168,7 @@ View view;
             }
         } );
 
-        immediateTripBtn.setOnClickListener(new View.OnClickListener() {
+       /* immediateTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 immediateTripBtn.setBackgroundColor(getResources().getColor(R.color.colorBlue));
@@ -146,8 +180,8 @@ View view;
                 getFragmentManager().beginTransaction().replace(R.id.new_trip_frame_layout,
                         new ImmediateTripFragment()).addToBackStack(null).commit();
             }
-        });
-        newTripBtn.setOnClickListener(new View.OnClickListener() {
+        });*/
+        /*newTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newTripBtn.setBackgroundColor(getResources().getColor(R.color.colorBlue));
@@ -160,11 +194,40 @@ View view;
                 getFragmentManager().beginTransaction().replace(R.id.new_trip_frame_layout,
                         new AlternativeNewTripFragment()).addToBackStack(null).commit();
             }
-        });
+        });*/
 
 
         return view;
     }
+    /* Define the onClickListener, and start the DatePickerDialog with users current time */
+    private final View.OnClickListener startDateTxtListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mCalendar = Calendar.getInstance();
+            new DatePickerDialog(getContext(), startDateTxtDataSet, mCalendar.get(Calendar.YEAR),
+                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    };
+    /* After user decided on a date, store those in our calendar variable and then start the TimePickerDialog immediately */
+    private final DatePickerDialog.OnDateSetListener startDateTxtDataSet = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            mCalendar.set(Calendar.YEAR, year);
+            mCalendar.set(Calendar.MONTH, monthOfYear);
+            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            new TimePickerDialog(getContext(), startTimeTxtDataSet, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), false).show();
+        }
+    };
+
+    /* After user decided on a time, save them into our calendar instance, and now parse what our calendar has into the TextView */
+    private final TimePickerDialog.OnTimeSetListener startTimeTxtDataSet = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            mCalendar.set(Calendar.MINUTE, minute);
+            startDateTxt.setText(mSimpleDateFormat.format(mCalendar.getTime()));
+        }
+    };
 
     private void PerformAddingTrip() {
         FUtilsValidation.isEmpty( tripArabicName,getResources().getString(R.string.pleaseEnterTripArabicName) );

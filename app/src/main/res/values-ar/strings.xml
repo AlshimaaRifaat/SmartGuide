@@ -34,4 +34,5 @@
     <string name="MyGuides">المرشدين الخاصين بي</string>
     <string name="give_a_command">إعطاء امر التنزيل</string>
     <string name="ImmediateTrip">رحله فوريه</string>
+    <string name="Path">المسار</string>
 </resources>

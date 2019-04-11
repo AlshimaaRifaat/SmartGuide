@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f2f2f2"
+    android:id="@+id/new_trip_frame_layout"
     tools:context=".fragment.NewTripFragment">
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_trip_frame_layout">
+        android:layout_height="match_parent"
+
+       >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,6 +61,7 @@
                 android:textSize="@dimen/_14sdp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+<!--
 <RelativeLayout
     android:id="@+id/relative_btns"
     android:layout_width="@dimen/_180sdp"
@@ -86,13 +89,14 @@
            android:text="@string/ImmediateTrip"
            android:background="#fff"/>
 </RelativeLayout>
+-->
 
     <android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_trip_arabic_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_37sdp"
-        android:layout_below="@+id/relative_btns"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/new_trip_tool_bar"
+        android:layout_marginTop="@dimen/_37sdp"
         android:layout_marginStart="@dimen/_14sdp"
         android:layout_marginEnd="@dimen/_14sdp"
         app:cardCornerRadius="@dimen/_18sdp"
@@ -163,7 +167,28 @@
             android:prompt="@string/GuideName"
             ></android.support.v7.widget.AppCompatSpinner>
     </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/new_trip_cardV_driver_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@+id/new_trip_cardV_guide_name"
+            >
 
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/new_trip_spinner_driver_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_37sdp"
+                app:backgroundTint="#b7b7b7"
+                android:prompt="@string/DriverName"
+
+                ></android.support.v7.widget.AppCompatSpinner>
+        </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_bus_number"
         android:layout_width="match_parent"
@@ -174,7 +199,7 @@
         app:cardCornerRadius="@dimen/_18sdp"
         app:cardBackgroundColor="#fff"
         app:cardElevation="@dimen/_5sdp"
-        android:layout_below="@+id/new_trip_cardV_guide_name"
+        android:layout_below="@+id/new_trip_cardV_driver_name"
         >
 
         <android.support.v7.widget.AppCompatSpinner
@@ -186,7 +211,29 @@
 
             ></android.support.v7.widget.AppCompatSpinner>
     </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+        <android.support.v7.widget.CardView
+            android:id="@+id/new_trip_cardV_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@+id/new_trip_cardV_bus_number"
+            >
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/new_trip_spinner_path"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_37sdp"
+                app:backgroundTint="#b7b7b7"
+                android:prompt="@string/Path"
+
+                ></android.support.v7.widget.AppCompatSpinner>
+        </android.support.v7.widget.CardView>
+   <!-- <android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_driver_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -207,8 +254,8 @@
             android:prompt="@string/DriverName"
 
             ></android.support.v7.widget.AppCompatSpinner>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+    </android.support.v7.widget.CardView>-->
+   <!-- <android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_member_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -229,8 +276,30 @@
             android:prompt="@string/MemberName"
 
             ></android.support.v7.widget.AppCompatSpinner>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+    </android.support.v7.widget.CardView>-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/new_trip_cardV_trip_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@+id/new_trip_cardV_driver_name"
+            >
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/new_trip_spinner_status"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_37sdp"
+                app:backgroundTint="#b7b7b7"
+                android:prompt="@string/MemberName"
+
+                ></android.support.v7.widget.AppCompatSpinner>
+        </android.support.v7.widget.CardView>
+    <!--<android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_receipt_Place_of_pilgrims"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_37sdp"
@@ -280,8 +349,8 @@
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+    </android.support.v7.widget.CardView>-->
+    <!--<android.support.v7.widget.CardView
         android:id="@+id/new_trip_cardV_trip_start_date"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_37sdp"
@@ -291,7 +360,7 @@
         app:cardCornerRadius="@dimen/_18sdp"
         app:cardBackgroundColor="#fff"
         app:cardElevation="@dimen/_5sdp"
-        android:layout_below="@+id/new_trip_cardV_download_Place_of_pilgrims"
+        android:layout_below="@+id/new_trip_cardV_trip_status"
         >
         <EditText
             android:id="@+id/new_trip_Etext_trip_start_date"
@@ -305,9 +374,89 @@
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
-    </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/new_trip_cardV_trip_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@+id/new_trip_cardV_trip_status"
+            >
+        <RelativeLayout
+            android:id="@+id/new_trip_relative_trip_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+
+
+            >
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_layout_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_37sdp"
+                android:hint="@string/start_date_of_the_trip" >
+
+                <TextView
+                    android:id="@+id/new_trip_text_start_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_37sdp"
+                    android:paddingRight="@dimen/_14sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:textColor="#bababa"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:clickable="true"
+                    android:text="@string/start_date_of_the_trip"/>
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/new_trip_cardV_trip_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_37sdp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@+id/new_trip_cardV_trip_start_date"
+            >
+            <RelativeLayout
+                android:id="@+id/new_trip_relative_trip_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_37sdp"
+
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_layout_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_37sdp"
+                    android:hint="@string/end_date_of_the_trip"
+                    >
+
+                    <TextView
+                        android:id="@+id/new_trip_text_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_37sdp"
+                        android:paddingRight="@dimen/_14sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:textColor="#bababa"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:clickable="true"
+                        android:text="@string/end_date_of_the_trip"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <!--<android.support.v7.widget.CardView
             android:id="@+id/new_trip_cardV_trip_end_date"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_37sdp"
@@ -331,7 +480,7 @@
                 android:textSize="@dimen/_13sdp"
                 android:backgroundTint="#fff"
                 />
-        </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>-->
 
    <Button
         android:id="@+id/new_trip_btn_Create_atrip"
@@ -346,8 +495,7 @@
         android:textAllCaps="false"
         android:layout_below="@id/new_trip_cardV_trip_end_date"
         android:layout_marginBottom="@dimen/_32sdp"
-       android:visibility="gone"
         />
 </RelativeLayout>
-    </FrameLayout>
     </ScrollView>
+    </FrameLayout>

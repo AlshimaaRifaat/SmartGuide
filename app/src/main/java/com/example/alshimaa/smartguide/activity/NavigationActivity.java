@@ -108,7 +108,7 @@ public class NavigationActivity extends AppCompatActivity
         {
             case R.id.nav_follow_flights:
                 currentSelectedPosition=0;
-                fragment=new ViewOnMapFragment();
+                fragment=new FollowFlightsFragment();
                 break;
             case R.id.nav_TripsInProgress:
                 currentSelectedPosition=1;
