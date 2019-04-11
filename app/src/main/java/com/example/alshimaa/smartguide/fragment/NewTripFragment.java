@@ -101,7 +101,7 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     AddTripPresenter addTripPresenter;
 
     private SimpleDateFormat mSimpleDateFormat;
-    private Calendar mCalendar;
+    private Calendar startDateCalendar,endDateCalendar;
 
     GetPathPresenter getPathPresenter;
    @BindView(R.id.new_trip_spinner_path) Spinner pathSpinner;
@@ -222,19 +222,19 @@ View view;
     private final View.OnClickListener startDateTxtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mCalendar = Calendar.getInstance();
-            new DatePickerDialog(getContext(), startDateTxtDataSet, mCalendar.get(Calendar.YEAR),
-                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            startDateCalendar = Calendar.getInstance();
+            new DatePickerDialog(getContext(), startDateTxtDataSet, startDateCalendar.get(Calendar.YEAR),
+                    startDateCalendar.get(Calendar.MONTH), startDateCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     };
     /* After user decided on a date, store those in our calendar variable and then start the TimePickerDialog immediately */
     private final DatePickerDialog.OnDateSetListener startDateTxtDataSet = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            mCalendar.set(Calendar.YEAR, year);
-            mCalendar.set(Calendar.MONTH, monthOfYear);
-            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            new TimePickerDialog(getContext(), startTimeTxtDataSet, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), false).show();
+            startDateCalendar.set(Calendar.YEAR, year);
+            startDateCalendar.set(Calendar.MONTH, monthOfYear);
+            startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            new TimePickerDialog(getContext(), startTimeTxtDataSet, startDateCalendar.get(Calendar.HOUR_OF_DAY), startDateCalendar.get(Calendar.MINUTE), false).show();
         }
     };
 
@@ -242,9 +242,9 @@ View view;
     private final TimePickerDialog.OnTimeSetListener startTimeTxtDataSet = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            mCalendar.set(Calendar.MINUTE, minute);
-            startDateTxt.setText(mSimpleDateFormat.format(mCalendar.getTime()));
+            startDateCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            startDateCalendar.set(Calendar.MINUTE, minute);
+            startDateTxt.setText(mSimpleDateFormat.format(startDateCalendar.getTime()));
         }
     };
 
@@ -252,9 +252,9 @@ View view;
     private final View.OnClickListener endDateTxtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mCalendar = Calendar.getInstance();
-            new DatePickerDialog(getContext(), endDateTxtDataSet, mCalendar.get(Calendar.YEAR),
-                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            endDateCalendar = Calendar.getInstance();
+            new DatePickerDialog(getContext(), endDateTxtDataSet, endDateCalendar.get(Calendar.YEAR),
+                    endDateCalendar.get(Calendar.MONTH), endDateCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     };
 
@@ -262,19 +262,19 @@ View view;
     private final DatePickerDialog.OnDateSetListener endDateTxtDataSet = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            mCalendar.set(Calendar.YEAR, year);
-            mCalendar.set(Calendar.MONTH, monthOfYear);
-            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            new TimePickerDialog(getContext(), endTimeTxtDataSet, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), false).show();
+            endDateCalendar.set(Calendar.YEAR, year);
+            endDateCalendar.set(Calendar.MONTH, monthOfYear);
+            endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            new TimePickerDialog(getContext(), endTimeTxtDataSet, endDateCalendar.get(Calendar.HOUR_OF_DAY), endDateCalendar.get(Calendar.MINUTE), false).show();
         }
     };
     /* After user decided on a time, save them into our calendar instance, and now parse what our calendar has into the TextView */
     private final TimePickerDialog.OnTimeSetListener endTimeTxtDataSet = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            mCalendar.set(Calendar.MINUTE, minute);
-            startDateTxt.setText(mSimpleDateFormat.format(mCalendar.getTime()));
+            endDateCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            endDateCalendar.set(Calendar.MINUTE, minute);
+            endDateTxt.setText(mSimpleDateFormat.format(endDateCalendar.getTime()));
         }
     };
     private void PerformAddingTrip() {
@@ -403,7 +403,7 @@ View view;
                             LocationModelID=locationDatalist.get(i).getId();
                         }
                     }*/
-                    Toast.makeText(getContext(),String.valueOf(GuideNameModelID), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(),String.valueOf(GuideNameModelID), Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -576,7 +576,7 @@ View view;
 
     @Override
     public void showAddTripResult(String Msg) {
-        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -624,7 +624,7 @@ View view;
                             LocationModelID=locationDatalist.get(i).getId();
                         }
                     }*/
-                    Toast.makeText(getContext(),String.valueOf(PathModelID), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(),String.valueOf(PathModelID), Toast.LENGTH_SHORT).show();
 
                 }
 
