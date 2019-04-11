@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.adapter.BusNumberSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.DriverNameSpinnerAdapter;
@@ -95,8 +96,10 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
 
     NetworkConnection networkConnection;
     Toolbar toolbar;
-    EditText tripArabicName,tripLatinName,receiptPlace_Of_Pilgrims,downloadPlace_of_pilgrims
-            ,tripStartDate,tripEndDate;
+    @BindView(R.id.new_trip_Etext_trip_arabic_name)EditText tripArabicName;
+    @BindView(R.id.new_trip_Etext_trip_Latin_name)EditText tripLatinName;
+
+
     Button addTripBtn;
     AddTripPresenter addTripPresenter;
 
@@ -280,29 +283,29 @@ View view;
     private void PerformAddingTrip() {
         FUtilsValidation.isEmpty( tripArabicName,getResources().getString(R.string.pleaseEnterTripArabicName) );
         FUtilsValidation.isEmpty( tripLatinName,getResources().getString(R.string.pleaseEnterTripLatinName));
-        FUtilsValidation.isEmpty( receiptPlace_Of_Pilgrims,getResources().getString(R.string.pleaseEnterReceiptPlace_Of_Pilgrims));
-        FUtilsValidation.isEmpty( downloadPlace_of_pilgrims,getResources().getString(R.string.pleaseEnterDownloadPlace_of_pilgrims) );
-        FUtilsValidation.isEmpty( tripStartDate,getResources().getString(R.string.pleaseEntertripStartDate));
-        FUtilsValidation.isEmpty( tripEndDate,getResources().getString(R.string.pleaseEnterTripEndDate));
-        validateEmail();
+
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext()))
         {
-            /*if ( validateEmail()) {
+            // status,company id ,price
                 if (!tripArabicName.getText().toString().equals("") &&
                         !tripLatinName.getText().toString().equals("") &&
-                        !receiptPlace_Of_Pilgrims.getText().toString().equals("") &&
-                        !downloadPlace_of_pilgrims.getText().toString().equals("") &&
-                        !tripStartDate.getText().toString().equals("") &&
-                        !tripEndDate.getText().toString().equals("") &&GuideNameModel!=null &&
-                        BusNumberModel!=null &&DriverNameModel!=null &&MemberNameModel!=null) {
+                        GuideNameModelID.toString()!=null &&
+                       String.valueOf(DriverNameModelID) !=null&&
+                        String.valueOf(BusNumberModelID)!=null&&
+                        String.valueOf(PathModelID)!=null&&
+                        !startDateTxt.getText().toString().equals("") &&
+                        !endDateTxt.getText().toString().equals("")  &&
+                        SplashActivity.Login!=null ) {
 
                     addTripPresenter.getAddTripResult(tripArabicName.getText().toString(),
-                            tripLatinName.getText().toString(),
-                            );  // still not done
+                            tripLatinName.getText().toString(),String.valueOf(GuideNameModelID),String.valueOf(DriverNameModelID)
+                            ,String.valueOf(BusNumberModelID),startDateTxt.getText().toString(),endDateTxt.getText().toString()
+                            ,String.valueOf(PathModelID),"1",SplashActivity.Login,"20","1");
+                     // still not done
 
                 }
-            }*/
+
 
         }else
         {
@@ -311,8 +314,6 @@ View view;
 
     }
 
-    private void validateEmail() {
-    }
 
     private void addTrip() {
         addTripPresenter=new AddTripPresenter(getContext(),this);
@@ -344,12 +345,6 @@ View view;
         busNumberSpinner=view.findViewById( R.id.new_trip_spinner_bus_number );
         driverNameSpinner=view.findViewById( R.id.new_trip_spinner_driver_name );
         memberNameSpinner=view.findViewById( R.id.new_trip_spinner_member_name);
-        tripArabicName=view.findViewById(R.id.new_trip_Etext_trip_arabic_name);
-        tripLatinName=view.findViewById(R.id.new_trip_Etext_trip_Latin_name);
-        receiptPlace_Of_Pilgrims=view.findViewById(R.id.new_trip_Etext_receipt_Place_of_pilgrims);
-        downloadPlace_of_pilgrims=view.findViewById(R.id.new_trip_Etext_download_Place_of_pilgrims);
-        tripStartDate=view.findViewById(R.id.new_trip_Etext_trip_start_date);
-        tripEndDate=view.findViewById(R.id.new_trip_Etext_trip_end_date);
         addTripBtn=view.findViewById(R.id.new_trip_btn_Create_atrip);
 
     }
@@ -576,7 +571,7 @@ View view;
 
     @Override
     public void showAddTripResult(String Msg) {
-       // Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
