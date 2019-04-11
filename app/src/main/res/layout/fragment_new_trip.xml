@@ -111,10 +111,11 @@
             android:hint="@string/trip_arabic_name"
             android:textColorHint="#bababa"
             android:textColor="#000"
-            android:paddingStart="@dimen/_19sdp"
-            android:paddingEnd="@dimen/_13sdp"
+            android:paddingStart="@dimen/_22sdp"
+            android:paddingEnd="@dimen/_22sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
+
 
             />
     </android.support.v7.widget.CardView>
@@ -140,8 +141,8 @@
             android:hint="@string/trip_Latin_name"
             android:textColorHint="#bababa"
             android:textColor="#000"
-            android:paddingStart="@dimen/_19sdp"
-            android:paddingEnd="@dimen/_13sdp"
+            android:paddingStart="@dimen/_22sdp"
+            android:paddingEnd="@dimen/_22sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             />
@@ -404,11 +405,12 @@
                     android:id="@+id/new_trip_text_start_date"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_37sdp"
-                    android:paddingRight="@dimen/_14sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
                     android:paddingTop="@dimen/_7sdp"
                     android:textColor="#bababa"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:clickable="true"
                     android:text="@string/start_date_of_the_trip"/>
             </android.support.design.widget.TextInputLayout>
@@ -444,11 +446,12 @@
                         android:id="@+id/new_trip_text_end_date"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_37sdp"
-                        android:paddingRight="@dimen/_14sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
                         android:paddingTop="@dimen/_7sdp"
                         android:textColor="#bababa"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:clickable="true"
                         android:text="@string/end_date_of_the_trip"
                         />

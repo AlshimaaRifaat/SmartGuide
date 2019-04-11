@@ -29,20 +29,24 @@ import com.example.alshimaa.smartguide.adapter.BusNumberSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.DriverNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.GuideNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.MemberNameSpinnerAdapter;
+import com.example.alshimaa.smartguide.adapter.PathSpinnerAdapter;
 import com.example.alshimaa.smartguide.model.GetBusNumberData;
 import com.example.alshimaa.smartguide.model.GetDriverNameData;
 import com.example.alshimaa.smartguide.model.GetGuideNameData;
 import com.example.alshimaa.smartguide.model.GetMemberNameData;
+import com.example.alshimaa.smartguide.model.GetPathData;
 import com.example.alshimaa.smartguide.presenter.AddTripPresenter;
 import com.example.alshimaa.smartguide.presenter.GetBusNumberPresenter;
 import com.example.alshimaa.smartguide.presenter.GetDriverNamePresenter;
 import com.example.alshimaa.smartguide.presenter.GetGuideNamePresenter;
 import com.example.alshimaa.smartguide.presenter.GetMemberNamePresenter;
+import com.example.alshimaa.smartguide.presenter.GetPathPresenter;
 import com.example.alshimaa.smartguide.view.AddTripView;
 import com.example.alshimaa.smartguide.view.GetBusNumberView;
 import com.example.alshimaa.smartguide.view.GetDriverNameView;
 import com.example.alshimaa.smartguide.view.GetGuideNameView;
 import com.example.alshimaa.smartguide.view.GetMemberNameView;
+import com.example.alshimaa.smartguide.view.GetPathView;
 import com.fourhcode.forhutils.FUtilsValidation;
 
 import java.text.SimpleDateFormat;
@@ -59,8 +63,9 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class NewTripFragment extends Fragment implements GetGuideNameView,GetBusNumberView
-,GetDriverNameView,AddTripView{
+,GetDriverNameView,AddTripView,GetPathView{
    @BindView(R.id.new_trip_text_start_date) TextView startDateTxt;
+    @BindView(R.id.new_trip_text_end_date) TextView endDateTxt;
   //  @BindView(R.id.new_trip_btn_new_trip) Button newTripBtn;
     private Unbinder unbinder;
 
@@ -98,6 +103,12 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     private SimpleDateFormat mSimpleDateFormat;
     private Calendar mCalendar;
 
+    GetPathPresenter getPathPresenter;
+   @BindView(R.id.new_trip_spinner_path) Spinner pathSpinner;
+    Integer PathModelID;
+    String PathModel;
+    PathSpinnerAdapter pathSpinnerAdapter;
+
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -134,12 +145,14 @@ View view;
         GuideName();
         BusNumber();
         driverName();
+        PathFromTo();
        // MemberName();
 
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
 
         startDateTxt.setOnClickListener(startDateTxtListener);
 
+        endDateTxt.setOnClickListener(endDateTxtListener);
         addTrip();
 
        /* public void showDateTimePicker() {
@@ -199,6 +212,12 @@ View view;
 
         return view;
     }
+
+    private void PathFromTo() {
+        getPathPresenter=new GetPathPresenter(getContext(),this);
+        getPathPresenter.getPathResult( "ar" );
+    }
+
     /* Define the onClickListener, and start the DatePickerDialog with users current time */
     private final View.OnClickListener startDateTxtListener = new View.OnClickListener() {
         @Override
@@ -229,6 +248,35 @@ View view;
         }
     };
 
+    /* Define the onClickListener, and start the DatePickerDialog with users current time */
+    private final View.OnClickListener endDateTxtListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mCalendar = Calendar.getInstance();
+            new DatePickerDialog(getContext(), endDateTxtDataSet, mCalendar.get(Calendar.YEAR),
+                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    };
+
+    /* After user decided on a date, store those in our calendar variable and then start the TimePickerDialog immediately */
+    private final DatePickerDialog.OnDateSetListener endDateTxtDataSet = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            mCalendar.set(Calendar.YEAR, year);
+            mCalendar.set(Calendar.MONTH, monthOfYear);
+            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            new TimePickerDialog(getContext(), endTimeTxtDataSet, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), false).show();
+        }
+    };
+    /* After user decided on a time, save them into our calendar instance, and now parse what our calendar has into the TextView */
+    private final TimePickerDialog.OnTimeSetListener endTimeTxtDataSet = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            mCalendar.set(Calendar.MINUTE, minute);
+            startDateTxt.setText(mSimpleDateFormat.format(mCalendar.getTime()));
+        }
+    };
     private void PerformAddingTrip() {
         FUtilsValidation.isEmpty( tripArabicName,getResources().getString(R.string.pleaseEnterTripArabicName) );
         FUtilsValidation.isEmpty( tripLatinName,getResources().getString(R.string.pleaseEnterTripLatinName));
@@ -533,6 +581,65 @@ View view;
 
     @Override
     public void showAddTripError() {
+
+    }
+
+    @Override
+    public void showGetPathList(final List<GetPathData> getPathDataList) {
+        ArrayList<String> Pathes=new ArrayList<>(  );
+        for(int i=0;i<getPathDataList.size();i++)
+        {
+            Pathes.add( getPathDataList.get( i ).getFromTo() );
+        }
+        pathSpinnerAdapter =new PathSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
+        pathSpinnerAdapter.addAll( Pathes );
+        pathSpinnerAdapter.add( "المسار");
+        pathSpinner.setAdapter( pathSpinnerAdapter );
+        pathSpinner.setPrompt("المسار");
+        pathSpinner.setSelection( pathSpinnerAdapter.getCount() );
+        pathSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (pathSpinner.getSelectedItem()=="اسم المرشد")
+                {
+
+                }
+                else
+                {
+                    PathModel=pathSpinner.getSelectedItem().toString();
+                    for ( i=0;i<getPathDataList.size();i++)
+                    {
+                        if(getPathDataList.get(i).getFromTo().equals(PathModel))
+                        {
+                            PathModelID=Integer.valueOf(getPathDataList.get(i).getId());
+
+                        }
+
+                    }
+
+                    /*for (i=0;i<locationDatalist.size();i++)
+                    {
+                        if(locationDatalist.get(i).getCountry().equals( LocationModel ))
+                        {
+                            LocationModelID=locationDatalist.get(i).getId();
+                        }
+                    }*/
+                    Toast.makeText(getContext(),String.valueOf(PathModelID), Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        } );
+
+    }
+
+    @Override
+    public void showGetPathError() {
 
     }
 }
