@@ -3,6 +3,8 @@ package com.example.alshimaa.smartguide.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -112,6 +114,10 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     String PathModel;
     PathSpinnerAdapter pathSpinnerAdapter;
 
+   /* SharedPreferences sharedPreferences;
+    public static String CompanyId;*/
+   SharedPreferences sharedPreferences_company_id;
+    public static String CompanyId;
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -124,6 +130,9 @@ View view;
         view= inflater.inflate(R.layout.fragment_new_trip, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
+        sharedPreferences_company_id=this.getActivity().getSharedPreferences("def", Context.MODE_PRIVATE);
+        CompanyId=sharedPreferences_company_id.getString("company_id",null);
+       Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -287,8 +296,13 @@ View view;
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext()))
         {
-            // status,company id ,price
-                if (!tripArabicName.getText().toString().equals("") &&
+            Toast.makeText(getContext(), "arabic name "+tripArabicName.getText().toString()+
+                    "latin "+tripLatinName.getText().toString()+"GuideNameModelID "+String.valueOf(GuideNameModelID)
+        +"DriverNameModelID "+String.valueOf(DriverNameModelID)+"BusNumberModelID "+
+                    String.valueOf(BusNumberModelID)+"startDateTxt "+startDateTxt.getText()+"endDateTxt "+endDateTxt.getText().toString()
+                    +"PathModelID "+String.valueOf(PathModelID)+"token "+SplashActivity.Login, Toast.LENGTH_SHORT).show();
+            // status/**/,price
+              /*  if (!tripArabicName.getText().toString().equals("") &&
                         !tripLatinName.getText().toString().equals("") &&
                         GuideNameModelID.toString()!=null &&
                        String.valueOf(DriverNameModelID) !=null&&
@@ -296,15 +310,15 @@ View view;
                         String.valueOf(PathModelID)!=null&&
                         !startDateTxt.getText().toString().equals("") &&
                         !endDateTxt.getText().toString().equals("")  &&
-                        SplashActivity.Login!=null ) {
+                        SplashActivity.Login!=null ) {*/
 
-                    addTripPresenter.getAddTripResult(tripArabicName.getText().toString(),
-                            tripLatinName.getText().toString(),String.valueOf(GuideNameModelID),String.valueOf(DriverNameModelID)
+                    addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
+                            tripArabicName.getText().toString(),String.valueOf(GuideNameModelID),String.valueOf(DriverNameModelID)
                             ,String.valueOf(BusNumberModelID),startDateTxt.getText().toString(),endDateTxt.getText().toString()
-                            ,String.valueOf(PathModelID),"1",SplashActivity.Login,"20","1");
+                            ,String.valueOf(PathModelID),CompanyId,SplashActivity.Login,"20","1");
                      // still not done
 
-                }
+
 
 
         }else
@@ -507,6 +521,11 @@ View view;
             }
         } );
 
+    }
+
+    @Override
+    public void showDriverError() {
+      //  Toast.makeText(getContext(), re, Toast.LENGTH_SHORT).show();
     }
 
     @Override

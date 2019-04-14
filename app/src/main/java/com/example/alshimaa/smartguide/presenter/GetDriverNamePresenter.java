@@ -1,6 +1,7 @@
 package com.example.alshimaa.smartguide.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.api.Client;
 import com.example.alshimaa.smartguide.api.Service;
@@ -36,17 +37,27 @@ public class GetDriverNamePresenter {
         call.enqueue( new Callback<GetDriverNameResponse>() {
             @Override
             public void onResponse(Call<GetDriverNameResponse> call, Response<GetDriverNameResponse> response) {
-                if(response.isSuccessful())
-                {
-
+//                if(response.isSuccessful())
+//                {
+//
+//                    getDriverNameView.showDriverNameList( response.body().getData() );
+//
+//                }else
+//                {
+//                    getDriverNameView.showDriverError();
+//                }
+                if(response.code()==200){
                     getDriverNameView.showDriverNameList( response.body().getData() );
+
+                }else if(response.code()==400){
+                    Toast.makeText(context, response.body().getError(), Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<GetDriverNameResponse> call, Throwable t) {
-                getDriverNameView.showError(  );
+                getDriverNameView.showDriverError();
             }
         } );
     }

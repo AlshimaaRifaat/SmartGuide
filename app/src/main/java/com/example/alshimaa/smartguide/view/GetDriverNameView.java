@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GetDriverNameView {
     void showDriverNameList(List<GetDriverNameData> getDriverNameDataList);
-    void showError();
+    void showDriverError();
 }

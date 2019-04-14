@@ -33,6 +33,8 @@ public class LoginFragment extends Fragment implements LoginView {
 
     SharedPreferences.Editor sharedPref;
 
+    SharedPreferences.Editor sharedPref_company_id;
+     public  static String CompanyId;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -45,6 +47,7 @@ View view;
         view= inflater.inflate(R.layout.fragment_login, container, false);
         init();
         sharedPref=getContext().getSharedPreferences("default", Context.MODE_PRIVATE).edit();
+        sharedPref_company_id=getContext().getSharedPreferences("def", Context.MODE_PRIVATE).edit();
         Login();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -112,12 +115,19 @@ View view;
         userPassword=view.findViewById(R.id.login_Etext_password);
     }
 
+
+
     @Override
-    public void showLoginResult(String UserToken) {
+    public void showLoginResult(String UserToken, String CompanyId) {
         sharedPref.putString("login_to_follow_flight",UserToken);
         sharedPref.apply();
+        Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
+       sharedPref_company_id.putString("company_id",CompanyId);
+        sharedPref_company_id.apply();
+
+
         SplashActivity.Login=UserToken;
-       // Toast.makeText(getContext(), UserToken, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getContext(), UserToken, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getActivity(), NavigationActivity.class);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0,0);

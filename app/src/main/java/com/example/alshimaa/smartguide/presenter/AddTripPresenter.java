@@ -1,6 +1,7 @@
 package com.example.alshimaa.smartguide.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.api.Client;
 import com.example.alshimaa.smartguide.api.Service;
@@ -39,7 +40,6 @@ public class AddTripPresenter {
         hashMap.put("date_time_end",date_time_end);
         hashMap.put("path_id",path_id);
         hashMap.put("company_id",company_id);
-        hashMap.put("company_id",company_id);
         hashMap.put("user_token",user_token);
         hashMap.put("price",price);
         hashMap.put("status",status);
@@ -51,9 +51,13 @@ public class AddTripPresenter {
         call.enqueue( new Callback<AddTripResponse>() {
             @Override
             public void onResponse(Call<AddTripResponse> call, Response<AddTripResponse> response) {
-                if(response.isSuccessful())
+                if(response.code()==200)
                 {
                     addTripView.showAddTripResult( response.body().getData() );
+                }
+                else if (response.code()==400)
+                {
+                    Toast.makeText(context, "this driver in trip now select date different", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -15,6 +15,8 @@ import com.example.alshimaa.smartguide.activity.NavigationActivity;
 public class SplashActivity extends AppCompatActivity {
 SharedPreferences sharedPreferences;
 public static String Login;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public static String Login;
 
         sharedPreferences=getSharedPreferences("default", Context.MODE_PRIVATE);
         Login=sharedPreferences.getString("login_to_follow_flight",null);
+
 
         Thread timer=new Thread(  )
         {
@@ -38,11 +41,11 @@ public static String Login;
                 {
                     e.printStackTrace();
                 }finally {
-                    if (Login!=null)
+                    if (Login!=null )
                     {
                         Intent intent=new Intent( SplashActivity.this,NavigationActivity.class);
                         startActivity( intent );
-                    }else
+                    }else if (Login==null)
                     {
                         Intent intent=new Intent( SplashActivity.this,MainActivity.class);
                         startActivity( intent );
