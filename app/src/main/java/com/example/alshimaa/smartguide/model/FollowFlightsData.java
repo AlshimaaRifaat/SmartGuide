@@ -22,27 +22,12 @@ public class FollowFlightsData implements  Parcelable
     @SerializedName("companyName")
     @Expose
     private String companyName;
-    @SerializedName("guideId")
-    @Expose
-    private String guideId;
     @SerializedName("guideName")
     @Expose
     private String guideName;
-    @SerializedName("memberId")
-    @Expose
-    private String memberId;
-    @SerializedName("memberName")
-    @Expose
-    private String memberName;
-    @SerializedName("driverId")
-    @Expose
-    private String driverId;
     @SerializedName("driverName")
     @Expose
     private String driverName;
-    @SerializedName("busId")
-    @Expose
-    private String busId;
     @SerializedName("busName")
     @Expose
     private String busName;
@@ -61,18 +46,21 @@ public class FollowFlightsData implements  Parcelable
     @SerializedName("to")
     @Expose
     private String to;
-    @SerializedName("startLat")
+    @SerializedName("latStart")
     @Expose
-    private Object startLat;
-    @SerializedName("startLng")
+    private String latStart;
+    @SerializedName("lngStart")
     @Expose
-    private Object startLng;
-    @SerializedName("endLat")
+    private String lngStart;
+    @SerializedName("latEnd")
     @Expose
-    private Object endLat;
-    @SerializedName("endLng")
+    private String latEnd;
+    @SerializedName("lngEnd")
     @Expose
-    private Object endLng;
+    private String lngEnd;
+    @SerializedName("price")
+    @Expose
+    private String price;
     @SerializedName("status")
     @Expose
     private String status;
@@ -92,30 +80,26 @@ public class FollowFlightsData implements  Parcelable
 
     }
             ;
-    private final static long serialVersionUID = -6307884786033853348L;
+    private final static long serialVersionUID = 193045609611999524L;
 
     protected FollowFlightsData(Parcel in) {
         this.tripId = ((String) in.readValue((String.class.getClassLoader())));
         this.tripName = ((String) in.readValue((String.class.getClassLoader())));
         this.companyId = ((String) in.readValue((String.class.getClassLoader())));
         this.companyName = ((String) in.readValue((String.class.getClassLoader())));
-        this.guideId = ((String) in.readValue((String.class.getClassLoader())));
         this.guideName = ((String) in.readValue((String.class.getClassLoader())));
-        this.memberId = ((String) in.readValue((String.class.getClassLoader())));
-        this.memberName = ((String) in.readValue((String.class.getClassLoader())));
-        this.driverId = ((String) in.readValue((String.class.getClassLoader())));
         this.driverName = ((String) in.readValue((String.class.getClassLoader())));
-        this.busId = ((String) in.readValue((String.class.getClassLoader())));
         this.busName = ((String) in.readValue((String.class.getClassLoader())));
         this.numberPassenger = ((String) in.readValue((String.class.getClassLoader())));
         this.dateStart = ((String) in.readValue((String.class.getClassLoader())));
         this.dateEnd = ((String) in.readValue((String.class.getClassLoader())));
         this.from = ((String) in.readValue((String.class.getClassLoader())));
         this.to = ((String) in.readValue((String.class.getClassLoader())));
-        this.startLat = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.startLng = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.endLat = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.endLng = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.latStart = ((String) in.readValue((String.class.getClassLoader())));
+        this.lngStart = ((String) in.readValue((String.class.getClassLoader())));
+        this.latEnd = ((String) in.readValue((String.class.getClassLoader())));
+        this.lngEnd = ((String) in.readValue((String.class.getClassLoader())));
+        this.price = ((String) in.readValue((String.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
     }
 
@@ -154,14 +138,6 @@ public class FollowFlightsData implements  Parcelable
         this.companyName = companyName;
     }
 
-    public String getGuideId() {
-        return guideId;
-    }
-
-    public void setGuideId(String guideId) {
-        this.guideId = guideId;
-    }
-
     public String getGuideName() {
         return guideName;
     }
@@ -170,44 +146,12 @@ public class FollowFlightsData implements  Parcelable
         this.guideName = guideName;
     }
 
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-
-    public String getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
-    }
-
     public String getDriverName() {
         return driverName;
     }
 
     public void setDriverName(String driverName) {
         this.driverName = driverName;
-    }
-
-    public String getBusId() {
-        return busId;
-    }
-
-    public void setBusId(String busId) {
-        this.busId = busId;
     }
 
     public String getBusName() {
@@ -258,36 +202,44 @@ public class FollowFlightsData implements  Parcelable
         this.to = to;
     }
 
-    public Object getStartLat() {
-        return startLat;
+    public String getLatStart() {
+        return latStart;
     }
 
-    public void setStartLat(Object startLat) {
-        this.startLat = startLat;
+    public void setLatStart(String latStart) {
+        this.latStart = latStart;
     }
 
-    public Object getStartLng() {
-        return startLng;
+    public String getLngStart() {
+        return lngStart;
     }
 
-    public void setStartLng(Object startLng) {
-        this.startLng = startLng;
+    public void setLngStart(String lngStart) {
+        this.lngStart = lngStart;
     }
 
-    public Object getEndLat() {
-        return endLat;
+    public String getLatEnd() {
+        return latEnd;
     }
 
-    public void setEndLat(Object endLat) {
-        this.endLat = endLat;
+    public void setLatEnd(String latEnd) {
+        this.latEnd = latEnd;
     }
 
-    public Object getEndLng() {
-        return endLng;
+    public String getLngEnd() {
+        return lngEnd;
     }
 
-    public void setEndLng(Object endLng) {
-        this.endLng = endLng;
+    public void setLngEnd(String lngEnd) {
+        this.lngEnd = lngEnd;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getStatus() {
@@ -303,23 +255,19 @@ public class FollowFlightsData implements  Parcelable
         dest.writeValue(tripName);
         dest.writeValue(companyId);
         dest.writeValue(companyName);
-        dest.writeValue(guideId);
         dest.writeValue(guideName);
-        dest.writeValue(memberId);
-        dest.writeValue(memberName);
-        dest.writeValue(driverId);
         dest.writeValue(driverName);
-        dest.writeValue(busId);
         dest.writeValue(busName);
         dest.writeValue(numberPassenger);
         dest.writeValue(dateStart);
         dest.writeValue(dateEnd);
         dest.writeValue(from);
         dest.writeValue(to);
-        dest.writeValue(startLat);
-        dest.writeValue(startLng);
-        dest.writeValue(endLat);
-        dest.writeValue(endLng);
+        dest.writeValue(latStart);
+        dest.writeValue(lngStart);
+        dest.writeValue(latEnd);
+        dest.writeValue(lngEnd);
+        dest.writeValue(price);
         dest.writeValue(status);
     }
 

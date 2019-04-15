@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
@@ -28,6 +29,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
+    public static String StartLat,StartLng,EndLat,EndLng;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -54,6 +56,17 @@ View view;
             endDateTxt.setText("تاريخ نهايه الرحله:"+followFlightsData.getDateEnd());
             logoBusNumberTxt.setText(followFlightsData.getBusName());
             logoStatusTxt.setText(followFlightsData.getStatus());
+
+            StartLat=followFlightsData.getLatStart();
+            StartLng=followFlightsData.getLngStart();
+            EndLat=followFlightsData.getLatEnd();
+            EndLng=followFlightsData.getLngEnd();
+
+
+            Toast.makeText(getContext(), StartLat, Toast.LENGTH_SHORT).show();
+
+
+
 
             Typeface customFontBold = Typeface.createFromAsset(getContext().getAssets(), "DroidKufi-Bold.ttf");
             flightNameTxt.setTypeface(customFontBold);

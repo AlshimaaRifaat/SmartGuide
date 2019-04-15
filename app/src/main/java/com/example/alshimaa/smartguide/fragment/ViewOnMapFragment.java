@@ -1,7 +1,10 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,34 +18,59 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
+
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.model.LocationData;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolbar;
@@ -50,15 +78,31 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback,LocationListener {
+public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback
+        , com.google.android.gms.location.LocationListener
+,RoutingListener,GoogleApiClient.OnConnectionFailedListener
+        ,GoogleApiClient.ConnectionCallbacks
+{
 GoogleMap mGoogleMap;
 MapView mapView;
 ImageView iconPlus;
 Toolbar toolbar;
-
+ LocationRequest locationReques;
    private Marker currentLocationMaker;
     private LatLng currentLocationLatLong;
     private DatabaseReference mDatabase;
+    int REQUEST_LOCATION_CODE=99;
+    String Lat,Lng,Speed;
+    String Status;
+    private ProgressDialog progressDialog;
+    private List<Polyline> polylines;
+    private static final int[] COLORS = new int[]{R.color.colorAccent,R.color.colorAccent,R.color.colorAccent,R.color.colorAccent,R.color.colorAccent};
+    protected LatLng start;
+    protected LatLng end;
+
+
+
+    protected GoogleApiClient mGoogleApiClient;
 
 
 View view;
@@ -72,10 +116,18 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_view_on_map, container, false);
+
+
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         init();
+        polylines = new ArrayList<>();
+
+
+
+
+
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -104,10 +156,23 @@ View view;
             }
         });
 
+
+
         startGettingLocations();
        mDatabase = FirebaseDatabase.getInstance().getReference();
         getMarkers();
         return view;
+
+    }
+    public void buildApiClint(){
+       mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        MapsInitializer.initialize(getContext());
+        mGoogleApiClient.connect();
+
 
     }
 
@@ -144,7 +209,6 @@ View view;
             }
         }
 
-
         //Checks if FINE LOCATION and COARSE Location were granted
         if (ActivityCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -156,25 +220,7 @@ View view;
         }
 
         //Starts requesting location updates
-        if (canGetLocation) {
-            if (isGPS) {
-                lm.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
-            } else if (isNetwork) {
-                // from Network Provider
-
-                lm.requestLocationUpdates(
-                        LocationManager.NETWORK_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-
-            }
-        } else {
-            Toast.makeText(getContext(), "No Started requesting location updates", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void showSettingsAlert() {
@@ -231,25 +277,46 @@ View view;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(getContext());
+        buildApiClint();
         mGoogleMap=googleMap;
+
+
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
        /* googleMap.addMarker(new MarkerOptions().position(new LatLng(-34,151)).title("statue of liberty").snippet("snippet"));
         CameraPosition Liberty=CameraPosition.builder().target(new LatLng(-34,151))
                 .bearing(8).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
+       // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
+         start = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.StartLat), Double.parseDouble(DetailsFollowFlightsFragment.StartLng));
+        mGoogleMap.addMarker(new MarkerOptions().position(start).title("start"));
 
-        LatLng recife = new LatLng(-8.065638, -34.891130);
-        mGoogleMap.addMarker(new MarkerOptions().position(recife).title("Marcador em Recife"));
+        CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(recife).build();
+         end = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.EndLat), Double.parseDouble(DetailsFollowFlightsFragment.EndLng));
+        mGoogleMap.addMarker(new MarkerOptions().position(end).title("end"));
 
+        CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
 
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        getMarkers();
+
+       LatLng a=new LatLng(11.3232,23.2323);
+        LatLng b=new LatLng(90.3432,80.343);
+        Routing routing = new Routing.Builder()
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(this)
+                .key("AIzaSyCaf2jejQzVtF7myO4R-P2mEFmGoiom1Pc")
+                .waypoints(start,end)
+                .alternativeRoutes(false)
+                .build();
+        routing.execute();
+
 
     }
 
-   @Override
+
+  @Override
     public void onLocationChanged(Location location) {
         if (currentLocationMaker != null) {
             currentLocationMaker.remove();
@@ -266,21 +333,31 @@ View view;
         CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(currentLocationLatLong).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-        LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude());
-        mDatabase.child("busId").child("1").child("busId").child(String.valueOf(new Date().getTime())).setValue(locationData);
+        LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude()
+                ,location.getSpeed());
+        mDatabase.child("buses").child("1").child("1").setValue(locationData);
+        //check this line 3>> bus id
 
         Toast.makeText(getContext(), "Move to new location", Toast.LENGTH_SHORT).show();
-        getMarkers();
+       // getMarkers();
         
     }
 
     private void getMarkers(){
 
-        mDatabase.child("buses").child("1").child("busId").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("buses").child("1").child("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null)
-                    Toast.makeText(getContext(), dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                {
+                   /* Map<String,String> map=dataSnapshot.getValue(Map.class);
+                    String Lat=map.get("lat");
+                    String Lng=map.get("lng");
+                    String Speed=map.get("speed");
+                    Toast.makeText(getContext(), "lat "+Lat+"lng "+Lng+"speed "+Speed, Toast.LENGTH_SHORT).show();*/
+                }
+
+
             }
 
             @Override
@@ -290,17 +367,19 @@ View view;
         });
     }
 
+
+
     private void getAllLocations(Map<String,Object> locations) {
 
 
-      /*  for (Map.Entry<String, Object> entry : locations.entrySet()) {
+       for (Map.Entry<String, Object> entry : locations.entrySet()) {
 
             //Date newDate = new Date(Long.valueOf(entry.getKey()));
             Map singleLocation = (Map) entry.getValue();
             LatLng latLng = new LatLng((Double) singleLocation.get("lat"), (Double) singleLocation.get("lng"));
             addGreenMarker( latLng);
 
-        }*/
+        }
     }
     private void addGreenMarker( LatLng latLng) {
        // SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -312,17 +391,116 @@ View view;
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
+    public void onRoutingFailure(RouteException e) {
+        if(e != null) {
+            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(getContext(), "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRoutingStart() {
 
     }
 
     @Override
-    public void onProviderEnabled(String provider) {
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        mGoogleMap.animateCamera(zoom);
+
+        mGoogleMap.moveCamera(center);
+
+
+
+        if(polylines.size()>0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
+            }
+        }
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int j = 0; j <route.size(); j++) {
+
+            //In case of more than 5 alternative routes
+            int colorIndex = j % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + j * 3);
+            polyOptions.addAll(route.get(j).getPoints());
+            Polyline polyline = mGoogleMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+
+            Toast.makeText(getContext(),"Route "+ (j+1) +": distance - "+ route.get(j).getDistanceValue()+": duration - "+ route.get(j).getDurationValue(),Toast.LENGTH_SHORT).show();
+        }
+
+        // Start marker
+        MarkerOptions options = new MarkerOptions();
+        options.position(start);
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_gallery));
+        mGoogleMap.addMarker(options);
+
+        // End marker
+        options = new MarkerOptions();
+        options.position(end);
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_share));
+        mGoogleMap.addMarker(options);
+
 
     }
 
     @Override
-    public void onProviderDisabled(String provider) {
+    public void onRoutingCancelled() {
+        Toast.makeText(getContext(), "Routing was cancelled.", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        locationReques = new LocationRequest();
+//        locationReques.setSmallestDisplacement(10);
+        locationReques.setFastestInterval(10000);
+        locationReques.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                locationReques,this);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationReques);
+
+
+        SettingsClient client = LocationServices.getSettingsClient(getActivity());
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnFailureListener(getActivity(), new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof ResolvableApiException) {
+                    try {
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult(getActivity(),
+                                REQUEST_LOCATION_CODE);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(getContext(), connectionResult.toString(), Toast.LENGTH_SHORT).show();
 
     }
 }

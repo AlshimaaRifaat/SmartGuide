@@ -128,6 +128,7 @@ View view;
         DetailsFollowFlightsFragment detailsFollowFlightsFragment=new DetailsFollowFlightsFragment();
         Bundle bundle=new Bundle();
         bundle.putParcelable("follow_flight_item",followFlightsData);
+
         detailsFollowFlightsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.content_navigation,
                 detailsFollowFlightsFragment).addToBackStack(null).commit();
