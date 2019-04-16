@@ -81,9 +81,10 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
  * A simple {@link Fragment} subclass.
  */
 public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback
-        , com.google.android.gms.location.LocationListener
+
 ,RoutingListener,GoogleApiClient.OnConnectionFailedListener
         ,GoogleApiClient.ConnectionCallbacks
+    ,com.google.android.gms.location.LocationListener
 {
 GoogleMap mGoogleMap;
 MapView mapView;
@@ -94,11 +95,11 @@ Toolbar toolbar;
     private LatLng currentLocationLatLong;
     private DatabaseReference mDatabase;
     int REQUEST_LOCATION_CODE=99;
-    String Lat,Lng,Speed;
+    Double CurrentLat,CurrentLng;
     String Status;
     private ProgressDialog progressDialog;
     private List<Polyline> polylines;
-    private static final int[] COLORS = new int[]{R.color.colorAccent,R.color.colorAccent,R.color.colorAccent,R.color.colorAccent,R.color.colorAccent};
+    private static final int[] COLORS = new int[]{R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue};
     protected LatLng start;
     protected LatLng end;
 
@@ -348,7 +349,7 @@ Toolbar toolbar;
         currentLocationMaker = mGoogleMap.addMarker(markerOptions);
 
         //Move to new location
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(currentLocationLatLong).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocationLatLong).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude()
@@ -356,8 +357,8 @@ Toolbar toolbar;
         mDatabase.child("buses").child("1").child("1").setValue(locationData);
         //check this line 3>> bus id
 
-        Toast.makeText(getContext(), "Move to new location", Toast.LENGTH_SHORT).show();
-       // getMarkers();
+        Toast.makeText(getContext(),"cur "+ currentLocationLatLong.toString(), Toast.LENGTH_SHORT).show();
+      getMarkers();
         
     }
 
@@ -368,6 +369,12 @@ Toolbar toolbar;
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null)
                 {
+                    CurrentLat=Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
+                     CurrentLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                    //getAllLocations((Map<String,Object>) dataSnapshot.getValue());
+                    LatLng Bus=new LatLng(CurrentLat,CurrentLng);
+                    mGoogleMap.addMarker(new MarkerOptions().position(Bus).title("bus"));
+                Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();
                    /* Map<String,String> map=dataSnapshot.getValue(Map.class);
                     String Lat=map.get("lat");
                     String Lng=map.get("lng");
@@ -385,9 +392,30 @@ Toolbar toolbar;
         });
     }
 
+  /*  private void getAllLocations(Map<String, Object> locations) {
+        for (Map.Entry<String, Object> entry : locations.entrySet()){
+
+//            Date newDate = new Date(Long.valueOf(entry.getKey()));
+            Map singleLocation = (Map) entry.getValue();
+            LatLng latLng = new LatLng((Double) singleLocation.get("lat"), (Double)singleLocation.get("lng"));
+            addGreenMarker( latLng);
+
+        }
+
+    }
+
+    private void addGreenMarker( LatLng latLng) {
+       // SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+       // markerOptions.title(dt.format(newDate));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mGoogleMap.addMarker(markerOptions);
+    }*/
 
 
-    private void getAllLocations(Map<String,Object> locations) {
+
+   /* private void getAllLocations(Map<String,Object> locations) {
 
 
        for (Map.Entry<String, Object> entry : locations.entrySet()) {
@@ -398,15 +426,15 @@ Toolbar toolbar;
             addGreenMarker( latLng);
 
         }
-    }
-    private void addGreenMarker( LatLng latLng) {
+    }*/
+    /*private void addGreenMarker( LatLng latLng) {
        // SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
        // markerOptions.title(dt.format(newDate));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mGoogleMap.addMarker(markerOptions);
-    }
+    }*/
 
     @Override
     public void onRoutingFailure(RouteException e) {
@@ -424,11 +452,11 @@ Toolbar toolbar;
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-//        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-//        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-//        mGoogleMap.animateCamera(zoom);
-//
-//        mGoogleMap.moveCamera(center);
+       CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+       CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+       mGoogleMap.animateCamera(zoom);
+
+        mGoogleMap.moveCamera(center);
 
 
 
@@ -452,7 +480,7 @@ Toolbar toolbar;
             Polyline polyline = mGoogleMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(getContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
 
         // Start marker
@@ -492,8 +520,8 @@ Toolbar toolbar;
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                locationReques,this);
+       /* LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                locationReques,this);*/
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationReques);
 
@@ -521,5 +549,6 @@ Toolbar toolbar;
         Toast.makeText(getContext(), connectionResult.toString(), Toast.LENGTH_SHORT).show();
 
     }
+
 
 }

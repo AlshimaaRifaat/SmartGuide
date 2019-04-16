@@ -63,7 +63,7 @@ View view;
             EndLng=followFlightsData.getLngEnd();
 
 
-            Toast.makeText(getContext(), StartLat, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(), StartLat, Toast.LENGTH_SHORT).show();
 
 
 
