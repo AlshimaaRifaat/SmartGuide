@@ -33,6 +33,7 @@ import com.example.alshimaa.smartguide.adapter.DriverNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.GuideNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.MemberNameSpinnerAdapter;
 import com.example.alshimaa.smartguide.adapter.PathSpinnerAdapter;
+import com.example.alshimaa.smartguide.adapter.StatusSpinnerAdapter;
 import com.example.alshimaa.smartguide.model.GetBusNumberData;
 import com.example.alshimaa.smartguide.model.GetDriverNameData;
 import com.example.alshimaa.smartguide.model.GetGuideNameData;
@@ -118,6 +119,26 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     public static String CompanyId;*/
    SharedPreferences sharedPreferences_company_id;
     public static String CompanyId;
+
+
+    String[] statusValueSpinner = {
+            "مسندة",
+            "قيد التنفيذ",
+            "معلق",
+            "ملغية",
+            "منتهية",
+            "مقفل نهائي",
+            "مقفل جزئي",
+            "مجدولة"
+    };
+   /* List<String> SpinnerValueList = new ArrayList<>();
+        SpinnerValueList.add("Item 1");
+        SpinnerValueList.add("Item 2");
+        SpinnerValueList.add("Item 3");*/
+
+    StatusSpinnerAdapter statusSpinnerAdapter;
+    Spinner statusSpinner;
+    String statusSelectedItemSpinner;
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -158,6 +179,7 @@ View view;
         BusNumber();
         driverName();
         PathFromTo();
+        TripStatus();
        // MemberName();
 
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
@@ -223,6 +245,53 @@ View view;
 
 
         return view;
+    }
+
+    private void TripStatus() {
+        StatusSpinnerAdapter statusSpinnerAdapter = new StatusSpinnerAdapter(getContext(), R.layout.guide_name_spinner_item);
+
+       /* for (int i=0;i<SpinnerValueList.size();i++)
+        {
+            SelectedItemSpinner=SpinnerValueList.get(i);
+        }*/
+        statusSpinnerAdapter.addAll(statusValueSpinner);
+        statusSpinnerAdapter.add("حالة الرحله");
+        statusSpinner.setAdapter(statusSpinnerAdapter);
+        statusSpinner.setPrompt("حالة الرحله");
+
+        statusSpinner.setSelection(statusSpinnerAdapter.getCount());
+
+        statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub
+
+                if(statusSpinner.getSelectedItem() == "حالة الرحله")
+                {
+
+                    //Do nothing.
+                }
+                else{
+
+                    //  SpinnerValue=reasonSpinner.getSelectedItem();
+                    statusSelectedItemSpinner=statusSpinner.getSelectedItem().toString();
+                    /*callUsPresenter.getCallUsResult( userNameEtext.getText().toString(),
+                            userEmailEtext.getText().toString(),userPhoneEtext.getText().toString()
+                            ,userMsgEtext.getText().toString(),SelectedItemSpinner);*/
+                    Toast.makeText(getContext(), statusSelectedItemSpinner, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
     }
 
     private void PathFromTo() {
@@ -296,27 +365,31 @@ View view;
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext()))
         {
-            Toast.makeText(getContext(), "arabic name "+tripArabicName.getText().toString()+
+           /* Toast.makeText(getContext(), "arabic name "+tripArabicName.getText().toString()+
                     "latin "+tripLatinName.getText().toString()+"GuideNameModelID "+String.valueOf(GuideNameModelID)
         +"DriverNameModelID "+String.valueOf(DriverNameModelID)+"BusNumberModelID "+
                     String.valueOf(BusNumberModelID)+"startDateTxt "+startDateTxt.getText()+"endDateTxt "+endDateTxt.getText().toString()
-                    +"PathModelID "+String.valueOf(PathModelID)+"token "+SplashActivity.Login, Toast.LENGTH_SHORT).show();
-            // status/**/,price
-              /*  if (!tripArabicName.getText().toString().equals("") &&
+                    +"PathModelID "+String.valueOf(PathModelID)+"token "+SplashActivity.Login, Toast.LENGTH_SHORT).show();*/
+
+           // status/**/,price
+                if (!tripArabicName.getText().toString().equals("") &&
                         !tripLatinName.getText().toString().equals("") &&
                         GuideNameModelID.toString()!=null &&
                        String.valueOf(DriverNameModelID) !=null&&
                         String.valueOf(BusNumberModelID)!=null&&
                         String.valueOf(PathModelID)!=null&&
+                        statusSelectedItemSpinner!=null&&
                         !startDateTxt.getText().toString().equals("") &&
                         !endDateTxt.getText().toString().equals("")  &&
-                        SplashActivity.Login!=null ) {*/
+
+                        SplashActivity.Login!=null ) {
 
                     addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                            tripArabicName.getText().toString(),String.valueOf(GuideNameModelID),String.valueOf(DriverNameModelID)
-                            ,String.valueOf(BusNumberModelID),startDateTxt.getText().toString(),endDateTxt.getText().toString()
-                            ,String.valueOf(PathModelID),CompanyId,SplashActivity.Login,"20","1");
-                     // still not done
+                            tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
+                            , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
+                            , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, "20", statusSelectedItemSpinner);
+                    // still not done
+                }
 
 
 
@@ -358,8 +431,9 @@ View view;
         toolbar=view.findViewById( R.id.new_trip_tool_bar );
         busNumberSpinner=view.findViewById( R.id.new_trip_spinner_bus_number );
         driverNameSpinner=view.findViewById( R.id.new_trip_spinner_driver_name );
-        memberNameSpinner=view.findViewById( R.id.new_trip_spinner_member_name);
+       // memberNameSpinner=view.findViewById( R.id.new_trip_spinner_member_name);
         addTripBtn=view.findViewById(R.id.new_trip_btn_Create_atrip);
+        statusSpinner=view.findViewById( R.id.new_trip_spinner_status);
 
     }
 
