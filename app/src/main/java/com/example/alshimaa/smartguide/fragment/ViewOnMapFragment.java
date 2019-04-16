@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -49,6 +50,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -105,7 +107,10 @@ Toolbar toolbar;
     protected GoogleApiClient mGoogleApiClient;
 
 
-View view;
+
+
+
+    View view;
     public ViewOnMapFragment() {
         // Required empty public constructor
     }
@@ -170,7 +175,6 @@ View view;
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        MapsInitializer.initialize(getContext());
         mGoogleApiClient.connect();
 
 
@@ -260,19 +264,29 @@ View view;
     private void init() {
         iconPlus=view.findViewById(R.id.view_on_map_icon_plus);
         toolbar=view.findViewById( R.id.view_on_map_tool_bar );
-
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
 
     @Override
     public void onViewCreated( View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mapView=view.findViewById(R.id.map);
-        if (mapView!=null)
-        {
-            mapView.onCreate(null);
-            mapView.onResume();
-            mapView.getMapAsync(this);
-        }
+//        mapView=view.findViewById(R.id.map);
+//        if (mapView!=null)
+//        {
+//            mapView.onCreate(null);
+//            mapView.onResume();
+//            mapView.getMapAsync(this);
+//        }
     }
 
     @Override
@@ -287,13 +301,13 @@ View view;
                 .bearing(8).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
        // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
-         start = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.StartLat), Double.parseDouble(DetailsFollowFlightsFragment.StartLng));
+         start = new LatLng(30.132419, 31.321792);
         mGoogleMap.addMarker(new MarkerOptions().position(start).title("start"));
 
         CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
-         end = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.EndLat), Double.parseDouble(DetailsFollowFlightsFragment.EndLng));
+         end = new LatLng(30.113533, 31.286533);
         mGoogleMap.addMarker(new MarkerOptions().position(end).title("end"));
 
         CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
@@ -301,14 +315,18 @@ View view;
 
         getMarkers();
 
-       LatLng a=new LatLng(11.3232,23.2323);
-        LatLng b=new LatLng(90.3432,80.343);
+        /*LatLng a=new LatLng(30.132419, 31.321792);
+        LatLng b=new LatLng(30.113533, 31.286533);*/
+
+
+
+
         Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
                 .key("AIzaSyCaf2jejQzVtF7myO4R-P2mEFmGoiom1Pc")
-                .waypoints(start,end)
                 .alternativeRoutes(false)
+                .waypoints(start, end)
                 .build();
         routing.execute();
 
@@ -406,11 +424,11 @@ View view;
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-        mGoogleMap.animateCamera(zoom);
-
-        mGoogleMap.moveCamera(center);
+//        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+//        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+//        mGoogleMap.animateCamera(zoom);
+//
+//        mGoogleMap.moveCamera(center);
 
 
 
@@ -422,31 +440,31 @@ View view;
 
         polylines = new ArrayList<>();
         //add route(s) to the map.
-        for (int j = 0; j <route.size(); j++) {
+        for (int i = 0; i <route.size(); i++) {
 
             //In case of more than 5 alternative routes
-            int colorIndex = j % COLORS.length;
+            int colorIndex = i % COLORS.length;
 
             PolylineOptions polyOptions = new PolylineOptions();
             polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(10 + j * 3);
-            polyOptions.addAll(route.get(j).getPoints());
+            polyOptions.width(10 + i * 3);
+            polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mGoogleMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(getContext(),"Route "+ (j+1) +": distance - "+ route.get(j).getDistanceValue()+": duration - "+ route.get(j).getDurationValue(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
 
         // Start marker
         MarkerOptions options = new MarkerOptions();
         options.position(start);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_gallery));
+       // options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
         mGoogleMap.addMarker(options);
 
         // End marker
         options = new MarkerOptions();
         options.position(end);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_share));
+        //options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
         mGoogleMap.addMarker(options);
 
 
@@ -503,4 +521,5 @@ View view;
         Toast.makeText(getContext(), connectionResult.toString(), Toast.LENGTH_SHORT).show();
 
     }
+
 }
