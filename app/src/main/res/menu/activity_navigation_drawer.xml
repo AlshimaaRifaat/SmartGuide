@@ -8,9 +8,9 @@
             android:id="@+id/nav_follow_flights"
             android:title="الصفحه الرئيسيه"
             />
-        <item
+       <!-- <item
             android:id="@+id/nav_TripsInProgress"
-            android:title="رحلات قيد التنفيذ" />
+            android:title="رحلات قيد التنفيذ" />-->
         <item
             android:id="@+id/nav_OldTrip"
             android:title="رحلة قديمة" />

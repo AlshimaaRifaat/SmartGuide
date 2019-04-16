@@ -47,4 +47,5 @@
     <string name="ImmediateTrip">رحله فوريه</string>
     <string name="Path">المسار</string>
     <string name="StatusTrip">حاله الرحله</string>
+    <string name="SortBy">ترتيب بحسب</string>
 </resources>

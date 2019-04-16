@@ -110,17 +110,17 @@ public class NavigationActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new FollowFlightsFragment();
                 break;
-            case R.id.nav_TripsInProgress:
+           /* case R.id.nav_TripsInProgress:
                 currentSelectedPosition=1;
                 fragment=new TripsInProgressFragment();
-                break;
+                break;*/
 
             case R.id.nav_OldTrip:
-                currentSelectedPosition=2;
+                currentSelectedPosition=1;
                 fragment=new OldTripFragment();
                 break;
             case R.id.nav_ViewMyGuides:
-                currentSelectedPosition=3;
+                currentSelectedPosition=2;
                 fragment=new ViewMyGuidesFragment();
                 break;
 

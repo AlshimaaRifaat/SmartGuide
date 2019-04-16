@@ -132,7 +132,7 @@ View view;
         init();
         sharedPreferences_company_id=this.getActivity().getSharedPreferences("def", Context.MODE_PRIVATE);
         CompanyId=sharedPreferences_company_id.getString("company_id",null);
-       Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
+      // Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 

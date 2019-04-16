@@ -374,14 +374,14 @@ Toolbar toolbar;
                     //getAllLocations((Map<String,Object>) dataSnapshot.getValue());
                     LatLng Bus=new LatLng(CurrentLat,CurrentLng);
 
-                    MarkerOptions options = new MarkerOptions();
-                    options.position(Bus);
-                    options.title("bus");
-                    options.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
-                    mGoogleMap.addMarker(options);
+                    MarkerOptions option_bus = new MarkerOptions();
+                    option_bus.position(Bus);
+                    option_bus.title("bus");
+                    option_bus.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
+                    mGoogleMap.addMarker(option_bus);
 
                    // mGoogleMap.addMarker(new MarkerOptions().position(Bus).title("bus"));
-                Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();
                    /* Map<String,String> map=dataSnapshot.getValue(Map.class);
                     String Lat=map.get("lat");
                     String Lng=map.get("lng");

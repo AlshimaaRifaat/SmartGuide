@@ -40,7 +40,7 @@ public class FollowFlightsFragment extends Fragment implements FollowFlightsView
         ,DetailsFollowFlightsView {
     @BindView(R.id.follow_flights_icon_plus) ImageView iconPlus;
     private Unbinder unbinder;
-EditText searchEtext;
+
 Toolbar toolbar;
 
 
@@ -103,7 +103,7 @@ View view;
     }
 
     private void init() {
-        searchEtext=view.findViewById(R.id.follow_flights_edit_text_search);
+
         toolbar=view.findViewById(R.id.follow_flights_tool_bar);
        // iconPlus=view.findViewById(R.id.follow_flights_icon_plus);
         recyclerViewFollowFlights=view.findViewById(R.id.follow_flights_recycler);
