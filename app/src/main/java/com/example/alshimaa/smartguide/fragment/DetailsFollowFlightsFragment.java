@@ -29,7 +29,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
-    public static String StartLat,StartLng,EndLat,EndLng;
+    public static String StartLat,StartLng,EndLat,EndLng,CompanyId;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -62,8 +62,10 @@ View view;
             EndLat=followFlightsData.getLatEnd();
             EndLng=followFlightsData.getLngEnd();
 
+            CompanyId=followFlightsData.getCompanyId();
 
-           // Toast.makeText(getContext(), StartLat, Toast.LENGTH_SHORT).show();
+
+          Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
 
 
 

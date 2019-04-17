@@ -112,6 +112,8 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     GetPathPresenter getPathPresenter;
    @BindView(R.id.new_trip_spinner_path) Spinner pathSpinner;
     Integer PathModelID;
+    Double Price;
+
     String PathModel;
     PathSpinnerAdapter pathSpinnerAdapter;
 
@@ -280,7 +282,7 @@ View view;
                     /*callUsPresenter.getCallUsResult( userNameEtext.getText().toString(),
                             userEmailEtext.getText().toString(),userPhoneEtext.getText().toString()
                             ,userMsgEtext.getText().toString(),SelectedItemSpinner);*/
-                    Toast.makeText(getContext(), statusSelectedItemSpinner, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getContext(), statusSelectedItemSpinner, Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -382,12 +384,13 @@ View view;
                         !startDateTxt.getText().toString().equals("") &&
                         !endDateTxt.getText().toString().equals("")  &&
 
-                        SplashActivity.Login!=null ) {
+                        SplashActivity.Login!=null &&
+                        String.valueOf(Price)!=null) {
 
                     addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                             tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                             , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                            , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, "20", statusSelectedItemSpinner);
+                            , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), statusSelectedItemSpinner);
                     // still not done
                 }
 
@@ -700,11 +703,14 @@ View view;
                         if(getPathDataList.get(i).getFromTo().equals(PathModel))
                         {
                             PathModelID=Integer.valueOf(getPathDataList.get(i).getId());
+                            Price=Double.parseDouble(getPathDataList.get(i).getPrice());
+
 
                         }
 
-                    }
 
+                    }
+                   // Toast.makeText(getContext(),String.valueOf(Price), Toast.LENGTH_SHORT).show();
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))
@@ -712,7 +718,7 @@ View view;
                             LocationModelID=locationDatalist.get(i).getId();
                         }
                     }*/
-                   // Toast.makeText(getContext(),String.valueOf(PathModelID), Toast.LENGTH_SHORT).show();
+
 
                 }
 

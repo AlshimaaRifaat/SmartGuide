@@ -354,7 +354,7 @@ Toolbar toolbar;
 
         LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude()
                 ,location.getSpeed());
-        mDatabase.child("buses").child("1").child("1").setValue(locationData);
+        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").setValue(locationData);
         //check this line 3>> bus id
 
         Toast.makeText(getContext(),"cur "+ currentLocationLatLong.toString(), Toast.LENGTH_SHORT).show();
@@ -364,7 +364,7 @@ Toolbar toolbar;
 
     private void getMarkers(){
 
-        mDatabase.child("buses").child("1").child("1").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null)
