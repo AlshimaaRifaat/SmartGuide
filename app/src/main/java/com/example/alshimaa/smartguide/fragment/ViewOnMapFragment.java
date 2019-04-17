@@ -84,28 +84,28 @@ public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback
 
 ,RoutingListener,GoogleApiClient.OnConnectionFailedListener
         ,GoogleApiClient.ConnectionCallbacks
-    ,com.google.android.gms.location.LocationListener
+
 {
 GoogleMap mGoogleMap;
 MapView mapView;
 ImageView iconPlus;
 Toolbar toolbar;
+Context context;
  LocationRequest locationReques;
    private Marker currentLocationMaker;
     private LatLng currentLocationLatLong;
     private DatabaseReference mDatabase;
     int REQUEST_LOCATION_CODE=99;
-    Double CurrentLat,CurrentLng;
+    Double BusLat,BusLng;
     String Status;
     private ProgressDialog progressDialog;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue};
     protected LatLng start;
     protected LatLng end;
-
-
-
+    Marker m;
     protected GoogleApiClient mGoogleApiClient;
+
 
 
 
@@ -123,7 +123,7 @@ Toolbar toolbar;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_view_on_map, container, false);
 
-
+     context=this.getActivity();
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -335,7 +335,7 @@ Toolbar toolbar;
     }
 
 
-  @Override
+  /*@Override
     public void onLocationChanged(Location location) {
         if (currentLocationMaker != null) {
             currentLocationMaker.remove();
@@ -359,27 +359,36 @@ Toolbar toolbar;
 
         Toast.makeText(getContext(),"cur "+ currentLocationLatLong.toString(), Toast.LENGTH_SHORT).show();
       getMarkers();
-        
-    }
+
+    }*/
 
     private void getMarkers(){
+
 
         mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(m!=null){
+                    m.remove();
+                }
                 if (dataSnapshot.getValue() != null)
                 {
-                    CurrentLat=Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
-                     CurrentLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                   BusLat=Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
+                     BusLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
                     //getAllLocations((Map<String,Object>) dataSnapshot.getValue());
-                    LatLng Bus=new LatLng(CurrentLat,CurrentLng);
+                    LatLng BusLatLng=new LatLng(BusLat,BusLng);
 
-                    MarkerOptions option_bus = new MarkerOptions();
-                    option_bus.position(Bus);
-                    option_bus.title("bus");
-                    option_bus.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
-                    mGoogleMap.addMarker(option_bus);
+//                            MarkerOptions option_bus = new MarkerOptions();
+//                            option_bus.position(BusLatLng);
+//                            option_bus.title("bus");
+//                            option_bus.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
+//                            mGoogleMap.addMarker(option_bus);
 
+                      m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)).title("Bus").position(BusLatLng));
+
+                    if(context!=null) {
+                        Toast.makeText(context, String.valueOf(BusLat) + " " + String.valueOf(BusLng), Toast.LENGTH_SHORT).show();
+                    }
                    // mGoogleMap.addMarker(new MarkerOptions().position(Bus).title("bus"));
                // Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();
                    /* Map<String,String> map=dataSnapshot.getValue(Map.class);
