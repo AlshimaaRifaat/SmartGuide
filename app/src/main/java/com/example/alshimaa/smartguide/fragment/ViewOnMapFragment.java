@@ -104,6 +104,7 @@ Context context;
     protected LatLng start;
     protected LatLng end;
     Marker m;
+    Integer BusSpeed;
     protected GoogleApiClient mGoogleApiClient;
 
 
@@ -374,7 +375,9 @@ Context context;
                 if (dataSnapshot.getValue() != null)
                 {
                    BusLat=Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
-                     BusLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                   BusLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                   BusSpeed=Integer.parseInt(dataSnapshot.child("speed").getValue().toString());
+
                     //getAllLocations((Map<String,Object>) dataSnapshot.getValue());
                     LatLng BusLatLng=new LatLng(BusLat,BusLng);
 
@@ -384,10 +387,12 @@ Context context;
 //                            option_bus.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
 //                            mGoogleMap.addMarker(option_bus);
 
-                      m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)).title("Bus").position(BusLatLng));
+                      m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon))
+                              .title(DetailsFollowFlightsFragment.BusName).snippet(" سرعة "+String.valueOf(BusSpeed)+"KM ").position(BusLatLng));
+                    Toast.makeText(context, String.valueOf(BusSpeed), Toast.LENGTH_SHORT).show();
 
                     if(context!=null) {
-                        Toast.makeText(context, String.valueOf(BusLat) + " " + String.valueOf(BusLng), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, String.valueOf(BusLat) + " " + String.valueOf(BusLng), Toast.LENGTH_SHORT).show();
                     }
                    // mGoogleMap.addMarker(new MarkerOptions().position(Bus).title("bus"));
                // Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();

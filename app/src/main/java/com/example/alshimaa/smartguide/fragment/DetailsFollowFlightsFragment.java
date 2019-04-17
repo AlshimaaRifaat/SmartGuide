@@ -29,7 +29,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
-    public static String StartLat,StartLng,EndLat,EndLng,CompanyId;
+    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -45,16 +45,16 @@ View view;
         if (bundle!=null)
         {
             followFlightsData=bundle.getParcelable("follow_flight_item");
-
             flightNameTxt.setText("اسم الرحله:"+followFlightsData.getTripName());
             guideNameTxt.setText("اسم المشرف:"+followFlightsData.getGuideName());
-            busNumberTxt.setText("رقم الحافله:"+followFlightsData.getBusName());
+            BusName=followFlightsData.getBusName();
+            busNumberTxt.setText("رقم الحافله:"+BusName);
             driverNameTxt.setText("اسم السائق:"+followFlightsData.getDriverName());
             fromTxt.setText("مكان النزول:"+followFlightsData.getFrom());
             toTxt.setText("مكان الاستلام:"+followFlightsData.getTo());
             startDateTxt.setText("تاريخ بدايه الرحله:"+followFlightsData.getDateStart());
             endDateTxt.setText("تاريخ نهايه الرحله:"+followFlightsData.getDateEnd());
-            logoBusNumberTxt.setText(followFlightsData.getBusName());
+            logoBusNumberTxt.setText(BusName);
             logoStatusTxt.setText(followFlightsData.getStatus());
 
             StartLat=followFlightsData.getLatStart();
