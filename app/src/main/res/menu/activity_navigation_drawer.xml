@@ -11,12 +11,12 @@
        <!-- <item
             android:id="@+id/nav_TripsInProgress"
             android:title="رحلات قيد التنفيذ" />-->
-        <item
+        <!--<item
             android:id="@+id/nav_OldTrip"
             android:title="رحلة قديمة" />
         <item
             android:id="@+id/nav_ViewMyGuides"
-            android:title="عرض المرشدين الخاصين بي" />
+            android:title="عرض المرشدين الخاصين بي" />-->
 
         <item
             android:id="@+id/nav_LogOut"

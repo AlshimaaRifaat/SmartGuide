@@ -7,4 +7,7 @@ import java.util.List;
 public interface FollowFlightsView {
     void showFollowFlightsList(List<FollowFlightsData> followFlightsDataList);
     void showFollowFlightsError();
+
+    void showSortByStatusList(List<FollowFlightsData> followFlightsDataList);
+    void showSortByStatusError();
 }

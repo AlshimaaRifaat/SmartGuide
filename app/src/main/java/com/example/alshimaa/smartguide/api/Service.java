@@ -40,4 +40,7 @@ public interface Service {
     @POST("getPath")
     Call<GetPathResponse> getPathData(@Body Map<String,String> map);
 
+    @POST("filterByStatus")
+    Call<FollowFlightsResponse> getSortByStatusData(@Body Map<String,String> map);
+
 }

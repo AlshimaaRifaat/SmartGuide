@@ -26,7 +26,6 @@
     <string name="pleaseEnterDownloadPlace_of_pilgrims">من فضلك ,ادخل مكان تنزيل الحجاج</string>
     <string name="pleaseEntertripStartDate">من فضلك ,ادخل موعد بدء الرحله</string>
     <string name="pleaseEnterTripEndDate">من فضلك ,ادخل موعد انتهاء الرحله</string>
-    <string name="ViewOnMap">عرض على الخريطه</string>
     <string name="TripsNotifications">اشعارات الرحلات</string>
     <string name="contactWithGuide">تواصل مع المرشد</string>
     <string name="Accept">قبول</string>
@@ -37,4 +36,17 @@
     <string name="Path">المسار</string>
     <string name="StatusTrip">حاله الرحله</string>
     <string name="SortBy">ترتيب بحسب</string>
+    <string name="request_suspension">تعليق الطلب</string>
+    <string name="ViewPath">عرض المسار</string>
+    <string name="SortByDot">ترتيب بحسب....</string>
+    <string name="status">الحاله</string>
+    <string name="date">التاريخ</string>
+    <string name="SortByStatus">ترتيب بحسب الحاله</string>
+    <string name="mosnada">مسنده</string>
+    <string name="kayd_tanfez">قيد التنفيذ</string>
+    <string name="moalaq">معلق</string>
+    <string name="malghia">ملغيه</string>
+    <string name="mokfl_nhaey">مقفل نهائي</string>
+    <string name="mokfl_gozey">مقفل جزئي</string>
+    <string name="mogdwla">مجدوله</string>
 </resources>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
@@ -39,6 +40,7 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
 public class FollowFlightsFragment extends Fragment implements FollowFlightsView
         ,DetailsFollowFlightsView {
     @BindView(R.id.follow_flights_icon_plus) ImageView iconPlus;
+    @BindView(R.id.relative_sort_by) RelativeLayout sortByRelative;
     private Unbinder unbinder;
 
 Toolbar toolbar;
@@ -49,6 +51,10 @@ Toolbar toolbar;
     FollowFlightsPresenter followFlightsPresenter;
 
     NetworkConnection networkConnection;
+
+    Bundle bundle;
+    String Mosnda,Kayd_tnfez,Moalaq,Malghia,
+            Mokfl_nhaey,Mokfl_gozey,Mogdwla;
 
     public FollowFlightsFragment() {
         // Required empty public constructor
@@ -62,6 +68,8 @@ View view;
         view =inflater.inflate(R.layout.fragment_follow_flights, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
+        followFlightsPresenter=new FollowFlightsPresenter(getContext(),this);
+
 
         NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -84,7 +92,7 @@ View view;
             }
         });
         networkConnection=new NetworkConnection( getContext() );
-        FollowFlights();
+
 
         iconPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,11 +102,65 @@ View view;
 
             }
         });
+        sortByRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation,new
+                        SortByFragment()).addToBackStack(null).commit();
+            }
+        });
+        bundle=this.getArguments();
+        if(bundle!=null)
+        {
+            Mosnda=bundle.getString("mosnda");
+            Kayd_tnfez=bundle.getString("kayd_tnfez");
+            Moalaq=bundle.getString("moalaq");
+            Malghia=bundle.getString("malghia");
+
+            Mokfl_nhaey=bundle.getString("mokfl_nhaey");
+            Mokfl_gozey=bundle.getString("mokfl_gozey");
+            Mogdwla=bundle.getString("mogdwla");
+            SortByStatus();
+        }else
+        {
+            FollowFlights();
+        }
+        Toast.makeText(getContext(),"mos "+ Mosnda, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"kayd " +Kayd_tnfez, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"moalaq "+ Moalaq, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"malgh "+ Malghia, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"nahy "+ Mokfl_nhaey, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"gozy "+ Mokfl_gozey, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"mogdwl "+ Mogdwla, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getContext(),"USER   "+ SplashActivity.Login, Toast.LENGTH_SHORT).show();
+
+
+
         return view;
     }
 
+    private void SortByStatus() {
+        if(Mosnda=="1") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "1");
+        }else if(Kayd_tnfez=="2") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "2");
+        }else if(Moalaq=="3") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "3");
+        }else if(Malghia=="4") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "4");
+        }else if(Mokfl_nhaey=="5") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "5");
+        }else if(Mokfl_gozey=="6") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "6");
+        }else if(Mogdwla=="7") {
+            followFlightsPresenter.getSortByStatusResult(SplashActivity.Login, "ar", "7");
+        }
+        //status
+    }
+
     private void FollowFlights() {
-        followFlightsPresenter=new FollowFlightsPresenter(getContext(),this);
+
         followFlightsPresenter.getFollowFlightsResult("ar", SplashActivity.Login,"1");
     }
 
@@ -124,11 +186,23 @@ View view;
     }
 
     @Override
+    public void showSortByStatusList(List<FollowFlightsData> followFlightsDataList) {
+        followFlightsAdapter=new FollowFlightsAdapter( getContext(),followFlightsDataList );
+        followFlightsAdapter.onClick(this);
+        recyclerViewFollowFlights.setLayoutManager( new GridLayoutManager(getContext(),2));
+        recyclerViewFollowFlights.setAdapter( followFlightsAdapter );
+    }
+
+    @Override
+    public void showSortByStatusError() {
+
+    }
+
+    @Override
     public void showDetailsFollowFlights(FollowFlightsData followFlightsData) {
         DetailsFollowFlightsFragment detailsFollowFlightsFragment=new DetailsFollowFlightsFragment();
         Bundle bundle=new Bundle();
         bundle.putParcelable("follow_flight_item",followFlightsData);
-
         detailsFollowFlightsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.content_navigation,
                 detailsFollowFlightsFragment).addToBackStack(null).commit();
