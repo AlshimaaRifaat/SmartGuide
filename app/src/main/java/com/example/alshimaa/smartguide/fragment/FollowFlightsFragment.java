@@ -54,7 +54,7 @@ Toolbar toolbar;
 
     Bundle bundle;
     String Mosnda,Kayd_tnfez,Moalaq,Malghia,
-            Mokfl_nhaey,Mokfl_gozey,Mogdwla;
+            Mokfl_nhaey,Mokfl_gozey,Mogdwla,Old,New;
 
     public FollowFlightsFragment() {
         // Required empty public constructor
@@ -121,11 +121,21 @@ View view;
             Mokfl_gozey=bundle.getString("mokfl_gozey");
             Mogdwla=bundle.getString("mogdwla");
             SortByStatus();
-        }else
+
+            Old=bundle.getString("old");
+            New=bundle.getString("new");
+            SortByDate();
+
+        }/*else if (Old=="old" ||New =="new"){*/
+
+
+
+
+            else
         {
             FollowFlights();
         }
-        Toast.makeText(getContext(),"mos "+ Mosnda, Toast.LENGTH_SHORT).show();
+       /* Toast.makeText(getContext(),"mos "+ Mosnda, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(),"kayd " +Kayd_tnfez, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(),"moalaq "+ Moalaq, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(),"malgh "+ Malghia, Toast.LENGTH_SHORT).show();
@@ -134,10 +144,22 @@ View view;
         Toast.makeText(getContext(),"mogdwl "+ Mogdwla, Toast.LENGTH_SHORT).show();
 
         Toast.makeText(getContext(),"USER   "+ SplashActivity.Login, Toast.LENGTH_SHORT).show();
-
+*/
 
 
         return view;
+    }
+
+    private void SortByDate() {
+        if(Old=="old") {
+            Toast.makeText(getContext(),"o "+ Old, Toast.LENGTH_SHORT).show();
+
+            followFlightsPresenter.getSortByDateResult(SplashActivity.Login, "ar", "old");
+        }else if(New=="new") {
+            Toast.makeText(getContext(),"n "+ New, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), SplashActivity.Login, Toast.LENGTH_SHORT).show();
+            followFlightsPresenter.getSortByDateResult(SplashActivity.Login, "ar", "new");
+        }
     }
 
     private void SortByStatus() {
@@ -195,6 +217,19 @@ View view;
 
     @Override
     public void showSortByStatusError() {
+
+    }
+
+    @Override
+    public void showSortByDateList(List<FollowFlightsData> followFlightsDataList) {
+        followFlightsAdapter=new FollowFlightsAdapter( getContext(),followFlightsDataList );
+        followFlightsAdapter.onClick(this);
+        recyclerViewFollowFlights.setLayoutManager( new GridLayoutManager(getContext(),2));
+        recyclerViewFollowFlights.setAdapter( followFlightsAdapter );
+    }
+
+    @Override
+    public void showSortByDateError() {
 
     }
 

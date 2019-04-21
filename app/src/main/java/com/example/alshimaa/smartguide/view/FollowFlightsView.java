@@ -10,4 +10,7 @@ public interface FollowFlightsView {
 
     void showSortByStatusList(List<FollowFlightsData> followFlightsDataList);
     void showSortByStatusError();
+
+    void showSortByDateList(List<FollowFlightsData> followFlightsDataList);
+    void showSortByDateError();
 }

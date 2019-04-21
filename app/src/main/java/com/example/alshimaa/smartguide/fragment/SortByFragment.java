@@ -20,6 +20,8 @@ import butterknife.Unbinder;
  */
 public class SortByFragment extends Fragment {
     @BindView(R.id.sort_by_relative_status) RelativeLayout sortByStatusRelative;
+    @BindView(R.id.sort_by_relative_date) RelativeLayout sortByDateRelative;
+
      Unbinder unbinder;
 
     public SortByFragment() {
@@ -37,6 +39,13 @@ View view;
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,new SortByStatusFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
+        sortByDateRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation,new SortByDateFragment())
                         .addToBackStack(null).commit();
             }
         });

@@ -43,4 +43,7 @@ public interface Service {
     @POST("filterByStatus")
     Call<FollowFlightsResponse> getSortByStatusData(@Body Map<String,String> map);
 
+    @POST("filterByDate")
+    Call<FollowFlightsResponse> getSortByDateData(@Body Map<String,String> map);
+
 }

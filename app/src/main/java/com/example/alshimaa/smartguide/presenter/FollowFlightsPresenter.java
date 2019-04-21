@@ -70,13 +70,43 @@ public class FollowFlightsPresenter {
 
                 }else if (response.code()==404)
                 {
-                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "لا توجد نتيجه", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowFlightsResponse> call, Throwable t) {
                 followFlightsView.showSortByStatusError( );
+            }
+        } );
+    }
+
+    public void getSortByDateResult(String User_token,String Lang,String Status)
+    {
+        HashMap<String,String> hashMap=new HashMap<>(  );
+        hashMap.put("user_token",User_token);
+        hashMap.put("lang",Lang);
+        hashMap.put("status",Status);
+        Service service= Client.getClient().create( Service.class );
+        Call<FollowFlightsResponse> call=service.getSortByDateData( hashMap );
+
+        call.enqueue( new Callback<FollowFlightsResponse>() {
+            @Override
+            public void onResponse(Call<FollowFlightsResponse> call, Response<FollowFlightsResponse> response) {
+                if(response.code()==200)
+                {
+
+                    followFlightsView.showSortByDateList( response.body().getData() );
+
+                }else if (response.code()==404)
+                {
+                    Toast.makeText(context, "لا توجد نتيجه", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowFlightsResponse> call, Throwable t) {
+                followFlightsView.showSortByDateError( );
             }
         } );
     }

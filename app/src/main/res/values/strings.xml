@@ -61,4 +61,7 @@
     <string name="mokfl_nhaey">مقفل نهائي</string>
     <string name="mokfl_gozey">مقفل جزئي</string>
     <string name="mogdwla">مجدوله</string>
+    <string name="SortByDate">ترتيب بحسب التاريخ</string>
+    <string name="oldest">الاقدم</string>
+    <string name="recent">الاحدث</string>
 </resources>

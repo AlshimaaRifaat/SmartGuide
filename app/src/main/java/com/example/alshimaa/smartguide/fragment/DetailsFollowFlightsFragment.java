@@ -65,7 +65,7 @@ View view;
             CompanyId=followFlightsData.getCompanyId();
 
 
-          Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
+         // Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
 
 
 
