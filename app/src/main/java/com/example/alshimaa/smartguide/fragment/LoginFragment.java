@@ -19,14 +19,16 @@ import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.model.LoginData;
 import com.example.alshimaa.smartguide.presenter.LoginPresenter;
+import com.example.alshimaa.smartguide.view.DetailsNavHeaderProfileView;
 import com.example.alshimaa.smartguide.view.LoginView;
 import com.fourhcode.forhutils.FUtilsValidation;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment implements LoginView {
+public class LoginFragment extends Fragment implements LoginView{
     Button loginBtn;
     EditText userEmail,userPassword;
     LoginPresenter loginPresenter;
@@ -118,17 +120,20 @@ View view;
 
 
     @Override
-    public void showLoginResult(String UserToken, String CompanyId) {
-        sharedPref.putString("login_to_follow_flight",UserToken);
+    public void showLoginResult(LoginData loginData) {
+        sharedPref.putString("login_to_follow_flight",loginData.getUserToken());
         sharedPref.apply();
         Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
-       sharedPref_company_id.putString("company_id",CompanyId);
+       sharedPref_company_id.putString("company_id",loginData.getCompanyId());
         sharedPref_company_id.apply();
-
-
-        SplashActivity.Login=UserToken;
+        SplashActivity.Login=loginData.getUserToken();
         // Toast.makeText(getContext(), UserToken, Toast.LENGTH_SHORT).show();
+
         Intent i = new Intent(getActivity(), NavigationActivity.class);
+        i.putExtra("img",loginData.getImage());
+
+        i.putExtra("name",loginData.getName());
+        i.putExtra("phone",loginData.getPhone());
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0,0);
         getActivity().finish();
@@ -138,4 +143,30 @@ View view;
     public void showError() {
 
     }
+
+   /* @Override
+    public void showDetailsNavHeaderProfile(LoginData loginData) {
+       *//* DetailsFollowFlightsFragment detailsFollowFlightsFragment=new DetailsFollowFlightsFragment();
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("follow_flight_item",loginData);
+        detailsFollowFlightsFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                detailsFollowFlightsFragment).addToBackStack(null).commit();*//*
+
+     *//*   Intent i = new Intent(getActivity(), NavigationActivity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0,0);*//*
+
+        Intent i = new Intent(getActivity(), NavigationActivity.class);
+
+
+        i.putExtra("img",loginData.getImage());
+
+        i.putExtra("name",loginData.getName());
+        i.putExtra("phone",loginData.getPhone());
+
+        //Toast.makeText(getContext(), Under, Toast.LENGTH_SHORT).show();
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0,0);
+    }*/
 }

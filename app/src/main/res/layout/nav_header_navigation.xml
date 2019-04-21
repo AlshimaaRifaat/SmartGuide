@@ -22,7 +22,7 @@
         app:civ_border_width="@dimen/_1sdp"
         app:civ_border_color="#fff"/>
     <TextView
-        android:id="@+id/nav_header_text_guide_name"
+        android:id="@+id/nav_header_text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nav_header_profile_img"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/nav_header_text_guide_name"
+        android:layout_below="@+id/nav_header_text_name"
         android:text="736337" />
 
     <View

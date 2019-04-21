@@ -12,13 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.OldTripFragment;
 import com.example.alshimaa.smartguide.fragment.TripsInProgressFragment;
 import com.example.alshimaa.smartguide.fragment.ViewMyGuidesFragment;
 import com.example.alshimaa.smartguide.fragment.ViewOnMapFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,10 +38,23 @@ public class NavigationActivity extends AppCompatActivity
     public static DrawerLayout drawer;
 
     public static Toolbar toolbar;
+   // @BindView(R.id.nav_header_profile_img)
+    ImageView imgProfile;
+
+   // @BindView(R.id.nav_header_text_name)
+    TextView nameTxt;
+
+   // @BindView(R.id.nav_header_text_phone)
+    TextView phoneTxt ;
+ View header;
+
+
+      String Img,Name,Phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        // ButterKnife.bind(this);
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,6 +68,13 @@ public class NavigationActivity extends AppCompatActivity
         });*/
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
+        header=navigationView.getHeaderView(0);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        imgProfile=header.findViewById(R.id.nav_header_profile_img);
+        nameTxt=header.findViewById(R.id.nav_header_text_name);
+        phoneTxt=header.findViewById(R.id.nav_header_text_phone);
+
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
         drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         toggle = new ActionBarDrawerToggle(
@@ -66,7 +95,18 @@ public class NavigationActivity extends AppCompatActivity
                }
            }
       });*/
+        Img = getIntent().getStringExtra("img");
+        Name = getIntent().getStringExtra("name");
+        Phone=getIntent().getStringExtra("phone");
+        Toast.makeText(this, Img+" "+Name+" "+Phone, Toast.LENGTH_SHORT).show();
+      Glide.with(getApplicationContext()).load("http://omelqoura.com/"+Img).into(imgProfile);
+        nameTxt.setText(Name);
+        phoneTxt.setText(Phone);
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {

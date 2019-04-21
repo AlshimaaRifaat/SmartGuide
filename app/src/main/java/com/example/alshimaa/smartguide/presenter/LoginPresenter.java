@@ -38,8 +38,7 @@ public class LoginPresenter {
                 if(response.isSuccessful())
                 {
 
-                    loginView.showLoginResult( response.body().getData().getUserToken(),
-                            response.body().getData().getCompanyId());
+                    loginView.showLoginResult( response.body().getData());
 
                 }else
                 {
