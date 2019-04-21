@@ -1,6 +1,7 @@
 package com.example.alshimaa.smartguide.api;
 
 import com.example.alshimaa.smartguide.model.AddTripResponse;
+import com.example.alshimaa.smartguide.model.EditTripStatusResponse;
 import com.example.alshimaa.smartguide.model.FollowFlightsResponse;
 import com.example.alshimaa.smartguide.model.GetBusNumberResponse;
 import com.example.alshimaa.smartguide.model.GetDriverNameResponse;
@@ -45,5 +46,8 @@ public interface Service {
 
     @POST("filterByDate")
     Call<FollowFlightsResponse> getSortByDateData(@Body Map<String,String> map);
+
+    @POST("editTripStatus")
+    Call<EditTripStatusResponse> getEditTripStatusData(@Body Map<String,String> map);
 
 }

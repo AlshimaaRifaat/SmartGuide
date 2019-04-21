@@ -7,7 +7,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FollowFlightsData implements  Parcelable
+public class FollowFlightsData implements Serializable, Parcelable
 {
 
     @SerializedName("tripId")
@@ -28,6 +28,9 @@ public class FollowFlightsData implements  Parcelable
     @SerializedName("driverName")
     @Expose
     private String driverName;
+    @SerializedName("busId")
+    @Expose
+    private String busId;
     @SerializedName("busName")
     @Expose
     private String busName;
@@ -80,7 +83,7 @@ public class FollowFlightsData implements  Parcelable
 
     }
             ;
-    private final static long serialVersionUID = 193045609611999524L;
+    private final static long serialVersionUID = -5066606806211232370L;
 
     protected FollowFlightsData(Parcel in) {
         this.tripId = ((String) in.readValue((String.class.getClassLoader())));
@@ -89,6 +92,7 @@ public class FollowFlightsData implements  Parcelable
         this.companyName = ((String) in.readValue((String.class.getClassLoader())));
         this.guideName = ((String) in.readValue((String.class.getClassLoader())));
         this.driverName = ((String) in.readValue((String.class.getClassLoader())));
+        this.busId = ((String) in.readValue((String.class.getClassLoader())));
         this.busName = ((String) in.readValue((String.class.getClassLoader())));
         this.numberPassenger = ((String) in.readValue((String.class.getClassLoader())));
         this.dateStart = ((String) in.readValue((String.class.getClassLoader())));
@@ -152,6 +156,14 @@ public class FollowFlightsData implements  Parcelable
 
     public void setDriverName(String driverName) {
         this.driverName = driverName;
+    }
+
+    public String getBusId() {
+        return busId;
+    }
+
+    public void setBusId(String busId) {
+        this.busId = busId;
     }
 
     public String getBusName() {
@@ -257,6 +269,7 @@ public class FollowFlightsData implements  Parcelable
         dest.writeValue(companyName);
         dest.writeValue(guideName);
         dest.writeValue(driverName);
+        dest.writeValue(busId);
         dest.writeValue(busName);
         dest.writeValue(numberPassenger);
         dest.writeValue(dateStart);

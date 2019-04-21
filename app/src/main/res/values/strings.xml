@@ -64,4 +64,7 @@
     <string name="SortByDate">ترتيب بحسب التاريخ</string>
     <string name="oldest">الاقدم</string>
     <string name="recent">الاحدث</string>
+    <string name="Follow_flight">متابعة الرحلة</string>
+    <string name="edit_trip">تعديل الرحله</string>
+    <string name="save">حفظ</string>
 </resources>

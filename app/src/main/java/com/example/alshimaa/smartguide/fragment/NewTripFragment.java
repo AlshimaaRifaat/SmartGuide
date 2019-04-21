@@ -125,12 +125,9 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
 
     String[] statusValueSpinner = {
             "مسندة",
-            "قيد التنفيذ",
             "معلق",
-            "ملغية",
-            "مقفل نهائي",
-            "مقفل جزئي",
-            "مجدولة"
+            "مجدولة",
+            "فوريه"
     };
    /* List<String> SpinnerValueList = new ArrayList<>();
         SpinnerValueList.add("Item 1");
@@ -139,7 +136,7 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
 
     StatusSpinnerAdapter statusSpinnerAdapter;
     Spinner statusSpinner;
-    String statusSelectedItemSpinner;
+   public static String statusSelectedItemSpinner;
     public NewTripFragment() {
         // Required empty public constructor
     }
@@ -278,6 +275,7 @@ View view;
 
                     //  SpinnerValue=reasonSpinner.getSelectedItem();
                     statusSelectedItemSpinner=statusSpinner.getSelectedItem().toString();
+
                     /*callUsPresenter.getCallUsResult( userNameEtext.getText().toString(),
                             userEmailEtext.getText().toString(),userPhoneEtext.getText().toString()
                             ,userMsgEtext.getText().toString(),SelectedItemSpinner);*/
@@ -390,40 +388,23 @@ View view;
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "1");
-                    }else if (statusSelectedItemSpinner=="قيد التنفيذ") {
-                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
-                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "2");
                     }
                     else if (statusSelectedItemSpinner=="معلق") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "3");
-                    }
-                    else if (statusSelectedItemSpinner=="ملغية") {
-                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
-                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "4");
-                    }
-                    else if (statusSelectedItemSpinner=="مقفل نهائي") {
-                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
-                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "5");
-                    }
-                    else if (statusSelectedItemSpinner=="مقفل جزئي") {
-                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
-                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "6");
-                    }else if (statusSelectedItemSpinner=="مجدولة") {
+                    } else if (statusSelectedItemSpinner=="مجدولة") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "7");
+                    }
+                    else if (statusSelectedItemSpinner=="فوريه") {
+                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
+                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
+                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
+                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "8");
                     }
                     // still not done
                 }

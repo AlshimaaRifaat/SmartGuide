@@ -8,11 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +27,9 @@ public class DetailsFollowFlightsFragment extends Fragment {
 TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
         ,fromTxt,toTxt,startDateTxt,endDateTxt
         ,logoBusNumberTxt,logoStatusTxt;
+@BindView(R.id.details_follow_flights_icon_edit)
+    ImageView iconEdit;
+Unbinder unbinder;
 
 
 
@@ -29,7 +37,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
-    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName;
+    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus,BusId;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -40,6 +48,7 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_details_follow_flights, container, false);
+        unbinder= ButterKnife.bind(this,view);
         init();
         bundle=this.getArguments();
         if (bundle!=null)
@@ -55,7 +64,8 @@ View view;
             startDateTxt.setText("تاريخ بدايه الرحله:"+followFlightsData.getDateStart());
             endDateTxt.setText("تاريخ نهايه الرحله:"+followFlightsData.getDateEnd());
             logoBusNumberTxt.setText(BusName);
-            logoStatusTxt.setText(followFlightsData.getStatus());
+            TripStatus=followFlightsData.getStatus();
+            logoStatusTxt.setText(TripStatus);
 
             StartLat=followFlightsData.getLatStart();
             StartLng=followFlightsData.getLngStart();
@@ -63,6 +73,9 @@ View view;
             EndLng=followFlightsData.getLngEnd();
 
             CompanyId=followFlightsData.getCompanyId();
+
+            TripId=followFlightsData.getTripId();
+            BusId=followFlightsData.getBusId();
 
 
          // Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
@@ -88,6 +101,13 @@ View view;
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,
                        new ViewOnMapFragment()).addToBackStack(null).commit();
+            }
+        });
+        iconEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                        new EditFlightFragment()).addToBackStack(null).commit();
             }
         });
         return view;

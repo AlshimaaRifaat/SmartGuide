@@ -152,12 +152,12 @@ View view;
 
     private void SortByDate() {
         if(Old=="old") {
-            Toast.makeText(getContext(),"o "+ Old, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(),"o "+ Old, Toast.LENGTH_SHORT).show();
 
             followFlightsPresenter.getSortByDateResult(SplashActivity.Login, "ar", "old");
         }else if(New=="new") {
-            Toast.makeText(getContext(),"n "+ New, Toast.LENGTH_SHORT).show();
-            Toast.makeText(getContext(), SplashActivity.Login, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(),"n "+ New, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(), SplashActivity.Login, Toast.LENGTH_SHORT).show();
             followFlightsPresenter.getSortByDateResult(SplashActivity.Login, "ar", "new");
         }
     }

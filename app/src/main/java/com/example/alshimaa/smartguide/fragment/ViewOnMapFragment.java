@@ -366,7 +366,7 @@ Context context;
     private void getMarkers(){
 
 
-        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child(DetailsFollowFlightsFragment.BusId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(m!=null){
@@ -389,7 +389,7 @@ Context context;
 
                       m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon))
                               .title(DetailsFollowFlightsFragment.BusName).snippet(" سرعة "+String.valueOf(BusSpeed)+"KM ").position(BusLatLng));
-                    Toast.makeText(context, String.valueOf(BusSpeed), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, String.valueOf(BusSpeed), Toast.LENGTH_SHORT).show();
 
                     if(context!=null) {
                         //Toast.makeText(context, String.valueOf(BusLat) + " " + String.valueOf(BusLng), Toast.LENGTH_SHORT).show();
