@@ -13,7 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
+import com.example.alshimaa.smartguide.view.StartTripView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,13 +25,14 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFollowFlightsFragment extends Fragment {
+public class DetailsFollowFlightsFragment extends Fragment implements StartTripView {
 
 TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
         ,fromTxt,toTxt,startDateTxt,endDateTxt
         ,logoBusNumberTxt,logoStatusTxt;
-@BindView(R.id.details_follow_flights_icon_edit)
-    ImageView iconEdit;
+@BindView(R.id.details_follow_flights_icon_edit) ImageView iconEdit;
+    @BindView(R.id.details_follow_flights_btn_start_trip) Button startTripBtn;
+
 Unbinder unbinder;
 
 
@@ -38,6 +42,7 @@ Unbinder unbinder;
 
     Button viewOnMapBtn;
     public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus,BusId;
+    StartTripPresenter startTripPresenter;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -110,7 +115,19 @@ View view;
                         new EditFlightFragment()).addToBackStack(null).commit();
             }
         });
+        startTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               performStartTrip();
+            }
+        });
         return view;
+    }
+
+    private void performStartTrip() {
+        startTripPresenter=new StartTripPresenter(getContext(),this);
+        startTripPresenter.getStartTripResult(SplashActivity.Login,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+
     }
 
     private void init() {
@@ -127,4 +144,13 @@ View view;
         viewOnMapBtn=view.findViewById(R.id.details_follow_flights_btn_view_on_map);
     }
 
+    @Override
+    public void showStartTripMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showStartTripError() {
+
+    }
 }

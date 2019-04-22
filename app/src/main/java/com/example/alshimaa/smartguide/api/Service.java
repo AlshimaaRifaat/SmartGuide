@@ -9,6 +9,7 @@ import com.example.alshimaa.smartguide.model.GetGuideNameResponse;
 import com.example.alshimaa.smartguide.model.GetMemeberNameResponse;
 import com.example.alshimaa.smartguide.model.GetPathResponse;
 import com.example.alshimaa.smartguide.model.LoginResponse;
+import com.example.alshimaa.smartguide.model.StartTripResponse;
 
 import java.util.Map;
 
@@ -49,5 +50,8 @@ public interface Service {
 
     @POST("editTripStatus")
     Call<EditTripStatusResponse> getEditTripStatusData(@Body Map<String,String> map);
+
+    @POST("startTrip")
+    Call<StartTripResponse> getStartTripData(@Body Map<String,String> map);
 
 }
