@@ -278,7 +278,8 @@
                 android:text="@string/request_suspension"
                 android:textAllCaps="false"
                 android:layout_below="@id/details_follow_flights_btn_start_trip"
-                android:layout_marginBottom="@dimen/_10sdp"/>
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="gone"/>
         </RelativeLayout>
         </RelativeLayout>
 

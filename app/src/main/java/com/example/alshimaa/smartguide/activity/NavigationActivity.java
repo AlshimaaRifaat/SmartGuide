@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
+import com.example.alshimaa.smartguide.fragment.LoginFragment;
 import com.example.alshimaa.smartguide.fragment.OldTripFragment;
 import com.example.alshimaa.smartguide.fragment.TripsInProgressFragment;
 import com.example.alshimaa.smartguide.fragment.ViewMyGuidesFragment;
@@ -54,10 +55,14 @@ public class NavigationActivity extends AppCompatActivity
             sharedPreferences_phone,sharedPreferences_img;
 
       String Img,Name,Phone;
+
+    SharedPreferences.Editor shared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        shared=getSharedPreferences("default",Context.MODE_PRIVATE ).edit();
+
         // ButterKnife.bind(this);
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -114,6 +119,8 @@ public class NavigationActivity extends AppCompatActivity
         phoneTxt.setText(Phone);
 
 
+
+
     }
 
 
@@ -160,10 +167,12 @@ public class NavigationActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new FollowFlightsFragment();
                 break;
-           /* case R.id.nav_TripsInProgress:
-                currentSelectedPosition=1;
-                fragment=new TripsInProgressFragment();
-                break;*/
+           case R.id.nav_LogOut:
+               currentSelectedPosition=1;
+               shared.putString( "login_to_follow_flight",null );
+               shared.apply();
+               fragment=new LoginFragment();
+                break;
 
           /*  case R.id.nav_OldTrip:
                 currentSelectedPosition=1;
@@ -197,4 +206,12 @@ public class NavigationActivity extends AppCompatActivity
         drawer.closeDrawer( GravityCompat.START );
         return true;
     }
+/*
+    private void Log_Out() {
+
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.add( R.id.content_navigation,new LoginFragment())
+                .addToBackStack( null ).commit();
+    }*/
 }

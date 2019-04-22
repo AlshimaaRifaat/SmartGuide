@@ -41,7 +41,8 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
-    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus,BusId;
+    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus,BusId
+            ,TripName,GuideName,DriverName,From,To,StartDate,EndDate;
     StartTripPresenter startTripPresenter;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
@@ -59,15 +60,30 @@ View view;
         if (bundle!=null)
         {
             followFlightsData=bundle.getParcelable("follow_flight_item");
-            flightNameTxt.setText("اسم الرحله:"+followFlightsData.getTripName());
-            guideNameTxt.setText("اسم المشرف:"+followFlightsData.getGuideName());
+            TripName=followFlightsData.getTripName();
+            flightNameTxt.setText("اسم الرحله:"+TripName);
+
+            GuideName=followFlightsData.getGuideName();
+            guideNameTxt.setText("اسم المشرف:"+GuideName);
+
             BusName=followFlightsData.getBusName();
             busNumberTxt.setText("رقم الحافله:"+BusName);
-            driverNameTxt.setText("اسم السائق:"+followFlightsData.getDriverName());
-            fromTxt.setText("مكان النزول:"+followFlightsData.getFrom());
-            toTxt.setText("مكان الاستلام:"+followFlightsData.getTo());
-            startDateTxt.setText("تاريخ بدايه الرحله:"+followFlightsData.getDateStart());
-            endDateTxt.setText("تاريخ نهايه الرحله:"+followFlightsData.getDateEnd());
+
+            DriverName=followFlightsData.getDriverName();
+            driverNameTxt.setText("اسم السائق:"+DriverName);
+
+            From=followFlightsData.getFrom();
+            fromTxt.setText("مكان النزول:"+From);
+
+            To=followFlightsData.getTo();
+            toTxt.setText("مكان الاستلام:"+To);
+
+           StartDate= followFlightsData.getDateStart();
+            startDateTxt.setText("تاريخ بدايه الرحله:"+StartDate);
+
+            EndDate=followFlightsData.getDateEnd();
+            endDateTxt.setText("تاريخ نهايه الرحله:"+EndDate);
+
             logoBusNumberTxt.setText(BusName);
             TripStatus=followFlightsData.getStatus();
             logoStatusTxt.setText(TripStatus);
@@ -159,6 +175,7 @@ View view;
     @Override
     public void showStartTripMsg(String Msg) {
         Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        pauseTripBtn.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -169,6 +186,8 @@ View view;
     @Override
     public void showPauseTripMsg(String Msg) {
         Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                new RequestPauseTripFragment()).addToBackStack(null).commit();
     }
 
     @Override
