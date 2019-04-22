@@ -37,6 +37,10 @@ public class LoginFragment extends Fragment implements LoginView{
 
     SharedPreferences.Editor sharedPref_company_id;
      public  static String CompanyId;
+
+    SharedPreferences.Editor sharedPref_Name;
+    SharedPreferences.Editor sharedPref_Phone;
+    SharedPreferences.Editor sharedPref_Img;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -50,6 +54,10 @@ View view;
         init();
         sharedPref=getContext().getSharedPreferences("default", Context.MODE_PRIVATE).edit();
         sharedPref_company_id=getContext().getSharedPreferences("def", Context.MODE_PRIVATE).edit();
+
+        sharedPref_Name=getContext().getSharedPreferences("nav_name", Context.MODE_PRIVATE).edit();
+        sharedPref_Phone=getContext().getSharedPreferences("nav_phone", Context.MODE_PRIVATE).edit();
+        sharedPref_Img=getContext().getSharedPreferences("nav_img", Context.MODE_PRIVATE).edit();
         Login();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,17 +131,25 @@ View view;
     public void showLoginResult(LoginData loginData) {
         sharedPref.putString("login_to_follow_flight",loginData.getUserToken());
         sharedPref.apply();
-        Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
        sharedPref_company_id.putString("company_id",loginData.getCompanyId());
         sharedPref_company_id.apply();
         SplashActivity.Login=loginData.getUserToken();
+
         // Toast.makeText(getContext(), UserToken, Toast.LENGTH_SHORT).show();
 
+        sharedPref_Name.putString("name",loginData.getName());
+        sharedPref_Name.apply();
+        sharedPref_Phone.putString("phone",loginData.getPhone());
+        sharedPref_Phone.apply();
+        sharedPref_Img.putString("img",loginData.getImage());
+        sharedPref_Img.apply();
+
         Intent i = new Intent(getActivity(), NavigationActivity.class);
-        i.putExtra("img",loginData.getImage());
+        /*i.putExtra("img",loginData.getImage());
 
         i.putExtra("name",loginData.getName());
-        i.putExtra("phone",loginData.getPhone());
+        i.putExtra("phone",loginData.getPhone());*/
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0,0);
         getActivity().finish();

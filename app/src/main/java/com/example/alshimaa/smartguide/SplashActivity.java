@@ -13,8 +13,8 @@ import com.example.alshimaa.smartguide.activity.MainActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 
 public class SplashActivity extends AppCompatActivity {
-SharedPreferences sharedPreferences;
-public static String Login;
+SharedPreferences sharedPreferences,sharedPreferences_name,sharedPreferences_phone,sharedPreferences_img;
+public static String Login,Name,Phone,Img;
 
 
     @Override
@@ -27,6 +27,15 @@ public static String Login;
 
         sharedPreferences=getSharedPreferences("default", Context.MODE_PRIVATE);
         Login=sharedPreferences.getString("login_to_follow_flight",null);
+
+        sharedPreferences_name=getSharedPreferences("nav_name", Context.MODE_PRIVATE);
+        Name=sharedPreferences_name.getString("name",null);
+
+        sharedPreferences_phone=getSharedPreferences("nav_phone", Context.MODE_PRIVATE);
+        Phone=sharedPreferences_phone.getString("phone",null);
+
+        sharedPreferences_img=getSharedPreferences("nav_img", Context.MODE_PRIVATE);
+        Img=sharedPreferences_img.getString("img",null);
 
 
         Thread timer=new Thread(  )
@@ -41,7 +50,7 @@ public static String Login;
                 {
                     e.printStackTrace();
                 }finally {
-                    if (Login!=null )
+                    if (Login!=null &&Name!=null&&Phone!=null&Img!=null )
                     {
                         Intent intent=new Intent( SplashActivity.this,NavigationActivity.class);
                         startActivity( intent );

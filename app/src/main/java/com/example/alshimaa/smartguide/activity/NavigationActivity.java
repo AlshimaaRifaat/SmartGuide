@@ -1,5 +1,7 @@
 package com.example.alshimaa.smartguide.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -48,6 +50,8 @@ public class NavigationActivity extends AppCompatActivity
     TextView phoneTxt ;
  View header;
 
+    SharedPreferences sharedPreferences_name,
+            sharedPreferences_phone,sharedPreferences_img;
 
       String Img,Name,Phone;
     @Override
@@ -95,10 +99,16 @@ public class NavigationActivity extends AppCompatActivity
                }
            }
       });*/
-        Img = getIntent().getStringExtra("img");
-        Name = getIntent().getStringExtra("name");
-        Phone=getIntent().getStringExtra("phone");
-        Toast.makeText(this, Img+" "+Name+" "+Phone, Toast.LENGTH_SHORT).show();
+        sharedPreferences_name=getSharedPreferences("nav_name", Context.MODE_PRIVATE);
+        Name=sharedPreferences_name.getString("name",null);
+
+        sharedPreferences_phone=getSharedPreferences("nav_phone", Context.MODE_PRIVATE);
+        Phone=sharedPreferences_phone.getString("phone",null);
+
+        sharedPreferences_img=getSharedPreferences("nav_img", Context.MODE_PRIVATE);
+        Img=sharedPreferences_img.getString("img",null);
+
+       // Toast.makeText(this, Img+" "+Name+" "+Phone, Toast.LENGTH_SHORT).show();
       Glide.with(getApplicationContext()).load("http://omelqoura.com/"+Img).into(imgProfile);
         nameTxt.setText(Name);
         phoneTxt.setText(Phone);

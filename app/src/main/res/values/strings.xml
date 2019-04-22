@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SmartGuide</string>
-    <string name="Welcome_to_the_program_guide_smart_to_serve_pilgrims">Welcome to the program of smart guide to serve pilgrims</string>
+    <string name="Welcome_to_the_program_guide_smart_to_serve_pilgrims">اهلا بكم فى برنامج المرشد الذكى لخدمة الحجاج</string>
     <string name="UserName">اسم المستخدم</string>
     <string name="Password">كلمة المرور</string>
     <string name="Register">تسجيل</string>

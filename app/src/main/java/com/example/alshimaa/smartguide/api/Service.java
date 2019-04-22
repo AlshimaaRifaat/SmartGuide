@@ -54,4 +54,8 @@ public interface Service {
     @POST("startTrip")
     Call<StartTripResponse> getStartTripData(@Body Map<String,String> map);
 
+
+    @POST("tripPause")
+    Call<StartTripResponse> getPauseTripData(@Body Map<String,String> map);
+
 }
