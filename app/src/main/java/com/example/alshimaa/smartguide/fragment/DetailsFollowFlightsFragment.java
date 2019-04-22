@@ -30,10 +30,10 @@ public class DetailsFollowFlightsFragment extends Fragment implements StartTripV
 TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
         ,fromTxt,toTxt,startDateTxt,endDateTxt
         ,logoBusNumberTxt,logoStatusTxt;
-@BindView(R.id.details_follow_flights_icon_edit) ImageView iconEdit;
+    @BindView(R.id.details_follow_flights_icon_edit) ImageView iconEdit;
     @BindView(R.id.details_follow_flights_btn_start_trip) Button startTripBtn;
-
-Unbinder unbinder;
+    @BindView(R.id.details_follow_flights_btn_pause_trip) Button pauseTripBtn;
+    Unbinder unbinder;
 
 
 
@@ -121,7 +121,19 @@ View view;
                performStartTrip();
             }
         });
+        pauseTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performPauseTrip();
+            }
+        });
         return view;
+    }
+
+    private void performPauseTrip() {
+        startTripPresenter=new StartTripPresenter(getContext(),this);
+        startTripPresenter.getPauseResult(SplashActivity.Login,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز","3");
+
     }
 
     private void performStartTrip() {
@@ -151,6 +163,16 @@ View view;
 
     @Override
     public void showStartTripError() {
+
+    }
+
+    @Override
+    public void showPauseTripMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showPauseTripError() {
 
     }
 }

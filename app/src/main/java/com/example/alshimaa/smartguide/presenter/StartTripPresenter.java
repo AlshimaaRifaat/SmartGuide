@@ -51,4 +51,34 @@ public class StartTripPresenter {
             }
         } );
     }
+
+    public void getPauseResult(String user_token,String trip_id,String headings,
+                               String message,String status)
+    {
+        HashMap<String,String> hashMap=new HashMap<>(  );
+        hashMap.put("user_token",user_token);
+        hashMap.put("trip_id",trip_id);
+        hashMap.put("headings",headings);
+        hashMap.put("message",message);
+        hashMap.put("status",status);
+        // hashMap.put("id",ID);
+
+        Service service= Client.getClient().create( Service.class );
+        Call<StartTripResponse> call=service.getPauseTripData( hashMap );
+
+        call.enqueue( new Callback<StartTripResponse>() {
+            @Override
+            public void onResponse(Call<StartTripResponse> call, Response<StartTripResponse> response) {
+                if(response.isSuccessful())
+                {
+                    startTripView.showPauseTripMsg( response.body().getData() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StartTripResponse> call, Throwable t) {
+                startTripView.showPauseTripError();
+            }
+        } );
+    }
 }
