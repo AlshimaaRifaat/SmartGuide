@@ -26,6 +26,7 @@ import com.example.alshimaa.smartguide.presenter.FollowFlightsPresenter;
 import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 import com.example.alshimaa.smartguide.view.FollowFlightsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,6 +56,8 @@ Toolbar toolbar;
     Bundle bundle;
     String Mosnda,Kayd_tnfez,Moalaq,Malghia,
             Mokfl_nhaey,Mokfl_gozey,Mogdwla,Old,New;
+
+    List<FollowFlightsData> listAfterRemoveItems=new ArrayList<>() ;
 
     public FollowFlightsFragment() {
         // Required empty public constructor
@@ -196,7 +199,19 @@ View view;
 
     @Override
     public void showFollowFlightsList(List<FollowFlightsData> followFlightsDataList) {
-        followFlightsAdapter=new FollowFlightsAdapter( getContext(),followFlightsDataList );
+         for(int i=0;i<followFlightsDataList.size();i++)
+         {
+
+             if(!followFlightsDataList.get(i).getStatus().equals("متواقف"))
+             {
+                 FollowFlightsData followFlightsData=new FollowFlightsData();
+                 followFlightsData.setBusName(followFlightsDataList.get(i).getBusName());
+                 followFlightsData.setStatus(followFlightsDataList.get(i).getStatus());
+
+                 listAfterRemoveItems.add(followFlightsData) ;
+             }
+         }
+        followFlightsAdapter=new FollowFlightsAdapter( getContext(),listAfterRemoveItems );
        followFlightsAdapter.onClick(this);
         recyclerViewFollowFlights.setLayoutManager( new GridLayoutManager(getContext(),2));
         recyclerViewFollowFlights.setAdapter( followFlightsAdapter );

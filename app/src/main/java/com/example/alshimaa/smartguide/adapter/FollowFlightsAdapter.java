@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +20,8 @@ import java.util.List;
 public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdapter.ViewHolder> {
     Context context;
     List<FollowFlightsData> followFlightsDataList;
+    List<FollowFlightsData> ListAfterRemoveItems;
+
 
    DetailsFollowFlightsView detailsFollowFlightsView;
 
@@ -53,6 +56,9 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
 
        /* holder.address.setTypeface( customFontRegular );*/
 
+
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,13 +86,14 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
 
         private TextView busNumber;
         private TextView status;
+       // RelativeLayout relativeItem;
 
         public ViewHolder(View itemView) {
             super( itemView );
 
             busNumber=itemView.findViewById(R.id.row_follow_flights_bus_number);
             status=itemView.findViewById(R.id.row_follow_flights_status);
-
+         //   relativeItem=itemView.findViewById(R.id.row_follow_flights_relative_item);
 
         }
     }
