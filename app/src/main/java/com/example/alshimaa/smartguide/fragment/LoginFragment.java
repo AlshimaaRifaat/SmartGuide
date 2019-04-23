@@ -79,18 +79,18 @@ View view;
         ((Activity) getActivity()).overridePendingTransition(0,0);*/
         FUtilsValidation.isEmpty( userEmail,"من فضلك ادخل بريدك الالكترونى" );
         FUtilsValidation.isEmpty( userPassword,"من فضك,ادخل كلمه المرور" );
-        validateEmail();
+
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext() ))
         {
-           if(validateEmail()) {
+
                if (!userEmail.getText().toString().equals("") &&
                        !userPassword.getText().toString().equals("") &&
                        validateEmail()) {
                    loginPresenter.getLoginResult(userEmail.getText().toString(),
                            userPassword.getText().toString(), "ar");
                }
-           }
+
 
             else
             {

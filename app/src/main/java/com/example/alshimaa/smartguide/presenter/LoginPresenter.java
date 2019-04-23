@@ -1,6 +1,7 @@
 package com.example.alshimaa.smartguide.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.api.Client;
 import com.example.alshimaa.smartguide.api.Service;
@@ -40,9 +41,10 @@ public class LoginPresenter {
 
                     loginView.showLoginResult( response.body().getData());
 
-                }else
+                }else if(response.code()==400)
                 {
-                    loginView.showError();
+                    //loginView.showError();
+                    Toast.makeText(context, "البريد الالكترونى او كلمه المرور غير صحيح!", Toast.LENGTH_SHORT).show();
                 }
             }
 
