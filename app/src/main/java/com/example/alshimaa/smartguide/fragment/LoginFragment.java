@@ -83,7 +83,10 @@ View view;
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext() ))
         {
-
+            if(userPassword.getText().toString().length()<6)
+            {
+                Toast.makeText(getContext(), "من فضلك ادخل كلمه المرور فيما لا يقل عن سته ارقام !", Toast.LENGTH_SHORT).show();
+            }
                if (!userEmail.getText().toString().equals("") &&
                        !userPassword.getText().toString().equals("") &&
                        validateEmail()) {
