@@ -83,14 +83,14 @@ View view;
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext() ))
         {
-
-            if(!userEmail.getText().toString().equals( "" )&&
-                    !userPassword.getText().toString().equals("")&&
-                    validateEmail())
-            {
-                loginPresenter.getLoginResult( userEmail.getText().toString(),
-                        userPassword.getText().toString(),"ar" );
-            }
+           if(validateEmail()) {
+               if (!userEmail.getText().toString().equals("") &&
+                       !userPassword.getText().toString().equals("") &&
+                       validateEmail()) {
+                   loginPresenter.getLoginResult(userEmail.getText().toString(),
+                           userPassword.getText().toString(), "ar");
+               }
+           }
 
             else
             {

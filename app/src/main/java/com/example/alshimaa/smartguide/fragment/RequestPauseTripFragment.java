@@ -4,6 +4,9 @@ package com.example.alshimaa.smartguide.fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
+import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.presenter.LoginPresenter;
 import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
 import com.example.alshimaa.smartguide.view.StartTripView;
@@ -62,8 +66,12 @@ public class RequestPauseTripFragment extends Fragment implements StartTripView{
     @BindView(R.id.request_pause_text_msg)
     EditText msgEtxt;
 
-    @BindView(R.id.details_follow_flights_btn_send)
+    @BindView(R.id.request_pause_trip_btn_send)
     Button sendBtn;
+
+    @BindView(R.id.request_pause_trip_tool_bar)
+    Toolbar toolbar;
+
 
     Unbinder unbinder;
     StartTripPresenter startTripPresenter;
@@ -100,6 +108,26 @@ public class RequestPauseTripFragment extends Fragment implements StartTripView{
         endDateTxt.setTypeface(customFontBold);
 
         RequestPause();
+        NavigationActivity.toggle = new ActionBarDrawerToggle(
+                getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
+        NavigationActivity.toggle.syncState();
+
+        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.group151);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
+                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override

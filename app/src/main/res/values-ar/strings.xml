@@ -56,4 +56,5 @@
     <string name="edit_trip">تعديل الرحله</string>
     <string name="save">حفظ</string>
     <string name="Send">ارسال</string>
+    <string name="PauseTrip">تعليق الطلب</string>
 </resources>
