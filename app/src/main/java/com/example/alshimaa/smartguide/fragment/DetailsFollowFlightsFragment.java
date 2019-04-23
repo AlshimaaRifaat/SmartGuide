@@ -194,4 +194,14 @@ View view;
     public void showPauseTripError() {
 
     }
+
+    @Override
+    public void showRequestPauseTripMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showRequestPauseTripError() {
+
+    }
 }

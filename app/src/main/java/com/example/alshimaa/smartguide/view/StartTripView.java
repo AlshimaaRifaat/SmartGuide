@@ -6,4 +6,7 @@ public interface StartTripView {
 
     void showPauseTripMsg(String Msg);
     void showPauseTripError();
+
+    void showRequestPauseTripMsg(String Msg);
+    void showRequestPauseTripError();
 }

@@ -55,4 +55,5 @@
     <string name="Follow_flight">متابعة الرحلة</string>
     <string name="edit_trip">تعديل الرحله</string>
     <string name="save">حفظ</string>
+    <string name="Send">ارسال</string>
 </resources>

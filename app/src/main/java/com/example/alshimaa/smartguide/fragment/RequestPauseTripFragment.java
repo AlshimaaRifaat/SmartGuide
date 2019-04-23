@@ -1,14 +1,24 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.SplashActivity;
+import com.example.alshimaa.smartguide.presenter.LoginPresenter;
+import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
+import com.example.alshimaa.smartguide.view.StartTripView;
+import com.fourhcode.forhutils.FUtilsValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +27,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RequestPauseTripFragment extends Fragment {
+public class RequestPauseTripFragment extends Fragment implements StartTripView{
 
     /*flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
         ,fromTxt,toTxt,startDateTxt,endDateTxt*/
@@ -45,7 +55,18 @@ public class RequestPauseTripFragment extends Fragment {
 
     @BindView(R.id.request_pause_end_date)
     TextView endDateTxt;
+
+
+    @BindView(R.id.request_pause_text_pause_reason)
+    EditText pauseReasonEtxt;
+    @BindView(R.id.request_pause_text_msg)
+    EditText msgEtxt;
+
+    @BindView(R.id.details_follow_flights_btn_send)
+    Button sendBtn;
+
     Unbinder unbinder;
+    StartTripPresenter startTripPresenter;
 
     View view;
     public RequestPauseTripFragment() {
@@ -67,7 +88,87 @@ public class RequestPauseTripFragment extends Fragment {
         toTxt.setText("مكان الاستلام:"+DetailsFollowFlightsFragment.To);
         startDateTxt.setText("تاريخ بدايه الرحله:"+DetailsFollowFlightsFragment.StartDate);
         endDateTxt.setText("تاريخ نهايه الرحله:"+DetailsFollowFlightsFragment.EndDate);
+
+        Typeface customFontBold = Typeface.createFromAsset(getContext().getAssets(), "DroidKufi-Bold.ttf");
+        tripNameTxt.setTypeface(customFontBold);
+        guideNameTxt.setTypeface(customFontBold);
+        busNumberTxt.setTypeface(customFontBold);
+        driverNameTxt.setTypeface(customFontBold);
+        fromTxt.setTypeface(customFontBold);
+        toTxt.setTypeface(customFontBold);
+        startDateTxt.setTypeface(customFontBold);
+        endDateTxt.setTypeface(customFontBold);
+
+        RequestPause();
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performSending();
+            }
+        });
         return view;
     }
 
+    private void performSending() {
+        FUtilsValidation.isEmpty( pauseReasonEtxt,"من فضلك,اكتب سبب التعليق" );
+        FUtilsValidation.isEmpty( msgEtxt,"من فضك,اترك رسالتك" );
+        NetworkConnection networkConnection=new NetworkConnection( getContext() );
+        if (networkConnection.isNetworkAvailable( getContext() ))
+        {
+
+          //  Toast.makeText(getContext(),DetailsFollowFlightsFragment.TripId+ SplashActivity.Login+ " "+pauseReasonEtxt.getText().toString()+" "+msgEtxt.getText().toString(), Toast.LENGTH_SHORT).show();
+            if(!pauseReasonEtxt.getText().toString().equals( "" )&&
+                    !msgEtxt.getText().toString().equals(""))
+            {
+                startTripPresenter.getRequestPauseResult(SplashActivity.Login,DetailsFollowFlightsFragment.TripId,pauseReasonEtxt.getText().toString(),msgEtxt.getText().toString(),"10");
+            }
+
+            else
+            {
+                Toast.makeText( getContext(),"من فضلك, املأ البيانات ", Toast.LENGTH_SHORT ).show();
+            }
+
+        }else {
+            Toast.makeText( getContext(), "تأكد من اتصالك بالانترنت", Toast.LENGTH_SHORT ).show();
+        }
+
+    }
+
+    private void RequestPause() {
+        startTripPresenter=new StartTripPresenter( getContext(),this );
+
+    }
+
+    @Override
+    public void showStartTripMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showStartTripError() {
+
+    }
+
+    @Override
+    public void showPauseTripMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showPauseTripError() {
+
+    }
+
+    @Override
+    public void showRequestPauseTripMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showRequestPauseTripError() {
+
+
+    }
 }

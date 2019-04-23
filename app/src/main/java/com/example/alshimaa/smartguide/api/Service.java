@@ -58,4 +58,8 @@ public interface Service {
     @POST("tripPause")
     Call<StartTripResponse> getPauseTripData(@Body Map<String,String> map);
 
+
+    @POST("tripPause")
+    Call<StartTripResponse> getRequestPauseTripData(@Body Map<String,String> map);
+
 }
