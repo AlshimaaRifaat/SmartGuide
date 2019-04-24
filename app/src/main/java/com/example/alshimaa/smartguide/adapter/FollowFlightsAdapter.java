@@ -20,7 +20,6 @@ import java.util.List;
 public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdapter.ViewHolder> {
     Context context;
     List<FollowFlightsData> followFlightsDataList;
-    List<FollowFlightsData> ListAfterRemoveItems;
 
 
    DetailsFollowFlightsView detailsFollowFlightsView;

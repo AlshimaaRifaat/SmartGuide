@@ -52,9 +52,9 @@ public class NavigationActivity extends AppCompatActivity
  View header;
 
     SharedPreferences sharedPreferences_name,
-            sharedPreferences_phone,sharedPreferences_img;
+            sharedPreferences_phone,sharedPreferences_img,sharedPreferences_role;
 
-      String Img,Name,Phone;
+      String Img,Name,Phone,Role;
 
     SharedPreferences.Editor shared;
     @Override
@@ -62,6 +62,7 @@ public class NavigationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         shared=getSharedPreferences("default",Context.MODE_PRIVATE ).edit();
+
 
         // ButterKnife.bind(this);
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -104,6 +105,9 @@ public class NavigationActivity extends AppCompatActivity
                }
            }
       });*/
+      /*sharedPreferences_role=getSharedPreferences("role_to_home", Context.MODE_PRIVATE);
+      Role=sharedPreferences_role.getString("role",null);*/
+
         sharedPreferences_name=getSharedPreferences("nav_name", Context.MODE_PRIVATE);
         Name=sharedPreferences_name.getString("name",null);
 

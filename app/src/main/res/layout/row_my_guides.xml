@@ -10,7 +10,7 @@
 
 
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_43sdp"
         android:background="#fff"
@@ -29,5 +29,5 @@
             android:textSize="@dimen/_12sdp"
             android:layout_alignParentRight="true"/>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 </RelativeLayout>
