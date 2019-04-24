@@ -33,6 +33,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     @BindView(R.id.details_follow_flights_icon_edit) ImageView iconEdit;
     @BindView(R.id.details_follow_flights_btn_start_trip) Button startTripBtn;
     @BindView(R.id.details_follow_flights_btn_pause_trip) Button pauseTripBtn;
+    @BindView(R.id.details_follow_flights_btn_finish_trip) Button finishTripBtn;
     Unbinder unbinder;
 
 
@@ -116,6 +117,34 @@ View view;
             logoBusNumberTxt.setTypeface(customFontBold);
             logoStatusTxt.setTypeface(customFontBold);
 
+        }
+        if(TripStatus.equals("مسنده"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }
+        if(TripStatus.equals("قيد التنفيذ"))
+        {
+            finishTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            pauseTripBtn.setVisibility(View.VISIBLE);
+        }
+        if(TripStatus.equals("معلق"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("ملغيه"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("مقفل جزئي"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("مجدوله"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            startTripBtn.setVisibility(View.VISIBLE);
         }
         viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -57,7 +57,7 @@ Toolbar toolbar;
     String Mosnda,Kayd_tnfez,Moalaq,Malghia,
             Mokfl_nhaey,Mokfl_gozey,Mogdwla,Old,New;
 
-    List<FollowFlightsData> listAfterRemoveItems=new ArrayList<>() ;
+    //List<FollowFlightsData> listAfterRemoveItems=new ArrayList<>() ;
 
     public FollowFlightsFragment() {
         // Required empty public constructor
@@ -199,7 +199,7 @@ View view;
 
     @Override
     public void showFollowFlightsList(List<FollowFlightsData> followFlightsDataList) {
-         for(int i=0;i<followFlightsDataList.size();i++)
+         /*for(int i=0;i<followFlightsDataList.size();i++)
          {
 
              if(!followFlightsDataList.get(i).getStatus().equals("متواقف"))
@@ -210,8 +210,8 @@ View view;
 
                  listAfterRemoveItems.add(followFlightsData) ;
              }
-         }
-        followFlightsAdapter=new FollowFlightsAdapter( getContext(),listAfterRemoveItems );
+         }*/
+        followFlightsAdapter=new FollowFlightsAdapter( getContext(),followFlightsDataList );
        followFlightsAdapter.onClick(this);
         recyclerViewFollowFlights.setLayoutManager( new GridLayoutManager(getContext(),2));
         recyclerViewFollowFlights.setAdapter( followFlightsAdapter );

@@ -303,13 +303,13 @@ Context context;
                 .bearing(8).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
        // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
-         start = new LatLng(30.132419, 31.321792);
+         start = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.StartLat), Double.parseDouble(DetailsFollowFlightsFragment.StartLng));
         mGoogleMap.addMarker(new MarkerOptions().position(start).title("start"));
 
         CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
-         end = new LatLng(30.113533, 31.286533);
+         end = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.EndLat), Double.parseDouble(DetailsFollowFlightsFragment.EndLng));
         mGoogleMap.addMarker(new MarkerOptions().position(end).title("end"));
 
         CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
@@ -366,7 +366,7 @@ Context context;
     private void getMarkers(){
 
 
-        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child(DetailsFollowFlightsFragment.BusId).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child(DetailsFollowFlightsFragment.TripId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(m!=null){

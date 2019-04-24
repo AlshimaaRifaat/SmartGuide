@@ -77,7 +77,7 @@ View view;
         /*Intent i = new Intent(getActivity(), NavigationActivity.class);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0,0);*/
-        FUtilsValidation.isEmpty( userEmail,"من فضلك ادخل بريدك الالكترونى" );
+        FUtilsValidation.isEmpty( userEmail,"من فضلك ,ادخل بريدك الالكترونى" );
         FUtilsValidation.isEmpty( userPassword,"من فضك,ادخل كلمه المرور" );
 
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
