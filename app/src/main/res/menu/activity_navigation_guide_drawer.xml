@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_guide"
+            android:title="الصفحه الرئيسيه"
+            />
+        <item
+             android:id="@+id/nav_old"
+             android:title="طلبات قديمه" />
+        <!--<item
+            android:id="@+id/nav_OldTrip"
+            android:title="رحلة قديمة" />
+        <item
+            android:id="@+id/nav_ViewMyGuides"
+            android:title="عرض المرشدين الخاصين بي" />-->
+
+        <item
+            android:id="@+id/nav_guide_LogOut"
+            android:title="تسجيل خروج" />
+    </group>
+
+
+
+</menu>
