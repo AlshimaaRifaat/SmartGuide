@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff">
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/_134sdp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="@dimen/_3sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_9sdp"
+        >
+        <ImageView
+            android:id="@+id/row_follow_flights_image"
+            android:layout_width="@dimen/_134sdp"
+            android:layout_height="@dimen/_59sdp"
+            android:src="@drawable/group118"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="@dimen/_134sdp"
+            android:layout_height="@dimen/_51sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:background="#154677"
+
+            >
+
+            <TextView
+                android:id="@+id/row_follow_flights_bus_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="سلطه خضراء"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textStyle="bold"
+                android:maxLines="1"/>
+            <TextView
+                android:id="@+id/row_follow_flights_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_follow_flights_bus_number"
+                android:layout_centerHorizontal="true"
+                android:text="50 dollar"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#fff"
+                android:maxLines="1"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
