@@ -255,6 +255,6 @@ View view;
         bundle.putParcelable("follow_flight_item",followFlightsData);
         detailsFollowFlightsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.content_navigation,
-                detailsFollowFlightsFragment).addToBackStack(null).commit();
+               detailsFollowFlightsFragment ).addToBackStack(null).commit();
     }
 }

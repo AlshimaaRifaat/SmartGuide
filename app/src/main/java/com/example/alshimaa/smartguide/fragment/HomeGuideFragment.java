@@ -22,6 +22,7 @@ import com.example.alshimaa.smartguide.adapter.HomeGuideAdapter;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.presenter.FollowFlightsPresenter;
 import com.example.alshimaa.smartguide.presenter.HomeGuidePresenter;
+import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 import com.example.alshimaa.smartguide.view.HomeGuideView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeGuideFragment extends Fragment implements HomeGuideView {
+public class HomeGuideFragment extends Fragment implements HomeGuideView,DetailsFollowFlightsView{
     @BindView(R.id.home_guide_recycler)   RecyclerView recyclerViewHomeGuide;
     @BindView(R.id.home_guide_tool_bar)  Toolbar toolbar;;
     Unbinder unbinder;
@@ -89,13 +90,13 @@ View view;
     private void HomeGuideTrips() {
 
         homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
-        homeGuidePresenter.getHomeGuideResult( SplashActivity.Login,"ar");
+        homeGuidePresenter.getHomeGuideResult( SplashActivity.Guide_user_token,"ar");
     }
 
     @Override
     public void showHomeGuideList(List<FollowFlightsData> followFlightsDataList) {
         homeGuideAdapter=new HomeGuideAdapter( getContext(),followFlightsDataList );
-        //followFlightsAdapter.onClick(this);
+        homeGuideAdapter.onClick(this);
         recyclerViewHomeGuide.setLayoutManager( new GridLayoutManager(getContext(),2));
         recyclerViewHomeGuide.setAdapter( homeGuideAdapter );
     }
@@ -103,5 +104,15 @@ View view;
     @Override
     public void showHomeGuideError() {
 
+    }
+
+    @Override
+    public void showDetailsFollowFlights(FollowFlightsData followFlightsData) {
+        DetailsHomeGuideFragment detailsHomeGuideFragment=new DetailsHomeGuideFragment();
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("guide_item",followFlightsData);
+        detailsHomeGuideFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,
+                detailsHomeGuideFragment).addToBackStack(null).commit();
     }
 }

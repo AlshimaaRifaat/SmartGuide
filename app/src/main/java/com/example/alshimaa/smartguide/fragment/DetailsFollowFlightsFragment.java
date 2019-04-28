@@ -118,7 +118,7 @@ View view;
             logoStatusTxt.setTypeface(customFontBold);
 
         }
-        if(TripStatus.equals("مسنده"))
+        /*if(TripStatus.equals("مسنده"))
         {
             startTripBtn.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
@@ -145,7 +145,7 @@ View view;
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
             startTripBtn.setVisibility(View.VISIBLE);
-        }
+        }*/
         viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

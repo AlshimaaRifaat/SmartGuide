@@ -51,7 +51,7 @@ public class NavigationGuideActivity extends AppCompatActivity
 
     // @BindView(R.id.nav_header_text_phone)
 
-
+    SharedPreferences.Editor shared_guide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ public class NavigationGuideActivity extends AppCompatActivity
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         shared_role=getSharedPreferences("role_to_home", Context.MODE_PRIVATE ).edit();
+        shared_guide=getSharedPreferences("default",Context.MODE_PRIVATE ).edit();
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -149,12 +150,12 @@ public class NavigationGuideActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new HomeGuideFragment();
                 break;
-           /* case R.id.nav_LogOut:
+           case R.id.nav_LogOut:
                 currentSelectedPosition=1;
-                shared.putString( "login_to_follow_flight",null );
-                shared.apply();
+                shared_guide.putString( "guide_user_token",null );
+                shared_guide.apply();
                 fragment=new LoginFragment();
-                break;*/
+                break;
 
           /*  case R.id.nav_OldTrip:
                 currentSelectedPosition=1;

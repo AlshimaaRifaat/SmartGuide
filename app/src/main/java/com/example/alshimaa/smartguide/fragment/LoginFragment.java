@@ -34,7 +34,7 @@ public class LoginFragment extends Fragment implements LoginView{
     EditText userEmail,userPassword;
     LoginPresenter loginPresenter;
 
-    SharedPreferences.Editor sharedPref;
+    SharedPreferences.Editor sharedPref,sharedPref_guide;
 
     SharedPreferences.Editor sharedPref_company_id,sharedPref_role;
      public  static String CompanyId;
@@ -61,6 +61,8 @@ View view;
         sharedPref_Img=getContext().getSharedPreferences("nav_img", Context.MODE_PRIVATE).edit();
 
         sharedPref_role=getContext().getSharedPreferences("role_to_home", Context.MODE_PRIVATE).edit();
+
+        sharedPref_guide=getContext().getSharedPreferences("guide", Context.MODE_PRIVATE).edit();
         Login();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,11 +140,12 @@ View view;
 
         sharedPref_role.putString("role",loginData.getRole());
         sharedPref_role.apply();
+        Toast.makeText(getContext(), loginData.getUserToken(), Toast.LENGTH_SHORT).show();
         if(loginData.getRole().equals("guides"))
         {
-            sharedPref.putString("login_to_follow_flight", loginData.getUserToken());
-            sharedPref.apply();
-            SplashActivity.Login = loginData.getUserToken();
+            sharedPref_guide.putString("guide_user_token", loginData.getUserToken());
+            sharedPref_guide.apply();
+            SplashActivity.Guide_user_token = loginData.getUserToken();
 
             sharedPref_Name.putString("name", loginData.getName());
             sharedPref_Name.apply();

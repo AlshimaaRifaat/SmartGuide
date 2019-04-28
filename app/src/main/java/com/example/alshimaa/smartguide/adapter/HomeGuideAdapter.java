@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
@@ -21,7 +22,7 @@ public class HomeGuideAdapter extends RecyclerView.Adapter<HomeGuideAdapter.View
 
 
 
-   // DetailsFollowFlightsView detailsFollowFlightsView;
+  DetailsFollowFlightsView detailsFollowFlightsView;
 
 
     public HomeGuideAdapter(Context context, List<FollowFlightsData> followFlightsDataList) {
@@ -29,41 +30,39 @@ public class HomeGuideAdapter extends RecyclerView.Adapter<HomeGuideAdapter.View
         this.followFlightsDataList = followFlightsDataList;
     }
 
-   /* public  void onClick(DetailsFollowFlightsView detailsFollowFlightsView)
+    public  void onClick(DetailsFollowFlightsView detailsFollowFlightsView)
     {
         this.detailsFollowFlightsView=detailsFollowFlightsView;
-    }*/
+    }
     @Override
     public HomeGuideAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from( context ).inflate(R.layout.row_follow_flights,parent,false);
+        View view= LayoutInflater.from( context ).inflate(R.layout.row_home_guide,parent,false);
         return new HomeGuideAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeGuideAdapter.ViewHolder holder, final int position) {
-       /* Glide.with( context ).load( "http://omelqoura.com"
-                +followFlightsDataList.get( position ).getImg() ).into(holder.imageView);*/
+
         holder.busNumber.setText(followFlightsDataList.get( position ).getBusName());
         holder.status.setText(followFlightsDataList.get( position ).getStatus());
-        // Typeface customFontBold = Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
-        /* holder.address.setText(currentExhibtionDataList.get( position ).getAddress());*/
+
 
         Typeface customFontBold= Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
         holder.busNumber.setTypeface( customFontBold );
         holder.status.setTypeface( customFontBold );
 
-        /* holder.address.setTypeface( customFontRegular );*/
 
 
 
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+     holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 detailsFollowFlightsView.showDetailsFollowFlights(followFlightsDataList.get(position));
             }
-        });*/
+        });
 
     }
 

@@ -11,10 +11,11 @@ import android.view.WindowManager;
 
 import com.example.alshimaa.smartguide.activity.MainActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
 
 public class SplashActivity extends AppCompatActivity {
-SharedPreferences sharedPreferences,sharedPreferences_name,sharedPreferences_phone,sharedPreferences_img;
-public static String Login,Name,Phone,Img;
+SharedPreferences sharedPreferences,sharedPreferences_guide_user_token,sharedPreferences_name,sharedPreferences_phone,sharedPreferences_img;
+public static String Login,Name,Phone,Img,Guide_user_token;
 
 
     @Override
@@ -27,6 +28,9 @@ public static String Login,Name,Phone,Img;
 
         sharedPreferences=getSharedPreferences("default", Context.MODE_PRIVATE);
         Login=sharedPreferences.getString("login_to_follow_flight",null);
+
+        sharedPreferences_guide_user_token=getSharedPreferences("guide", Context.MODE_PRIVATE);
+        Guide_user_token=sharedPreferences_guide_user_token.getString("guide_user_token",null);
 
         sharedPreferences_name=getSharedPreferences("nav_name", Context.MODE_PRIVATE);
         Name=sharedPreferences_name.getString("name",null);
@@ -54,7 +58,12 @@ public static String Login,Name,Phone,Img;
                     {
                         Intent intent=new Intent( SplashActivity.this,NavigationActivity.class);
                         startActivity( intent );
-                    }else if (Login==null)
+                    }else if (Guide_user_token!=null &&Name!=null&&Phone!=null&Img!=null )
+                    {
+                            Intent intent=new Intent( SplashActivity.this,NavigationGuideActivity.class);
+                            startActivity( intent );
+
+                    } if (Login==null &&Guide_user_token==null)
                     {
                         Intent intent=new Intent( SplashActivity.this,MainActivity.class);
                         startActivity( intent );
