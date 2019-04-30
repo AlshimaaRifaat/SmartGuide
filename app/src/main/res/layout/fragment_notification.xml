@@ -7,10 +7,10 @@
     tools:context=".fragment.NotificationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-   <!-- <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/notification_tool_bar"
@@ -21,13 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            &lt;!&ndash; <ImageView
-                 android:id="@+id/home_image_favrite_heart"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentLeft="true"
-                 android:background="@drawable/favorite_heart_button"
-                 />&ndash;&gt;
+
             <ImageView
                 android:id="@+id/notification_icon_notification"
                 android:layout_width="wrap_content"
@@ -64,6 +58,6 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             ></android.support.v7.widget.RecyclerView>
-    </RelativeLayout>-->
+    </RelativeLayout>
 
 </ScrollView>

@@ -10,38 +10,83 @@
 
 
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_43sdp"
+        android:layout_height="@dimen/_123sdp"
         android:background="#fff"
         >
 
         <TextView
-            android:id="@+id/row_notification_text_name"
+            android:id="@+id/row_notification_text_supervisor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تم وصول الرحله"
+            android:text="الاسم"
             android:textStyle="bold"
-          android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_6sdp"
             android:textColor="#b3b3b3"
             android:textSize="@dimen/_12sdp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:maxLines="1"/>
 
 
         <TextView
-            android:id="@+id/row_notification_text_time"
+            android:id="@+id/row_notification_text_driver_name"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
-            android:text="7 pm"
+            android:layout_height="wrap_content"
+            android:text="اسم السائق"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:textColor="#b3b3b3"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_centerVertical="true"
-
+            android:textSize="@dimen/_12sdp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/row_notification_text_supervisor_name"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/row_notification_text_guide_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="اسم المرشد"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:textColor="#b3b3b3"
+            android:textSize="@dimen/_12sdp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/row_notification_text_driver_name"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/row_notification_text_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="عنوان الرساله"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:textColor="#b3b3b3"
+            android:textSize="@dimen/_12sdp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/row_notification_text_guide_name"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/row_notification_text_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الرساله"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:textColor="#b3b3b3"
+            android:textSize="@dimen/_12sdp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/row_notification_text_header"
+            android:maxLines="1"
             />
 
-
-
-    </RelativeLayout>-->
+    </RelativeLayout>
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
@@ -36,7 +37,9 @@ import butterknife.Unbinder;
  */
 public class HomeGuideFragment extends Fragment implements HomeGuideView,DetailsFollowFlightsView{
     @BindView(R.id.home_guide_recycler)   RecyclerView recyclerViewHomeGuide;
-    @BindView(R.id.home_guide_tool_bar)  Toolbar toolbar;;
+    @BindView(R.id.home_guide_tool_bar)  Toolbar toolbar;
+    @BindView(R.id.home_guide_notification)
+    ImageView iconNotification;;
     Unbinder unbinder;
 
     HomeGuideAdapter homeGuideAdapter;
@@ -82,6 +85,14 @@ View view;
         });
 
         networkConnection=new NetworkConnection( getContext() );
+        iconNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,new
+                        NotificationFragment()).addToBackStack(null).commit();
+
+            }
+        });
         HomeGuideTrips();
 
         return view;
