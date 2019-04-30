@@ -42,7 +42,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     Bundle bundle;
 
     Button viewOnMapBtn;
-    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus,BusId
+    public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus
             ,TripName,GuideName,DriverName,From,To,StartDate,EndDate;
     StartTripPresenter startTripPresenter;
     public DetailsFollowFlightsFragment() {
@@ -97,7 +97,7 @@ View view;
             CompanyId=followFlightsData.getCompanyId();
 
             TripId=followFlightsData.getTripId();
-            BusId=followFlightsData.getBusId();
+           // BusId=followFlightsData.getBusId();
 
 
          // Toast.makeText(getContext(), CompanyId, Toast.LENGTH_SHORT).show();
@@ -231,6 +231,16 @@ View view;
 
     @Override
     public void showRequestPauseTripError() {
+
+    }
+
+    @Override
+    public void showRequestPauseTripGuideMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showRequestPauseTripGuideError() {
 
     }
 }

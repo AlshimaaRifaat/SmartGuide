@@ -9,4 +9,8 @@ public interface StartTripView {
 
     void showRequestPauseTripMsg(String Msg);
     void showRequestPauseTripError();
+
+    void showRequestPauseTripGuideMsg(String Msg);
+    void showRequestPauseTripGuideError();
+
 }

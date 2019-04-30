@@ -121,14 +121,14 @@ public class StartTripPresenter {
         hashMap.put("message",message);
 
         Service service= Client.getClient().create( Service.class );
-        Call<StartTripResponse> call=service.getRequestPauseTripData( hashMap );
+        Call<StartTripResponse> call=service.getRequestPauseGuideData( hashMap );
 
         call.enqueue( new Callback<StartTripResponse>() {
             @Override
             public void onResponse(Call<StartTripResponse> call, Response<StartTripResponse> response) {
                 if(response.isSuccessful())
                 {
-                    startTripView.showRequestPauseTripMsg( response.body().getData() );
+                    startTripView.showRequestPauseTripGuideMsg( response.body().getData() );
                 }
             }
 

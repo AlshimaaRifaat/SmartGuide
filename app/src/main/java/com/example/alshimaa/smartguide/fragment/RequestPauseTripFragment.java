@@ -199,4 +199,14 @@ public class RequestPauseTripFragment extends Fragment implements StartTripView{
 
 
     }
+
+    @Override
+    public void showRequestPauseTripGuideMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showRequestPauseTripGuideError() {
+
+    }
 }

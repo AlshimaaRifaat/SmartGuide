@@ -24,6 +24,8 @@ import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.LoginFragment;
 import com.example.alshimaa.smartguide.fragment.OldTripFragment;
+import com.example.alshimaa.smartguide.fragment.RequestPauseTripFragment;
+import com.example.alshimaa.smartguide.fragment.RequestPauseTripGuideFragment;
 import com.example.alshimaa.smartguide.fragment.TripsInProgressFragment;
 import com.example.alshimaa.smartguide.fragment.ViewMyGuidesFragment;
 import com.example.alshimaa.smartguide.fragment.ViewOnMapFragment;
@@ -171,8 +173,12 @@ public class NavigationActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new FollowFlightsFragment();
                 break;
+            case R.id.nav_request_pause_trip:
+                currentSelectedPosition=1;
+                fragment=new RequestPauseTripFragment();
+                break;
            case R.id.nav_LogOut:
-               currentSelectedPosition=1;
+               currentSelectedPosition=2;
                shared.putString( "login_to_follow_flight",null );
                shared.apply();
                fragment=new LoginFragment();

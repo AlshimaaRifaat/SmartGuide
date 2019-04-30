@@ -22,15 +22,24 @@ public class FollowFlightsData implements Serializable, Parcelable
     @SerializedName("companyName")
     @Expose
     private String companyName;
+    @SerializedName("guideId")
+    @Expose
+    private String guideId;
     @SerializedName("guideName")
     @Expose
     private String guideName;
+    @SerializedName("supervisorId")
+    @Expose
+    private String supervisorId;
+    @SerializedName("supervisorName")
+    @Expose
+    private String supervisorName;
+    @SerializedName("driverId")
+    @Expose
+    private String driverId;
     @SerializedName("driverName")
     @Expose
     private String driverName;
-    @SerializedName("busId")
-    @Expose
-    private String busId;
     @SerializedName("busName")
     @Expose
     private String busName;
@@ -67,6 +76,9 @@ public class FollowFlightsData implements Serializable, Parcelable
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("statusId")
+    @Expose
+    private String statusId;
     public final static Parcelable.Creator<FollowFlightsData> CREATOR = new Creator<FollowFlightsData>() {
 
 
@@ -83,16 +95,19 @@ public class FollowFlightsData implements Serializable, Parcelable
 
     }
             ;
-    private final static long serialVersionUID = -5066606806211232370L;
+    private final static long serialVersionUID = -2963082273590582297L;
 
     protected FollowFlightsData(Parcel in) {
         this.tripId = ((String) in.readValue((String.class.getClassLoader())));
         this.tripName = ((String) in.readValue((String.class.getClassLoader())));
         this.companyId = ((String) in.readValue((String.class.getClassLoader())));
         this.companyName = ((String) in.readValue((String.class.getClassLoader())));
+        this.guideId = ((String) in.readValue((String.class.getClassLoader())));
         this.guideName = ((String) in.readValue((String.class.getClassLoader())));
+        this.supervisorId = ((String) in.readValue((String.class.getClassLoader())));
+        this.supervisorName = ((String) in.readValue((String.class.getClassLoader())));
+        this.driverId = ((String) in.readValue((String.class.getClassLoader())));
         this.driverName = ((String) in.readValue((String.class.getClassLoader())));
-        this.busId = ((String) in.readValue((String.class.getClassLoader())));
         this.busName = ((String) in.readValue((String.class.getClassLoader())));
         this.numberPassenger = ((String) in.readValue((String.class.getClassLoader())));
         this.dateStart = ((String) in.readValue((String.class.getClassLoader())));
@@ -105,6 +120,7 @@ public class FollowFlightsData implements Serializable, Parcelable
         this.lngEnd = ((String) in.readValue((String.class.getClassLoader())));
         this.price = ((String) in.readValue((String.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
+        this.statusId = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public FollowFlightsData() {
@@ -142,6 +158,14 @@ public class FollowFlightsData implements Serializable, Parcelable
         this.companyName = companyName;
     }
 
+    public String getGuideId() {
+        return guideId;
+    }
+
+    public void setGuideId(String guideId) {
+        this.guideId = guideId;
+    }
+
     public String getGuideName() {
         return guideName;
     }
@@ -150,20 +174,36 @@ public class FollowFlightsData implements Serializable, Parcelable
         this.guideName = guideName;
     }
 
+    public String getSupervisorId() {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(String supervisorId) {
+        this.supervisorId = supervisorId;
+    }
+
+    public String getSupervisorName() {
+        return supervisorName;
+    }
+
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
     public String getDriverName() {
         return driverName;
     }
 
     public void setDriverName(String driverName) {
         this.driverName = driverName;
-    }
-
-    public String getBusId() {
-        return busId;
-    }
-
-    public void setBusId(String busId) {
-        this.busId = busId;
     }
 
     public String getBusName() {
@@ -262,14 +302,25 @@ public class FollowFlightsData implements Serializable, Parcelable
         this.status = status;
     }
 
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(tripId);
         dest.writeValue(tripName);
         dest.writeValue(companyId);
         dest.writeValue(companyName);
+        dest.writeValue(guideId);
         dest.writeValue(guideName);
+        dest.writeValue(supervisorId);
+        dest.writeValue(supervisorName);
+        dest.writeValue(driverId);
         dest.writeValue(driverName);
-        dest.writeValue(busId);
         dest.writeValue(busName);
         dest.writeValue(numberPassenger);
         dest.writeValue(dateStart);
@@ -282,6 +333,7 @@ public class FollowFlightsData implements Serializable, Parcelable
         dest.writeValue(lngEnd);
         dest.writeValue(price);
         dest.writeValue(status);
+        dest.writeValue(statusId);
     }
 
     public int describeContents() {

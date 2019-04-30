@@ -48,14 +48,15 @@ public class DetailsHomeGuideFragment extends Fragment implements StartTripView 
     @BindView(R.id.details_home_guide_btn_start_trip) Button startTripBtn;
     @BindView(R.id.details_home_guide_btn_pause_trip) Button pauseTripBtn;
     @BindView(R.id.details_home_guide_btn_finish_trip) Button finishTripBtn;
-
+    @BindView(R.id.details_home_guide_btn_view_on_map) Button viewOnMapBtn;
     Unbinder unbinder;
 
     FollowFlightsData followFlightsData;
     Bundle bundle;
 
 
-    public static String TripName,GuideName,BusNumber,DriverName,From,To,StartDate,EndDate,TripId;
+    public static String TripName,GuideName,BusNumber,DriverName,From,To,StartDate,EndDate,TripId
+            ,StatusId,CompanyId,StartLat,StartLng,EndLat,EndLng;
     StartTripPresenter startTripPresenter;
     public DetailsHomeGuideFragment() {
         // Required empty public constructor
@@ -98,6 +99,16 @@ View view;
 
             TripId=followFlightsData.getTripId();
 
+           StatusId=followFlightsData.getStatusId();
+
+            StartLat=followFlightsData.getLatStart();
+            StartLng=followFlightsData.getLngStart();
+            EndLat=followFlightsData.getLatEnd();
+            EndLng=followFlightsData.getLngEnd();
+
+            CompanyId=followFlightsData.getCompanyId();
+
+            TripId=followFlightsData.getTripId();
 
 
 
@@ -118,22 +129,82 @@ View view;
             endDateTxt.setTypeface(customFontBold);
 
         }
+
+        if(StatusId.equals("1"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }
+        if(StatusId.equals("2"))
+        {
+            finishTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            pauseTripBtn.setVisibility(View.VISIBLE);
+        }
+        if(StatusId.equals("3"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(StatusId.equals("4"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }if(StatusId.equals("5"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(StatusId.equals("6"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            startTripBtn.setVisibility(View.VISIBLE);
+        }
+
+
         pauseTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 performPauseTripGuide();
             }
         });
+
+        startTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performStartTripGuide();
+            }
+        });
+        viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,
+                        new ViewOnMapGuideFragment()).addToBackStack(null).commit();
+            }
+        });
+
         return view;
     }
 
-    private void performPauseTripGuide() {
+    private void performStartTripGuide() {
+       // Toast.makeText(getContext(), SplashActivity.Guide_user_token, Toast.LENGTH_SHORT).show();
         startTripPresenter=new StartTripPresenter(getContext(),this);
-        startTripPresenter.getPauseResult(SplashActivity.Login,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز","3");
+        startTripPresenter.getStartTripResult(SplashActivity.Guide_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+        pauseTripBtn.setVisibility(View.VISIBLE);
+    }
+
+    private void performPauseTripGuide() {
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,
+                new RequestPauseTripGuideFragment()).addToBackStack(null).commit();
+       /* startTripPresenter=new StartTripPresenter(getContext(),this);
+
+        startTripPresenter.getPauseResult(SplashActivity.Guide_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز","3");
+*/
+
     }
 
     @Override
     public void showStartTripMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -144,7 +215,9 @@ View view;
 
     @Override
     public void showPauseTripMsg(String Msg) {
-        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();*/
+       /* getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,
+                new RequestPauseTripGuideFragment()).addToBackStack(null).commit();*/
 
     }
 
@@ -160,6 +233,16 @@ View view;
 
     @Override
     public void showRequestPauseTripError() {
+
+    }
+
+    @Override
+    public void showRequestPauseTripGuideMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showRequestPauseTripGuideError() {
 
     }
 
