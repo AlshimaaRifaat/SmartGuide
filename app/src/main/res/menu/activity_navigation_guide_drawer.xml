@@ -9,8 +9,8 @@
             android:title="الصفحه الرئيسيه"
             />
         <item
-             android:id="@+id/nav_old"
-             android:title="طلبات التعليق" />
+             android:id="@+id/nav_old_requests_guide"
+             android:title="الطلبات القديمه" />
         <!--<item
             android:id="@+id/nav_OldTrip"
             android:title="رحلة قديمة" />

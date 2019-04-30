@@ -57,7 +57,7 @@ View view;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_home_guide, container, false);
         unbinder= ButterKnife.bind(this,view);
-        homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
+        //homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
 
 
         NavigationGuideActivity.toggle_guide = new ActionBarDrawerToggle(

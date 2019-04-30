@@ -25,6 +25,7 @@ import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.HomeGuideFragment;
 import com.example.alshimaa.smartguide.fragment.LoginFragment;
+import com.example.alshimaa.smartguide.fragment.OldRequestsGuideFragment;
 
 public class NavigationGuideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -150,8 +151,13 @@ public class NavigationGuideActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new HomeGuideFragment();
                 break;
-           case R.id.nav_LogOut:
+
+            case R.id.nav_old_requests_guide:
                 currentSelectedPosition=1;
+                fragment=new OldRequestsGuideFragment();
+                break;
+           case R.id.nav_LogOut:
+                currentSelectedPosition=2;
                 shared_guide.putString( "guide_user_token",null );
                 shared_guide.apply();
                 fragment=new LoginFragment();

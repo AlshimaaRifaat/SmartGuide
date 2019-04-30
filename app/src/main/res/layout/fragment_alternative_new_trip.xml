@@ -8,12 +8,12 @@
     tools:context=".fragment.AlternativeNewTripFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         >
-        <!-- TODO: Update blank fragment layout -->
+        &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;
         <android.support.v7.widget.Toolbar
             android:id="@+id/new_trip_tool_bar"
             android:layout_width="match_parent"
@@ -23,13 +23,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <!-- <ImageView
+                &lt;!&ndash; <ImageView
                      android:id="@+id/home_image_favrite_heart"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
-                     />-->
+                     />&ndash;&gt;
                 <ImageView
                     android:id="@+id/new_trip_notification"
                     android:layout_width="wrap_content"
@@ -346,6 +346,6 @@
             android:layout_below="@id/new_trip_cardV_trip_end_date"
             android:layout_marginBottom="@dimen/_32sdp"
             />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </ScrollView>

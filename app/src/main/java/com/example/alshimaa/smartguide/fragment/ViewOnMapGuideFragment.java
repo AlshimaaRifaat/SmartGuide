@@ -16,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -107,6 +111,27 @@ View view;
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         init();
         polylines = new ArrayList<>();
+
+        NavigationGuideActivity.toggle_guide = new ActionBarDrawerToggle(
+                getActivity(), NavigationGuideActivity.drawer_guide, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        NavigationGuideActivity.drawer_guide.addDrawerListener(NavigationGuideActivity.toggle_guide);
+        NavigationGuideActivity.toggle_guide.syncState();
+
+        NavigationGuideActivity.toggle_guide.setDrawerIndicatorEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.group151);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (NavigationGuideActivity.drawer_guide.isDrawerOpen(GravityCompat.START)) {
+                    NavigationGuideActivity.drawer_guide.closeDrawer(GravityCompat.START);
+                } else {
+                    NavigationGuideActivity.drawer_guide.openDrawer(GravityCompat.START);
+                }
+            }
+        });
 
         startGettingLocations();
         mDatabase = FirebaseDatabase.getInstance().getReference();
