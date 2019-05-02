@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.alshimaa.smartguide.R;
@@ -37,6 +38,8 @@ public class DetailsHomeDriverFragment extends Fragment {
     TextView startDateTxt;
     @BindView(R.id.details_home_driver_end_date)
     TextView endDateTxt;
+    @BindView(R.id.details_home_driver_btn_view_on_map)
+    Button viewOnMapBtn;
     Unbinder unbinder;
 
     FollowFlightsData followFlightsData;
@@ -134,6 +137,13 @@ View view;
                         new ViewOnMapGuideFragment()).addToBackStack(null).commit();
             }
         });*/
+        viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation_driver,
+                        new ViewOnMapDriverFragment()).addToBackStack(null).commit();
+            }
+        });
 
         return view;
     }

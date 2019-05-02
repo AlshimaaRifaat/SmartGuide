@@ -28,22 +28,14 @@
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
                      />-->
-                <ImageView
-                    android:id="@+id/old_requests_guide_icon_notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_11sdp"
-                    android:src="@drawable/notifications_button"
-                    />
+
 
                 <TextView
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="تعليق الطلبات"
-                    android:layout_toLeftOf="@+id/old_requests_guide_icon_notification"
-                    android:layout_marginRight="@dimen/_73sdp"
+                   android:layout_centerHorizontal="true"
                     android:textColor="#fff"
                     android:textSize="@dimen/_14sdp"/>
             </RelativeLayout>

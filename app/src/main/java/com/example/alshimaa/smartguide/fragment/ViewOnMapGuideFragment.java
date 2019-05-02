@@ -281,7 +281,6 @@ View view;
     }
 
     private void init() {
-        iconPlus=view.findViewById(R.id.view_on_map_guide_icon_plus);
         toolbar=view.findViewById( R.id.view_on_map_guide_tool_bar);
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.map_guide);

@@ -28,20 +28,12 @@
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
                      />-->
-                <ImageView
-                    android:id="@+id/request_pause_trip_guide_notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_11sdp"
-                    android:src="@drawable/notifications_button"
-                    />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_90sdp"
-                    android:layout_toLeftOf="@+id/request_pause_trip_guide_notification"
+                   android:layout_centerHorizontal="true"
                     android:text="@string/PauseTrip"
                     android:textColor="#fff"
                     android:textSize="@dimen/_14sdp" />
