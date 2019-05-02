@@ -71,4 +71,5 @@
     <string name="PauseTrip">تعليق الطلب</string>
     <string name="finish_trip">انهاء الرحلة</string>
     <string name="title_activity_navigation_guide">NavigationGuideActivity</string>
+    <string name="title_activity_navigation_driver">NavigationDriverActivity</string>
 </resources>

@@ -37,6 +37,10 @@
         <activity
             android:name=".activity.NavigationGuideActivity"
             android:label="@string/title_activity_navigation_guide"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activity.NavigationDriverActivity"
+            android:label="@string/title_activity_navigation_driver"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 

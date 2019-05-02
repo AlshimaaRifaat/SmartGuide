@@ -173,10 +173,10 @@ public class NavigationActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new FollowFlightsFragment();
                 break;
-            case R.id.nav_request_pause_trip:
+           /* case R.id.nav_request_pause_trip:
                 currentSelectedPosition=1;
                 fragment=new RequestPauseTripFragment();
-                break;
+                break;*/
            case R.id.nav_LogOut:
                currentSelectedPosition=2;
                shared.putString( "login_to_follow_flight",null );

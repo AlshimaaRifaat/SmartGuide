@@ -60,7 +60,7 @@ public class NavigationGuideActivity extends AppCompatActivity
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         shared_role=getSharedPreferences("role_to_home", Context.MODE_PRIVATE ).edit();
-        shared_guide=getSharedPreferences("default",Context.MODE_PRIVATE ).edit();
+        shared_guide=getSharedPreferences("guide",Context.MODE_PRIVATE ).edit();
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -152,11 +152,11 @@ public class NavigationGuideActivity extends AppCompatActivity
                 fragment=new HomeGuideFragment();
                 break;
 
-            case R.id.nav_old_requests_guide:
+          case R.id.nav_old_requests_guide:
                 currentSelectedPosition=1;
                 fragment=new OldRequestsGuideFragment();
                 break;
-           case R.id.nav_LogOut:
+           case R.id.nav_guide_LogOut:
                 currentSelectedPosition=2;
                 shared_guide.putString( "guide_user_token",null );
                 shared_guide.apply();

@@ -8,9 +8,9 @@
             android:id="@+id/nav_follow_flights"
             android:title="الصفحه الرئيسيه"
             />
-    <item
+  <!--  <item
             android:id="@+id/nav_request_pause_trip"
-            android:title="طلبات التعليق" />
+            android:title="طلبات التعليق" />-->
         <!--<item
             android:id="@+id/nav_OldTrip"
             android:title="رحلة قديمة" />

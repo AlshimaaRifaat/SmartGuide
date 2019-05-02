@@ -44,7 +44,7 @@ public class OldRequestsGuideAdapter extends RecyclerView.Adapter<OldRequestsGui
     @Override
     public void onBindViewHolder(@NonNull OldRequestsGuideAdapter.ViewHolder holder, final int position) {
 
-        holder.fromTo.setText(oldRequestsGuideDataList.get( position ).getFrom()+" الى "+oldRequestsGuideDataList.get( position ).getTo());
+        holder.fromTo.setText(" المسار: "+oldRequestsGuideDataList.get( position ).getFrom()+" الى "+oldRequestsGuideDataList.get( position ).getTo());
       if(oldRequestsGuideDataList.get( position ).getStatus().equals("3"))
       {
          holder.status.setText("تم الموافقه على طلبك");

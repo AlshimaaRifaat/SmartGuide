@@ -19,6 +19,7 @@ import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.activity.NavigationDriverActivity;
 import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
 import com.example.alshimaa.smartguide.model.LoginData;
 import com.example.alshimaa.smartguide.presenter.LoginPresenter;
@@ -34,7 +35,7 @@ public class LoginFragment extends Fragment implements LoginView{
     EditText userEmail,userPassword;
     LoginPresenter loginPresenter;
 
-    SharedPreferences.Editor sharedPref,sharedPref_guide;
+    SharedPreferences.Editor sharedPref,sharedPref_guide,sharedPref_driver;
 
     SharedPreferences.Editor sharedPref_company_id,sharedPref_role;
      public  static String CompanyId;
@@ -63,6 +64,7 @@ View view;
         sharedPref_role=getContext().getSharedPreferences("role_to_home", Context.MODE_PRIVATE).edit();
 
         sharedPref_guide=getContext().getSharedPreferences("guide", Context.MODE_PRIVATE).edit();
+        sharedPref_driver=getContext().getSharedPreferences("driver", Context.MODE_PRIVATE).edit();
         Login();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +142,7 @@ View view;
 
         sharedPref_role.putString("role",loginData.getRole());
         sharedPref_role.apply();
-        Toast.makeText(getContext(), loginData.getUserToken(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), loginData.getUserToken(), Toast.LENGTH_SHORT).show();
         if(loginData.getRole().equals("guides"))
         {
             sharedPref_guide.putString("guide_user_token", loginData.getUserToken());
@@ -185,7 +187,25 @@ View view;
             startActivity(i);
             ((Activity) getActivity()).overridePendingTransition(0, 0);
             getActivity().finish();
-        }
+        }else if(loginData.getRole().equals("drivers"))
+        {
+                sharedPref_driver.putString("driver_user_token", loginData.getUserToken());
+                sharedPref_driver.apply();
+                SplashActivity.Driver_user_token = loginData.getUserToken();
+
+                sharedPref_Name.putString("name", loginData.getName());
+                sharedPref_Name.apply();
+                sharedPref_Phone.putString("phone", loginData.getPhone());
+                sharedPref_Phone.apply();
+                sharedPref_Img.putString("img", loginData.getImage());
+                sharedPref_Img.apply();
+
+                Intent i = new Intent(getActivity(), NavigationDriverActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0,0);
+                getActivity().finish();
+            }
+
 
     }
 
