@@ -152,7 +152,7 @@ public class NavigationDriverActivity extends AppCompatActivity
                 fragment=new HomeDriverFragment();
                 break;
 
-            case R.id.nav_LogOut:
+            case R.id.nav_driver_LogOut:
                 currentSelectedPosition=1;
                 shared_driver.putString( "driver_user_token",null );
                 shared_driver.apply();

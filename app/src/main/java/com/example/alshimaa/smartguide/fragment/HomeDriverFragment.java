@@ -92,7 +92,7 @@ View view;
     @Override
     public void showHomeDriverList(List<FollowFlightsData> followFlightsDataList) {
         homeDriverAdapter=new HomeDriverAdapter( getContext(),followFlightsDataList );
-       homeDriverAdapter.onClick(this);
+        homeDriverAdapter.onClick(this);
         recyclerViewHomeDriver.setLayoutManager( new GridLayoutManager(getContext(),2));
         recyclerViewHomeDriver.setAdapter( homeDriverAdapter );
     }

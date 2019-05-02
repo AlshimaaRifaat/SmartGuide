@@ -174,7 +174,8 @@
                 android:text="@string/start_trip"
                 android:textAllCaps="false"
                 android:layout_marginBottom="@dimen/_11sdp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+               />
             <!-- <Button
                  android:id="@+id/details_follow_flights_btn_request_suspension"
                  android:layout_width="@dimen/_100sdp"
@@ -192,7 +193,8 @@
                  />-->
 
             <Button
-                android:id="@+id/details_home_guide_btn_view_on_map"
+
+                android:id="@+id/details_home_guide_btn_pause_trip"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/btn_register"
@@ -201,26 +203,28 @@
                 android:layout_marginLeft="@dimen/_32sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
-                android:text="@string/ViewPath"
+                android:text="@string/request_suspension"
                 android:textAllCaps="false"
                 android:visibility="gone"
-                android:layout_marginBottom="@dimen/_11sdp"
+
+
 
                 />
             <Button
-                android:id="@+id/details_home_guide_btn_pause_trip"
+                android:id="@+id/details_home_guide_btn_view_on_map"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/btn_register"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_32sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
-                android:text="@string/request_suspension"
+                android:text="@string/ViewPath"
                 android:textAllCaps="false"
-                android:layout_below="@id/details_home_guide_btn_start_trip"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:visibility="gone"
+                android:layout_below="@+id/details_home_guide_btn_pause_trip"
+
+               android:visibility="gone"
 
                 />
             <Button
@@ -238,6 +242,7 @@
                 android:layout_below="@id/details_home_guide_btn_start_trip"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:visibility="gone"
+
                />
         </RelativeLayout>
     </RelativeLayout>
