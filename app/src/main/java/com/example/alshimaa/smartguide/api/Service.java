@@ -75,4 +75,9 @@ public interface Service {
 
     @POST("getNotifications")
     Call<NotificationsResponse> getNotificationsData(@Body Map<String,String> map);
+
+
+
+    @POST("getTripsDriver")
+    Call<FollowFlightsResponse> getHomeDriverData(@Body Map<String,String> map);
 }
