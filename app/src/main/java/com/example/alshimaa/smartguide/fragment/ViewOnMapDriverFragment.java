@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -68,8 +70,8 @@ import java.util.List;
  */
 public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallback
 
-        ,RoutingListener,GoogleApiClient.OnConnectionFailedListener
-        ,GoogleApiClient.ConnectionCallbacks{
+        , RoutingListener, GoogleApiClient.OnConnectionFailedListener
+        , GoogleApiClient.ConnectionCallbacks, LocationListener {
 
     GoogleMap mGoogleMap;
     MapView mapView;
@@ -80,32 +82,33 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     private Marker currentLocationMaker;
     private LatLng currentLocationLatLong;
     private DatabaseReference mDatabase;
-    int REQUEST_LOCATION_CODE=99;
-    Double BusLat,BusLng;
+    int REQUEST_LOCATION_CODE = 99;
+    Double BusLat, BusLng;
     String Status;
     private ProgressDialog progressDialog;
     private List<Polyline> polylines;
-    private static final int[] COLORS = new int[]{R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue,R.color.colorBlue};
+    private static final int[] COLORS = new int[]{R.color.colorBlue, R.color.colorBlue, R.color.colorBlue, R.color.colorBlue, R.color.colorBlue};
     protected LatLng start;
     protected LatLng end;
     Marker m;
     Integer BusSpeed;
     protected GoogleApiClient mGoogleApiClient;
-
-
+   private Location lastLocation;
+   private static final int Request_User_Location_Code=99;
 
 
     public ViewOnMapDriverFragment() {
         // Required empty public constructor
     }
 
-View view;
+    View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_view_on_map_driver, container, false);
-        context=this.getActivity();
+        view = inflater.inflate(R.layout.fragment_view_on_map_driver, container, false);
+        context = this.getActivity();
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -113,11 +116,8 @@ View view;
         polylines = new ArrayList<>();
 
 
-
-
-
         NavigationDriverActivity.toggle_driver = new ActionBarDrawerToggle(
-                getActivity(), NavigationDriverActivity.drawer_driver, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                getActivity(), NavigationDriverActivity.drawer_driver, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         NavigationDriverActivity.drawer_driver.addDrawerListener(NavigationDriverActivity.toggle_driver);
         NavigationDriverActivity.toggle_driver.syncState();
@@ -138,13 +138,29 @@ View view;
         });
 
 
-
-
+       // mapReady();
         startGettingLocations();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         getMarkers();
         return view;
     }
+
+   /* private void mapReady() {
+       *//* if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            buildApiClint();
+            mGoogleMap.setMyLocationEnabled(true);
+            return;
+        }*//*
+
+    }*/
+
     public void buildApiClint(){
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .addConnectionCallbacks(this)
@@ -182,9 +198,10 @@ View view;
             // check permissions for later versions
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (permissionsToRequest.size() > 0) {
-                    requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]),
+                    checkUserLocationPermission();
+                  /*  requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]),
                             ALL_PERMISSIONS_RESULT);
-                    canGetLocation = false;
+                    canGetLocation = false;*/
                 }
             }
         }
@@ -238,7 +255,7 @@ View view;
     }
 
     private void init() {
-        
+
         toolbar=view.findViewById( R.id.view_on_map_driver_tool_bar );
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.map_driver);
@@ -269,7 +286,18 @@ View view;
     public void onMapReady(GoogleMap googleMap) {
         buildApiClint();
         mGoogleMap=googleMap;
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            buildApiClint();
+            mGoogleMap.setMyLocationEnabled(true);
 
+        }
 
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
        /* googleMap.addMarker(new MarkerOptions().position(new LatLng(-34,151)).title("statue of liberty").snippet("snippet"));
@@ -308,10 +336,49 @@ View view;
 
 
     }
+public boolean checkUserLocationPermission()
+{
+    if (ActivityCompat.checkSelfPermission(context,Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
+    {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION))
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},Request_User_Location_Code);
+        }else {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},Request_User_Location_Code);
+        }
+         return false;
+    }else
+    {
+        return true;
+    }
 
+}
 
-  /*@Override
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode)
+        {
+            case Request_User_Location_Code:
+                if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
+                {
+                    if (ActivityCompat.checkSelfPermission(context,Manifest.permission.ACCESS_FINE_LOCATION) ==PackageManager.PERMISSION_GRANTED)
+                    {
+                        if (mGoogleApiClient==null)
+                        {
+                            buildApiClint();
+                        }
+                        mGoogleMap.setMyLocationEnabled(true);
+                    }
+                }else
+                {
+                    Toast.makeText(context, "permission denied", Toast.LENGTH_SHORT).show();
+                }return;
+        }
+    }
+
+    @Override
     public void onLocationChanged(Location location) {
+        lastLocation=location;
         if (currentLocationMaker != null) {
             currentLocationMaker.remove();
         }
@@ -319,28 +386,31 @@ View view;
         currentLocationLatLong = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLocationLatLong);
-        markerOptions.title("Localização atual");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        markerOptions.title("user current location");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         currentLocationMaker = mGoogleMap.addMarker(markerOptions);
-
         //Move to new location
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocationLatLong).build();
+       /* CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocationLatLong).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
         LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude()
                 ,location.getSpeed());
         mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").setValue(locationData);
         //check this line 3>> bus id
-
         Toast.makeText(getContext(),"cur "+ currentLocationLatLong.toString(), Toast.LENGTH_SHORT).show();
-      getMarkers();
+      getMarkers();*/
+       mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocationLatLong));
+       mGoogleMap.animateCamera(CameraUpdateFactory.zoomBy(11));
 
-    }*/
+       if (mGoogleApiClient!=null)
+       {
+           LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) context);
+       }
+    }
 
     private void getMarkers(){
 
 
-        mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).addValueEventListener(new ValueEventListener() {
+      /*  mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(m!=null){
@@ -370,11 +440,11 @@ View view;
                     }
                     // mGoogleMap.addMarker(new MarkerOptions().position(Bus).title("bus"));
                     // Toast.makeText(getContext(), String.valueOf(CurrentLat)+" "+String.valueOf(CurrentLng), Toast.LENGTH_SHORT).show();
-                   /* Map<String,String> map=dataSnapshot.getValue(Map.class);
+                   *//* Map<String,String> map=dataSnapshot.getValue(Map.class);
                     String Lat=map.get("lat");
                     String Lng=map.get("lng");
                     String Speed=map.get("speed");
-                    Toast.makeText(getContext(), "lat "+Lat+"lng "+Lng+"speed "+Speed, Toast.LENGTH_SHORT).show();*/
+                    Toast.makeText(getContext(), "lat "+Lat+"lng "+Lng+"speed "+Speed, Toast.LENGTH_SHORT).show();*//*
                 }
 
 
@@ -384,21 +454,17 @@ View view;
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
   /*  private void getAllLocations(Map<String, Object> locations) {
         for (Map.Entry<String, Object> entry : locations.entrySet()){
-
 //            Date newDate = new Date(Long.valueOf(entry.getKey()));
             Map singleLocation = (Map) entry.getValue();
             LatLng latLng = new LatLng((Double) singleLocation.get("lat"), (Double)singleLocation.get("lng"));
             addGreenMarker( latLng);
-
         }
-
     }
-
     private void addGreenMarker( LatLng latLng) {
        // SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         MarkerOptions markerOptions = new MarkerOptions();
@@ -411,15 +477,11 @@ View view;
 
 
    /* private void getAllLocations(Map<String,Object> locations) {
-
-
        for (Map.Entry<String, Object> entry : locations.entrySet()) {
-
             //Date newDate = new Date(Long.valueOf(entry.getKey()));
             Map singleLocation = (Map) entry.getValue();
             LatLng latLng = new LatLng((Double) singleLocation.get("lat"), (Double) singleLocation.get("lng"));
             addGreenMarker( latLng);
-
         }
     }*/
     /*private void addGreenMarker( LatLng latLng) {
@@ -501,9 +563,55 @@ View view;
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+       /* locationReques=new LocationRequest();
+        locationReques.setInterval(1100);
+        locationReques.setFastestInterval(1100);
+        locationReques.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  )
+        {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,locationReques, (com.google.android.gms.location.LocationListener) this);
+
+
+
 
     }
+*/
+        locationReques = new LocationRequest();
+//        locationReques.setSmallestDisplacement(10);
+        locationReques.setFastestInterval(10000);
+        locationReques.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+       /* LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                locationReques,this);*/
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationReques);
+
+
+        SettingsClient client = LocationServices.getSettingsClient(getActivity());
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnFailureListener(getActivity(), new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof ResolvableApiException) {
+                    try {
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult(getActivity(),
+                                REQUEST_LOCATION_CODE);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                    }
+                }
+            }
+        });
+    }
     @Override
     public void onConnectionSuspended(int i) {
         locationReques = new LocationRequest();
@@ -546,5 +654,20 @@ View view;
     }
 
 
-}
 
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+}
