@@ -311,11 +311,13 @@ if (currentLocationMaker!=null) {
 }
     currentLocationMaker=mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
 
-                Toast.makeText(context, String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(context, String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
                     Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.CompanyId) , Toast.LENGTH_SHORT).show();
-                    Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.TripId) , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.TripId) , Toast.LENGTH_SHORT).show();*/
                     mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lat").setValue(String.valueOf(location.getLatitude()));
                     mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lng").setValue(String.valueOf(location.getLongitude()));
+
+
                 }
             });
 

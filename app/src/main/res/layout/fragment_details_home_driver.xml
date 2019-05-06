@@ -174,7 +174,24 @@
                 android:text="@string/start_trip"
                 android:textAllCaps="false"
                 android:layout_marginBottom="@dimen/_11sdp"
+                android:visibility="gone"
+
              />
+            <Button
+                android:id="@+id/details_home_driver_btn_finish_trip"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/btn_register"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_32sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                android:text="@string/finish_trip"
+                android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:visibility="gone"
+                />
             <!-- <Button
                  android:id="@+id/details_follow_flights_btn_request_suspension"
                  android:layout_width="@dimen/_100sdp"
@@ -203,6 +220,7 @@
                 android:textColor="#fff"
                 android:text="@string/ViewPath"
                 android:textAllCaps="false"
+
 
 
                 />
