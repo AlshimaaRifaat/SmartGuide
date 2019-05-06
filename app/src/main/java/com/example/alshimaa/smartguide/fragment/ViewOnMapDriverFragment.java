@@ -33,6 +33,7 @@ import com.directions.route.RoutingListener;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.activity.NavigationDriverActivity;
+import com.example.alshimaa.smartguide.model.LocationData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -79,8 +80,8 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     Toolbar toolbar;
     Context context;
     LocationRequest locationReques;
-    private Marker currentLocationMaker;
-    private LatLng currentLocationLatLong;
+    Marker currentLocationMaker;
+
     private DatabaseReference mDatabase;
     int REQUEST_LOCATION_CODE = 99;
     Double BusLat, BusLng;
@@ -95,6 +96,10 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     protected GoogleApiClient mGoogleApiClient;
    private Location lastLocation;
    private static final int Request_User_Location_Code=99;
+
+    SupportMapFragment mapFragment;
+
+
 
 
     public ViewOnMapDriverFragment() {
@@ -257,7 +262,7 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     private void init() {
 
         toolbar=view.findViewById( R.id.view_on_map_driver_tool_bar );
-        SupportMapFragment mapFragment = (SupportMapFragment)
+         mapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.map_driver);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
@@ -284,7 +289,7 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        buildApiClint();
+      //  buildApiClint();
         mGoogleMap=googleMap;
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -296,6 +301,25 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
             // for ActivityCompat#requestPermissions for more details.
             buildApiClint();
             mGoogleMap.setMyLocationEnabled(true);
+           mGoogleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+
+                @Override
+                public void onMyLocationChange(Location location) {
+                    // TODO Auto-generated method stub
+if (currentLocationMaker!=null) {
+    currentLocationMaker.remove();
+}
+    currentLocationMaker=mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
+
+                Toast.makeText(context, String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.CompanyId) , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.TripId) , Toast.LENGTH_SHORT).show();
+                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lat").setValue(String.valueOf(location.getLatitude()));
+                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lng").setValue(String.valueOf(location.getLongitude()));
+                }
+            });
+
+
 
         }
 
@@ -316,6 +340,16 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
 
         CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
+
+
+
+
+       // Toast.makeText(context, "cuuuur  "+String.valueOf(lastLocation.getLatitude())+" "+String.valueOf(lastLocation.getLongitude()), Toast.LENGTH_SHORT).show();
+
+
+
+
+
 
         getMarkers();
 
@@ -376,36 +410,7 @@ public boolean checkUserLocationPermission()
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        lastLocation=location;
-        if (currentLocationMaker != null) {
-            currentLocationMaker.remove();
-        }
-        //Add marker
-        currentLocationLatLong = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLocationLatLong);
-        markerOptions.title("user current location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        currentLocationMaker = mGoogleMap.addMarker(markerOptions);
-        //Move to new location
-       /* CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocationLatLong).build();
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        LocationData locationData=new LocationData(location.getLatitude(),location.getLongitude()
-                ,location.getSpeed());
-        mDatabase.child("buses").child(DetailsFollowFlightsFragment.CompanyId).child("1").setValue(locationData);
-        //check this line 3>> bus id
-        Toast.makeText(getContext(),"cur "+ currentLocationLatLong.toString(), Toast.LENGTH_SHORT).show();
-      getMarkers();*/
-       mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocationLatLong));
-       mGoogleMap.animateCamera(CameraUpdateFactory.zoomBy(11));
 
-       if (mGoogleApiClient!=null)
-       {
-           LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) context);
-       }
-    }
 
     private void getMarkers(){
 
@@ -531,7 +536,7 @@ public boolean checkUserLocationPermission()
             int colorIndex = i % COLORS.length;
 
             PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.color(getContext().getResources().getColor(COLORS[colorIndex]));
             polyOptions.width(10 + i * 3);
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mGoogleMap.addPolyline(polyOptions);
@@ -563,7 +568,7 @@ public boolean checkUserLocationPermission()
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-       /* locationReques=new LocationRequest();
+        locationReques=new LocationRequest();
         locationReques.setInterval(1100);
         locationReques.setFastestInterval(1100);
         locationReques.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
@@ -573,78 +578,17 @@ public boolean checkUserLocationPermission()
         {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,locationReques, (com.google.android.gms.location.LocationListener) this);
+//       LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,locationReques, (com.google.android.gms.location.LocationListener) this);
 
 
 
 
     }
-*/
-        locationReques = new LocationRequest();
-//        locationReques.setSmallestDisplacement(10);
-        locationReques.setFastestInterval(10000);
-        locationReques.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-       /* LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                locationReques,this);*/
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationReques);
-
-
-        SettingsClient client = LocationServices.getSettingsClient(getActivity());
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-        task.addOnFailureListener(getActivity(), new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    try {
-                        ResolvableApiException resolvable = (ResolvableApiException) e;
-                        resolvable.startResolutionForResult(getActivity(),
-                                REQUEST_LOCATION_CODE);
-                    } catch (IntentSender.SendIntentException sendEx) {
-                    }
-                }
-            }
-        });
-    }
     @Override
     public void onConnectionSuspended(int i) {
-        locationReques = new LocationRequest();
-//        locationReques.setSmallestDisplacement(10);
-        locationReques.setFastestInterval(10000);
-        locationReques.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-       /* LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                locationReques,this);*/
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationReques);
-
-
-        SettingsClient client = LocationServices.getSettingsClient(getActivity());
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-        task.addOnFailureListener(getActivity(), new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    try {
-                        ResolvableApiException resolvable = (ResolvableApiException) e;
-                        resolvable.startResolutionForResult(getActivity(),
-                                REQUEST_LOCATION_CODE);
-                    } catch (IntentSender.SendIntentException sendEx) {
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -654,7 +598,10 @@ public boolean checkUserLocationPermission()
     }
 
 
+    @Override
+    public void onLocationChanged(Location location) {
 
+    }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {

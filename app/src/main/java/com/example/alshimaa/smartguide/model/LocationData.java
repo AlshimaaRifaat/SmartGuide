@@ -11,4 +11,36 @@ public class LocationData {
         this.lng = lng;
         this.speed = speed;
     }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public double getStatus() {
+        return status;
+    }
+
+    public void setStatus(double status) {
+        this.status = status;
+    }
 }
