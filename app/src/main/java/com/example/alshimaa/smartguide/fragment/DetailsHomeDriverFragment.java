@@ -13,7 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+import com.example.alshimaa.smartguide.presenter.EndTripDriverPresenter;
+import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
+import com.example.alshimaa.smartguide.view.EndTripDriverView;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,7 +34,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsHomeDriverFragment extends Fragment {
+public class DetailsHomeDriverFragment extends Fragment implements EndTripDriverView{
 
     @BindView(R.id.details_home_driver_trip_name)
     TextView tripNameTxt;
@@ -64,6 +68,7 @@ public class DetailsHomeDriverFragment extends Fragment {
             ,StatusId,CompanyId,StartLat,StartLng,EndLat,EndLng;
 
     private DatabaseReference mDatabase;
+    EndTripDriverPresenter endTripDriverPresenter;
     public DetailsHomeDriverFragment() {
         // Required empty public constructor
     }
@@ -160,6 +165,7 @@ View view;
         endTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                performEndTrip();
                 clicked="end_clicked";
                 startTripBtn.setVisibility(View.VISIBLE);
                 if (clicked.equals("end_clicked")) {
@@ -195,6 +201,11 @@ View view;
         });
 
         return view;
+    }
+
+    private void performEndTrip() {
+        endTripDriverPresenter=new EndTripDriverPresenter(getContext(),this);
+        endTripDriverPresenter.getEndTripDriverResult(SplashActivity.Driver_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","hgg");
     }
 
     private void checkStatusFromFirebase() {
@@ -241,4 +252,13 @@ View view;
         endTripBtn=view.findViewById(R.id.details_home_driver_btn_finish_trip);
     }
 
+    @Override
+    public void showEndTripDriverMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showEndTripError() {
+
+    }
 }

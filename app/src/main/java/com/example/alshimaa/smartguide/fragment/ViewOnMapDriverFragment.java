@@ -332,13 +332,13 @@ if (currentLocationMaker!=null) {
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
         // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
         start = new LatLng(Double.parseDouble(DetailsHomeDriverFragment.StartLat), Double.parseDouble(DetailsHomeDriverFragment.StartLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(start).title("start"));
+        mGoogleMap.addMarker(new MarkerOptions().position(start).title("موضع بدء الرحله"));
 
         CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
         end = new LatLng(Double.parseDouble(DetailsHomeDriverFragment.EndLat), Double.parseDouble(DetailsHomeDriverFragment.EndLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(end).title("end"));
+        mGoogleMap.addMarker(new MarkerOptions().position(end).title("موضع انهاء الرحله"));
 
         CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
