@@ -118,6 +118,34 @@ View view;
             logoStatusTxt.setTypeface(customFontBold);
 
         }
+        if(TripStatus.equals("1"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }
+        if(TripStatus.equals("2"))
+        {
+            finishTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            pauseTripBtn.setVisibility(View.VISIBLE);
+        }
+        if(TripStatus.equals("3"))
+        {
+            startTripBtn.setVisibility(View.VISIBLE);
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("4"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("5"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+        }if(TripStatus.equals("6"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            startTripBtn.setVisibility(View.VISIBLE);
+        }
         /*if(TripStatus.equals("مسنده"))
         {
             startTripBtn.setVisibility(View.VISIBLE);

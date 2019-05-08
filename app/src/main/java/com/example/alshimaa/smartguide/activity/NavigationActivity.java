@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.LoginFragment;
+import com.example.alshimaa.smartguide.fragment.OldRequestsPauseTripSupervisorFragment;
 import com.example.alshimaa.smartguide.fragment.OldTripFragment;
 import com.example.alshimaa.smartguide.fragment.RequestPauseTripFragment;
 import com.example.alshimaa.smartguide.fragment.RequestPauseTripGuideFragment;
@@ -173,10 +174,10 @@ public class NavigationActivity extends AppCompatActivity
                 currentSelectedPosition=0;
                 fragment=new FollowFlightsFragment();
                 break;
-           /* case R.id.nav_request_pause_trip:
+          case R.id.nav_old_requests_supervisor:
                 currentSelectedPosition=1;
-                fragment=new RequestPauseTripFragment();
-                break;*/
+                fragment=new OldRequestsPauseTripSupervisorFragment();
+                break;
            case R.id.nav_LogOut:
                currentSelectedPosition=2;
                shared.putString( "login_to_follow_flight",null );

@@ -9,9 +9,11 @@ import com.example.alshimaa.smartguide.model.GetDriverNameResponse;
 import com.example.alshimaa.smartguide.model.GetGuideNameResponse;
 import com.example.alshimaa.smartguide.model.GetMemeberNameResponse;
 import com.example.alshimaa.smartguide.model.GetPathResponse;
+import com.example.alshimaa.smartguide.model.HomeMemberResponse;
 import com.example.alshimaa.smartguide.model.LoginResponse;
 import com.example.alshimaa.smartguide.model.NotificationsResponse;
 import com.example.alshimaa.smartguide.model.OldRequestsGuideResponse;
+import com.example.alshimaa.smartguide.model.OldRequestsSupervisorResponse;
 import com.example.alshimaa.smartguide.model.StartTripResponse;
 
 import java.util.Map;
@@ -84,4 +86,10 @@ public interface Service {
 
     @POST("endTripDriver")
     Call<EndTripDriverResponse> getEndTripDriverData(@Body Map<String,String> map);
+
+    @POST("getSupervisors")
+    Call<HomeMemberResponse> getHomeMemberData(@Body Map<String,String> map);
+
+    @POST("getRequestPauseTrip")
+    Call<OldRequestsSupervisorResponse> getOldRequestsSupervisorData(@Body Map<String,String> map);
 }

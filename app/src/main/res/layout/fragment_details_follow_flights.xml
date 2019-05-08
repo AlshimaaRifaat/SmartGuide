@@ -236,6 +236,7 @@
             android:text="@string/start_trip"
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/_11sdp"
+            android:visibility="gone"
             />
        <!-- <Button
             android:id="@+id/details_follow_flights_btn_request_suspension"
@@ -265,6 +266,7 @@
             android:textColor="#fff"
             android:text="@string/ViewPath"
             android:textAllCaps="false"
+            android:visibility="gone"
 
             />
             <Button

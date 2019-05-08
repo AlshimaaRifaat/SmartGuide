@@ -7,10 +7,10 @@
     tools:context=".fragment.ImmediateTripFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="رحله فوريه"
-        android:textSize="@dimen/_40sdp"/>
+        android:textSize="@dimen/_40sdp"/>-->
 
 </FrameLayout>

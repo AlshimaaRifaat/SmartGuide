@@ -13,12 +13,13 @@ import com.example.alshimaa.smartguide.activity.MainActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.activity.NavigationDriverActivity;
 import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
+import com.example.alshimaa.smartguide.activity.NavigationMemberActivity;
 
 public class SplashActivity extends AppCompatActivity {
 SharedPreferences sharedPreferences,sharedPreferences_guide_user_token,
         sharedPreferences_name,sharedPreferences_phone,sharedPreferences_img,
-        sharedPreferences_driver_user_token;
-public static String Login,Name,Phone,Img,Guide_user_token,Driver_user_token;
+        sharedPreferences_driver_user_token,sharedPreferences_member_user_token;
+public static String Login,Name,Phone,Img,Guide_user_token,Driver_user_token,Member_user_token;
 
 
     @Override
@@ -37,6 +38,9 @@ public static String Login,Name,Phone,Img,Guide_user_token,Driver_user_token;
 
        sharedPreferences_driver_user_token=getSharedPreferences("driver", Context.MODE_PRIVATE);
         Driver_user_token=sharedPreferences_driver_user_token.getString("driver_user_token",null);
+
+        sharedPreferences_member_user_token=getSharedPreferences("member", Context.MODE_PRIVATE);
+       Member_user_token=sharedPreferences_member_user_token.getString("member_user_token",null);
 
         sharedPreferences_name=getSharedPreferences("nav_name", Context.MODE_PRIVATE);
         Name=sharedPreferences_name.getString("name",null);
@@ -74,8 +78,13 @@ public static String Login,Name,Phone,Img,Guide_user_token,Driver_user_token;
                         Intent intent=new Intent( SplashActivity.this,NavigationDriverActivity.class);
                         startActivity( intent );
 
+                    }else if (Member_user_token!=null &&Name!=null&&Phone!=null&Img!=null )
+                    {
+                        Intent intent=new Intent( SplashActivity.this,NavigationMemberActivity.class);
+                        startActivity( intent );
+
                     }
-                    else if (Login==null &&Guide_user_token==null&&Driver_user_token==null)
+                    else if (Login==null &&Guide_user_token==null&&Driver_user_token==null&&Member_user_token==null)
                     {
                         Intent intent=new Intent( SplashActivity.this,MainActivity.class);
                         startActivity( intent );

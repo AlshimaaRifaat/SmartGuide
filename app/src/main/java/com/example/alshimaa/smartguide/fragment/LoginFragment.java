@@ -21,6 +21,7 @@ import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.activity.NavigationDriverActivity;
 import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
+import com.example.alshimaa.smartguide.activity.NavigationMemberActivity;
 import com.example.alshimaa.smartguide.model.LoginData;
 import com.example.alshimaa.smartguide.presenter.LoginPresenter;
 import com.example.alshimaa.smartguide.view.DetailsNavHeaderProfileView;
@@ -35,7 +36,7 @@ public class LoginFragment extends Fragment implements LoginView{
     EditText userEmail,userPassword;
     LoginPresenter loginPresenter;
 
-    SharedPreferences.Editor sharedPref,sharedPref_guide,sharedPref_driver;
+    SharedPreferences.Editor sharedPref,sharedPref_guide,sharedPref_driver,sharedPref_member;
 
     SharedPreferences.Editor sharedPref_company_id,sharedPref_role;
      public  static String CompanyId;
@@ -65,6 +66,7 @@ View view;
 
         sharedPref_guide=getContext().getSharedPreferences("guide", Context.MODE_PRIVATE).edit();
         sharedPref_driver=getContext().getSharedPreferences("driver", Context.MODE_PRIVATE).edit();
+        sharedPref_member=getContext().getSharedPreferences("member", Context.MODE_PRIVATE).edit();
         Login();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +207,25 @@ View view;
                 ((Activity) getActivity()).overridePendingTransition(0,0);
                 getActivity().finish();
             }
+
+        else if(loginData.getRole().equals("members"))
+        {
+            sharedPref_member.putString("member_user_token", loginData.getUserToken());
+            sharedPref_member.apply();
+            SplashActivity.Member_user_token = loginData.getUserToken();
+
+            sharedPref_Name.putString("name", loginData.getName());
+            sharedPref_Name.apply();
+            sharedPref_Phone.putString("phone", loginData.getPhone());
+            sharedPref_Phone.apply();
+            sharedPref_Img.putString("img", loginData.getImage());
+            sharedPref_Img.apply();
+
+            Intent i = new Intent(getActivity(), NavigationMemberActivity.class);
+            startActivity(i);
+            ((Activity) getActivity()).overridePendingTransition(0,0);
+            getActivity().finish();
+        }
 
 
     }

@@ -43,6 +43,10 @@
         <activity
             android:name=".activity.NavigationDriverActivity"
             android:label="@string/title_activity_navigation_driver"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activity.NavigationMemberActivity"
+            android:label="@string/title_activity_navigation_member"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
