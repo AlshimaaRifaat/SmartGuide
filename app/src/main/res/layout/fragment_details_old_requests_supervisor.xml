@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f2f2f2"
+    tools:context=".fragment.DetailsOldRequestsSupervisorFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/details_old_requests_supervisor_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_42sdp"
+            android:background="#154677">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!-- <ImageView
+                     android:id="@+id/home_image_favrite_heart"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentLeft="true"
+                     android:background="@drawable/favorite_heart_button"
+                     />-->
+                <ImageView
+                    android:id="@+id/details_old_requests_supervisor_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_11sdp"
+                    android:src="@drawable/notifications_button"
+                    />
+                <ImageView
+                    android:id="@+id/details_old_requests_supervisor_icon_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/details_old_requests_supervisor_notification"
+                    android:layout_marginRight="@dimen/_14sdp"
+                    android:src="@drawable/edit"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Follow_flight"
+                    android:layout_toLeftOf="@+id/details_old_requests_supervisor_icon_edit"
+                    android:layout_marginRight="@dimen/_73sdp"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_14sdp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/details_old_requests_supervisor_main_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_37sdp"
+            app:cardCornerRadius="@dimen/_3sdp"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_below="@id/details_old_requests_supervisor_tool_bar"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/row_old_requests_supervisor_image"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_69sdp"
+                    android:layout_marginTop="@dimen/_19sdp"
+                    android:src="@drawable/group118"
+                    android:layout_centerHorizontal="true"
+
+
+                    />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_210sdp"
+                    android:layout_height="@dimen/_57sdp"
+                    android:layout_marginTop="@dimen/_87sdp"
+                    android:background="#154677"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/details_old_requests_supervisor_logo_bus_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="ggg"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:textStyle="bold" />
+                   <!-- <TextView
+                        android:id="@+id/details_old_requests_supervisor_logo_satus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/details_old_requests_supervisor_logo_bus_number"
+                        android:layout_centerHorizontal="true"
+                        android:text="fffg"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="#fff"
+                        />-->
+                </RelativeLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/details_old_requests_supervisor_card_details"
+            android:layout_below="@+id/details_old_requests_supervisor_main_card"
+            android:layout_width="@dimen/_272sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:cardElevation="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_17sdp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_9sdp"
+                >
+               <!-- <TextView
+                    android:id="@+id/details_old_requests_supervisor_trip_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="اسم الرحله"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_alignParentRight="true"
+                    />-->
+                <TextView
+                    android:id="@+id/details_old_requests_supervisor_guide_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="اسم المشرف"
+                    android:layout_alignParentRight="true"
+                    />
+                <!--<TextView
+                    android:id="@+id/details_old_requests_supervisor_bus_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="رقم الحافلة"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_old_requests_supervisor_guide_name"
+                    />-->
+                <TextView
+                    android:id="@+id/details_old_requests_supervisor_driver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="اسم السائق"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_old_requests_supervisor_guide_name"
+                    />
+                <TextView
+                    android:id="@+id/details_old_requests_supervisor_going_down_Place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="مكان النزول"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_old_requests_supervisor_driver_name"
+                    />
+                <TextView
+                    android:id="@+id/details_old_requests_supervisor_delivery_Place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="مكان الاستلام"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_old_requests_supervisor_going_down_Place"
+                    />
+                <TextView
+                    android:id="@+id/details_old_requests_supervisor_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="تاريخ بدايه"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/details_old_requests_supervisor_delivery_Place"
+                    />
+                <!--<TextView
+                    android:id="@+id/details_old_requests_supervisor_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c8c8c8"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="تاريخ نهايه"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/_9sdp"
+                    android:layout_below="@+id/details_old_requests_supervisor_start_date"
+                    />-->
+                <Button
+                    android:id="@+id/details_old_requests_supervisor_btn_accept"
+                    android:layout_width="@dimen/_88sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:background="@drawable/btn_register"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_32sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="#fff"
+                    android:text="قبول"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/_11sdp"
+                    android:layout_below="@id/details_old_requests_supervisor_start_date"
+
+                    />
+                <Button
+                    android:id="@+id/details_old_requests_btn_refuse"
+                    android:layout_width="@dimen/_88sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:background="@drawable/btn_register"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/_32sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="#fff"
+                    android:text="رفض"
+                    android:textAllCaps="false"
+                    android:layout_below="@id/details_old_requests_supervisor_start_date"
+                    android:layout_marginBottom="@dimen/_11sdp"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+       <!-- <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/details_old_requests_supervisor_card_details"
+            >
+           &lt;!&ndash; <Button
+                android:id="@+id/details_old_requests_supervisor_btn_start_trip"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/btn_register"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_32sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                android:text="@string/start_trip"
+                android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:visibility="gone"
+                />&ndash;&gt;
+            &lt;!&ndash; <Button
+                 android:id="@+id/details_follow_flights_btn_request_suspension"
+                 android:layout_width="@dimen/_100sdp"
+                 android:layout_height="@dimen/_32sdp"
+                 android:background="@drawable/btn_register"
+                 android:layout_marginTop="@dimen/_11sdp"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="@dimen/_32sdp"
+                 android:textSize="@dimen/_13sdp"
+                 android:textColor="#fff"
+                 android:text="@string/request_suspension"
+                 android:textAllCaps="false"
+                 android:layout_below="@id/details_follow_flights_card_details"
+                 android:layout_marginBottom="@dimen/_11sdp"
+                 />&ndash;&gt;
+
+
+            <Button
+                android:id="@+id/details_old_requests_supervisor_btn_pause_trip"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/btn_register"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginLeft="@dimen/_32sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                android:text="@string/request_suspension"
+                android:textAllCaps="false"
+                android:layout_below="@id/details_follow_flights_card_details"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>-->
+    </RelativeLayout>
+
+
+</ScrollView>
