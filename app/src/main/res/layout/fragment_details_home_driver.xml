@@ -175,6 +175,7 @@
                 android:textAllCaps="false"
                 android:layout_marginBottom="@dimen/_11sdp"
                 android:visibility="gone"
+                android:clickable="true"
 
              />
             <Button
@@ -191,6 +192,7 @@
                 android:textAllCaps="false"
                 android:layout_marginBottom="@dimen/_11sdp"
                 android:visibility="gone"
+                android:clickable="true"
                 />
             <!-- <Button
                  android:id="@+id/details_follow_flights_btn_request_suspension"
@@ -220,6 +222,7 @@
                 android:textColor="#fff"
                 android:text="@string/ViewPath"
                 android:textAllCaps="false"
+                android:clickable="true"
 
 
 

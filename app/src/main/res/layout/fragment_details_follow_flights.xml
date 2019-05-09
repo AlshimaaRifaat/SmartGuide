@@ -238,7 +238,7 @@
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/_11sdp"
             android:visibility="gone"
-
+            android:clickable="true"
             />
        <!-- <Button
             android:id="@+id/details_follow_flights_btn_request_suspension"
@@ -269,6 +269,7 @@
             android:text="@string/ViewPath"
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/_4sdp"
+            android:clickable="true"
 
             />
             <Button
@@ -284,7 +285,7 @@
                 android:textAllCaps="false"
                 android:layout_below="@id/details_follow_flights_btn_view_on_map"
                 android:layout_marginBottom="@dimen/_4sdp"
-
+                android:clickable="true"
                 android:visibility="gone"
 
                />
@@ -300,6 +301,7 @@
                 android:textColor="#fff"
                 android:text="@string/finish_trip"
                 android:visibility="gone"
+                android:clickable="true"
 
               />
         </RelativeLayout>

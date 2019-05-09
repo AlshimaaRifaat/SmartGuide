@@ -101,6 +101,7 @@
         android:textAllCaps="false"
         android:layout_below="@id/login_cardV_password"
         android:layout_marginBottom="@dimen/_32sdp"
+        android:clickable="true"
         />
 </RelativeLayout>
 </ScrollView>

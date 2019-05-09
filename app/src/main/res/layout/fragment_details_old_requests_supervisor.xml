@@ -215,6 +215,7 @@
                     android:textAllCaps="false"
                     android:layout_marginBottom="@dimen/_11sdp"
                     android:layout_below="@id/details_old_requests_supervisor_start_date"
+                    android:clickable="true"
 
                     />
                 <Button
@@ -231,6 +232,7 @@
                     android:textAllCaps="false"
                     android:layout_below="@id/details_old_requests_supervisor_start_date"
                     android:layout_marginBottom="@dimen/_11sdp"
+                    android:clickable="true"
                     />
             </RelativeLayout>
         </android.support.v7.widget.CardView>

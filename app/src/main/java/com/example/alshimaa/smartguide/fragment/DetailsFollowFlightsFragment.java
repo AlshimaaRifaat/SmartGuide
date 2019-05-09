@@ -144,8 +144,13 @@ View view;
         }if(StatusId.equals("5"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
-            finishTripBtn.setVisibility(View.VISIBLE);
+            //finishTripBtn.setVisibility(View.VISIBLE);
         }if(StatusId.equals("6"))
+        {
+            viewOnMapBtn.setVisibility(View.VISIBLE);
+            finishTripBtn.setVisibility(View.VISIBLE);
+            //startTripBtn.setVisibility(View.VISIBLE);
+        }if(StatusId.equals("7"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
             startTripBtn.setVisibility(View.VISIBLE);
