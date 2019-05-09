@@ -149,7 +149,7 @@ View view;
         {
             startTripBtn.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
-            finishTripBtn.setVisibility(View.VISIBLE);
+
         }if(StatusId.equals("4"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
@@ -174,6 +174,7 @@ View view;
         startTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finishTripBtn.setVisibility(View.VISIBLE);
                 performStartTripGuide();
             }
         });
@@ -187,6 +188,7 @@ View view;
         finishTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startTripBtn.setVisibility(View.VISIBLE);
                 performEndTripGuide();
             }
         });

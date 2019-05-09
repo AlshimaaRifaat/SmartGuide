@@ -234,14 +234,13 @@
                 android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/btn_register"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_32sdp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_32sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
-                android:text="@string/finish_trip"
                 android:textAllCaps="false"
-                android:layout_below="@id/details_home_guide_btn_start_trip"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:text="@string/finish_trip"
                 android:visibility="gone"
 
                />
