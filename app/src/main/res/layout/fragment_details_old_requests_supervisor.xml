@@ -27,27 +27,13 @@
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
                      />-->
-                <ImageView
-                    android:id="@+id/details_old_requests_supervisor_notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_11sdp"
-                    android:src="@drawable/notifications_button"
-                    />
-                <ImageView
-                    android:id="@+id/details_old_requests_supervisor_icon_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/details_old_requests_supervisor_notification"
-                    android:layout_marginRight="@dimen/_14sdp"
-                    android:src="@drawable/edit"
-                    />
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Follow_flight"
-                    android:layout_toLeftOf="@+id/details_old_requests_supervisor_icon_edit"
+                   android:layout_centerHorizontal="true"
                     android:layout_marginRight="@dimen/_73sdp"
                     android:textColor="#fff"
                     android:textSize="@dimen/_14sdp"/>

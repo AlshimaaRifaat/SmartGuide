@@ -32,8 +32,7 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment implements Re
     TextView busNumberTxt,guideNameTxt,driverNameTxt
             ,fromTxt,toTxt,startDateTxt,endDateTxt
             ,logoBusNumberTxt;
-    @BindView(R.id.details_old_requests_supervisor_icon_edit)
-    ImageView iconEdit;
+
     @BindView(R.id.details_old_requests_supervisor_btn_accept)
     Button acceptBtn;
     @BindView(R.id.details_old_requests_btn_refuse) Button refuseBtn;
@@ -101,19 +100,10 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment implements Re
             fromTxt.setTypeface(customFontBold);
             toTxt.setTypeface(customFontBold);
             startDateTxt.setTypeface(customFontBold);
-
-
-
-
+            
         }
 
-        iconEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_navigation,
-                        new EditFlightFragment()).addToBackStack(null).commit();
-            }
-        });
+
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
