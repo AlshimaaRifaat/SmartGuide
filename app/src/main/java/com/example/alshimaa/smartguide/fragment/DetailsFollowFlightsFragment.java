@@ -43,7 +43,7 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
 
     Button viewOnMapBtn;
     public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus
-            ,TripName,GuideName,DriverName,From,To,StartDate,EndDate;
+            ,TripName,GuideName,DriverName,From,To,StartDate,EndDate,StatusId;
     StartTripPresenter startTripPresenter;
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
@@ -89,6 +89,7 @@ View view;
             TripStatus=followFlightsData.getStatus();
             logoStatusTxt.setText(TripStatus);
 
+
             StartLat=followFlightsData.getLatStart();
             StartLng=followFlightsData.getLngStart();
             EndLat=followFlightsData.getLatEnd();
@@ -97,6 +98,8 @@ View view;
             CompanyId=followFlightsData.getCompanyId();
 
             TripId=followFlightsData.getTripId();
+
+            StatusId=followFlightsData.getStatusId();
            // BusId=followFlightsData.getBusId();
 
 
@@ -118,30 +121,31 @@ View view;
             logoStatusTxt.setTypeface(customFontBold);
 
         }
-        if(TripStatus.equals("1"))
+        if(StatusId.equals("1"))
         {
             startTripBtn.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
+
         }
-        if(TripStatus.equals("2"))
+        if(StatusId.equals("2"))
         {
             finishTripBtn.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
             pauseTripBtn.setVisibility(View.VISIBLE);
         }
-        if(TripStatus.equals("3"))
+        if(StatusId.equals("3"))
         {
             startTripBtn.setVisibility(View.VISIBLE);
             viewOnMapBtn.setVisibility(View.VISIBLE);
-            finishTripBtn.setVisibility(View.VISIBLE);
-        }if(TripStatus.equals("4"))
+
+        }if(StatusId.equals("4"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
-        }if(TripStatus.equals("5"))
+        }if(StatusId.equals("5"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
             finishTripBtn.setVisibility(View.VISIBLE);
-        }if(TripStatus.equals("6"))
+        }if(StatusId.equals("6"))
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
             startTripBtn.setVisibility(View.VISIBLE);
@@ -191,6 +195,7 @@ View view;
         startTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finishTripBtn.setVisibility(View.VISIBLE);
                performStartTrip();
             }
         });

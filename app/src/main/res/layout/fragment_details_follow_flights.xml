@@ -127,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_9sdp"
+
             >
             <TextView
                 android:id="@+id/details_follow_flights_trip_name"
@@ -237,6 +238,7 @@
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/_11sdp"
             android:visibility="gone"
+
             />
        <!-- <Button
             android:id="@+id/details_follow_flights_btn_request_suspension"
@@ -266,7 +268,7 @@
             android:textColor="#fff"
             android:text="@string/ViewPath"
             android:textAllCaps="false"
-            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_4sdp"
 
             />
             <Button
@@ -274,31 +276,32 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/btn_register"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_32sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
                 android:text="@string/request_suspension"
                 android:textAllCaps="false"
-                android:layout_below="@id/details_follow_flights_btn_start_trip"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_below="@id/details_follow_flights_btn_view_on_map"
+                android:layout_marginBottom="@dimen/_4sdp"
+
                 android:visibility="gone"
+
                />
             <Button
                 android:id="@+id/details_follow_flights_btn_finish_trip"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/btn_register"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginRight="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_32sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
                 android:text="@string/finish_trip"
-                android:textAllCaps="false"
-                android:layout_below="@id/details_follow_flights_btn_start_trip"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+
+              />
         </RelativeLayout>
         </RelativeLayout>
 

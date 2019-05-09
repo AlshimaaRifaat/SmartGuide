@@ -15,7 +15,10 @@ import android.widget.Toast;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+import com.example.alshimaa.smartguide.presenter.EndTripDriverPresenter;
+import com.example.alshimaa.smartguide.presenter.EndTripGuidePresenter;
 import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
+import com.example.alshimaa.smartguide.view.EndTripGuideView;
 import com.example.alshimaa.smartguide.view.StartTripView;
 
 import butterknife.BindView;
@@ -25,7 +28,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsHomeGuideFragment extends Fragment implements StartTripView {
+public class DetailsHomeGuideFragment extends Fragment implements StartTripView,EndTripGuideView {
 
     @BindView(R.id.details_home_guide_trip_name)
     TextView tripNameTxt;
@@ -58,6 +61,7 @@ public class DetailsHomeGuideFragment extends Fragment implements StartTripView 
     public static String TripName,GuideName,BusNumber,DriverName,From,To,StartDate,EndDate,TripId
             ,StatusId,CompanyId,StartLat,StartLng,EndLat,EndLng;
     StartTripPresenter startTripPresenter;
+    EndTripGuidePresenter endTripGuidePresenter;
     public DetailsHomeGuideFragment() {
         // Required empty public constructor
     }
@@ -180,8 +184,19 @@ View view;
                         new ViewOnMapGuideFragment()).addToBackStack(null).commit();
             }
         });
+        finishTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performEndTripGuide();
+            }
+        });
 
         return view;
+    }
+
+    private void performEndTripGuide() {
+        endTripGuidePresenter=new EndTripGuidePresenter(getContext(),this);
+        endTripGuidePresenter.getEndTripGuideResult(SplashActivity.Guide_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","hgg");
     }
 
     private void performStartTripGuide() {
@@ -247,4 +262,13 @@ View view;
     }
 
 
+    @Override
+    public void showEndTripGuideMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showEndTripGuideError() {
+
+    }
 }

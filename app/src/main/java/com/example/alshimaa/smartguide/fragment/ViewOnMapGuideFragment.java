@@ -50,6 +50,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -162,8 +163,8 @@ View view;
 //                            option_bus.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon));
 //                            mGoogleMap.addMarker(option_bus);
 
-                    m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon))
-                            .title(DetailsHomeGuideFragment.BusNumber).snippet(" سرعة "+String.valueOf(BusSpeed)+"KM ").position(BusLatLng));
+                    m=mGoogleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.bus))
+                            .title(DetailsHomeGuideFragment.BusNumber).position(BusLatLng));
                     // Toast.makeText(context, String.valueOf(BusSpeed), Toast.LENGTH_SHORT).show();
 
                     if(context!=null) {
@@ -320,13 +321,13 @@ View view;
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
         // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
         start = new LatLng(Double.parseDouble(DetailsHomeGuideFragment.StartLat), Double.parseDouble(DetailsHomeGuideFragment.StartLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(start).title("start"));
+        mGoogleMap.addMarker(new MarkerOptions().position(start).title("موضع بدء الرحله"));
 
         CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
         end = new LatLng(Double.parseDouble(DetailsHomeGuideFragment.EndLat), Double.parseDouble(DetailsHomeGuideFragment.EndLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(end).title("end"));
+        mGoogleMap.addMarker(new MarkerOptions().position(end).title("موضع انهاء الرحله"));
 
         CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
@@ -442,10 +443,14 @@ View view;
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
         CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(3);
         mGoogleMap.animateCamera(zoom);
-
         mGoogleMap.moveCamera(center);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(start);
+        builder.include(end);
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 14));
 
 
 

@@ -100,7 +100,7 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment implements Re
             fromTxt.setTypeface(customFontBold);
             toTxt.setTypeface(customFontBold);
             startDateTxt.setTypeface(customFontBold);
-            
+
         }
 
 

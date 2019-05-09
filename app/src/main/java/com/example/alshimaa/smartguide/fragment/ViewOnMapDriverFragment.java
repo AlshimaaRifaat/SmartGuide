@@ -51,6 +51,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -517,10 +518,14 @@ public boolean checkUserLocationPermission()
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
         CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(3);
         mGoogleMap.animateCamera(zoom);
-
         mGoogleMap.moveCamera(center);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(start);
+        builder.include(end);
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 14));
 
 
 
