@@ -14,6 +14,7 @@ import com.example.alshimaa.smartguide.model.LoginResponse;
 import com.example.alshimaa.smartguide.model.NotificationsResponse;
 import com.example.alshimaa.smartguide.model.OldRequestsGuideResponse;
 import com.example.alshimaa.smartguide.model.OldRequestsSupervisorResponse;
+import com.example.alshimaa.smartguide.model.RequestAnswerResponse;
 import com.example.alshimaa.smartguide.model.StartTripResponse;
 
 import java.util.Map;
@@ -92,4 +93,8 @@ public interface Service {
 
     @POST("getRequestPauseTrip")
     Call<OldRequestsSupervisorResponse> getOldRequestsSupervisorData(@Body Map<String,String> map);
+    //requestAnswer
+
+    @POST("requestAnswer")
+    Call<RequestAnswerResponse> getRequestAnswerData(@Body Map<String,String> map);
 }

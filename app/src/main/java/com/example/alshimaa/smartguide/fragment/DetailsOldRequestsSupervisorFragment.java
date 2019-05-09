@@ -10,12 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
+import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.model.OldRequestsSupervisorData;
 import com.example.alshimaa.smartguide.presenter.OldRequestsSupervisorPresenter;
+import com.example.alshimaa.smartguide.presenter.RequestAnswerPresenter;
 import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
+import com.example.alshimaa.smartguide.view.RequestAnswerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +28,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsOldRequestsSupervisorFragment extends Fragment {
+public class DetailsOldRequestsSupervisorFragment extends Fragment implements RequestAnswerView{
     TextView busNumberTxt,guideNameTxt,driverNameTxt
             ,fromTxt,toTxt,startDateTxt,endDateTxt
             ,logoBusNumberTxt;
@@ -41,9 +45,9 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment {
     Bundle bundle;
 
 
-    public static String TripId,BusName
-            ,TripName,GuideName,DriverName,From,To,StartDate,EndDate;
-    OldRequestsSupervisorPresenter oldRequestsSupervisorPresenter;
+    public static String BusName
+            ,GuideName,DriverName,From,To,StartDate,RequestId;
+    RequestAnswerPresenter requestAnswerPresenter;
     View view;
     public DetailsOldRequestsSupervisorFragment() {
         // Required empty public constructor
@@ -82,9 +86,7 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment {
                     oldRequestsSupervisorData.getStartTime();
             startDateTxt.setText("تاريخ بدايه الرحله:"+StartDate);
 
-
-
-            logoBusNumberTxt.setText(BusName);
+            RequestId=String.valueOf(oldRequestsSupervisorData.getRequestId());
 
 
 
@@ -112,8 +114,30 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment {
                         new EditFlightFragment()).addToBackStack(null).commit();
             }
         });
-
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performAccepting();
+            }
+        });
+        refuseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performRefusing();
+            }
+        });
         return view;
+    }
+
+    private void performRefusing() {
+        requestAnswerPresenter=new RequestAnswerPresenter(getContext(),this);
+        requestAnswerPresenter.getRequestAnswerResult(SplashActivity.Login,RequestId,"no","adsdasdasdasdsad","adasdsadasdasdasdasdsad");
+    }
+
+    private void performAccepting() {
+        requestAnswerPresenter=new RequestAnswerPresenter(getContext(),this);
+        requestAnswerPresenter.getRequestAnswerResult(SplashActivity.Login,RequestId,"yes","adsdasdasdasdsad","adasdsadasdasdasdasdsad");
+
     }
 
     private void init() {
@@ -123,6 +147,16 @@ public class DetailsOldRequestsSupervisorFragment extends Fragment {
         toTxt=view.findViewById(R.id.details_old_requests_supervisor_delivery_Place);
         startDateTxt=view.findViewById(R.id.details_old_requests_supervisor_start_date);
         logoBusNumberTxt=view.findViewById(R.id.details_old_requests_supervisor_logo_bus_number);
+
+    }
+
+    @Override
+    public void showRequestAnswerMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showRequestAnswerError() {
 
     }
 }
