@@ -73,4 +73,6 @@
     <string name="title_activity_navigation_guide">NavigationGuideActivity</string>
     <string name="title_activity_navigation_driver">NavigationDriverActivity</string>
     <string name="title_activity_navigation_member">NavigationMemberActivity</string>
+    <string name="nextTrip">الرحله القادمه</string>
+    <string name="delivering_done">تم استلام الحجاج بنجاح</string>
 </resources>

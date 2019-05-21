@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.HomeMemberData;
 import com.example.alshimaa.smartguide.model.OldRequestsGuideData;
+import com.example.alshimaa.smartguide.view.DetailsHomeMemberView;
 
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class HomeMemberAdapter extends RecyclerView.Adapter<HomeMemberAdapter.Vi
     List<HomeMemberData> homeMemberDataList;
 
 
-
-    //DetailsFollowFlightsView detailsFollowFlightsView;
+    DetailsHomeMemberView detailsHomeMemberView;
 
 
     public HomeMemberAdapter(Context context, List<HomeMemberData> homeMemberDataList) {
@@ -30,10 +30,10 @@ public class HomeMemberAdapter extends RecyclerView.Adapter<HomeMemberAdapter.Vi
         this.homeMemberDataList = homeMemberDataList;
     }
 
-    /*public  void onClick(DetailsFollowFlightsView detailsFollowFlightsView)
+   public  void onClick(DetailsHomeMemberView detailsHomeMemberView)
         {
-            this.detailsFollowFlightsView=detailsFollowFlightsView;
-        }*/
+            this.detailsHomeMemberView=detailsHomeMemberView;
+        }
     @Override
     public HomeMemberAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from( context ).inflate(R.layout.row_home_member,parent,false);
@@ -49,18 +49,13 @@ public class HomeMemberAdapter extends RecyclerView.Adapter<HomeMemberAdapter.Vi
         holder.supervisorName.setTypeface( customFontBold );
 
 
-
-
-
-
-/*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                detailsFollowFlightsView.showDetailsFollowFlights(followFlightsDataList.get(position));
+                detailsHomeMemberView.showDetailsHomeMember(homeMemberDataList.get(position));
             }
-        });*/
+        });
 
     }
 

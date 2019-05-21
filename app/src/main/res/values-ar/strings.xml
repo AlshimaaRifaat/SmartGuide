@@ -58,4 +58,6 @@
     <string name="Send">ارسال</string>
     <string name="PauseTrip">تعليق الطلب</string>
     <string name="finish_trip">انهاء الرحلة</string>
+    <string name="nextTrip">الرحله القادمه</string>
+    <string name="delivering_done">تم استلام الحجاج بنجاح</string>
 </resources>

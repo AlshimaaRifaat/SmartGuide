@@ -82,7 +82,6 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
  * A simple {@link Fragment} subclass.
  */
 public class ViewOnMapFragment extends Fragment implements OnMapReadyCallback
-
 ,RoutingListener,GoogleApiClient.OnConnectionFailedListener
         ,GoogleApiClient.ConnectionCallbacks
 
@@ -109,10 +108,6 @@ Context context;
     protected GoogleApiClient mGoogleApiClient;
 
 
-
-
-
-
     View view;
     public ViewOnMapFragment() {
         // Required empty public constructor
@@ -125,7 +120,7 @@ Context context;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_view_on_map, container, false);
 
-       context=this.getActivity();
+        context=this.getActivity();
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);

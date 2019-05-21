@@ -10,6 +10,7 @@ import com.example.alshimaa.smartguide.model.GetDriverNameResponse;
 import com.example.alshimaa.smartguide.model.GetGuideNameResponse;
 import com.example.alshimaa.smartguide.model.GetMemeberNameResponse;
 import com.example.alshimaa.smartguide.model.GetPathResponse;
+import com.example.alshimaa.smartguide.model.GetTripsMemberSupervisorResponse;
 import com.example.alshimaa.smartguide.model.HomeMemberResponse;
 import com.example.alshimaa.smartguide.model.LoginResponse;
 import com.example.alshimaa.smartguide.model.NotificationsResponse;
@@ -101,4 +102,8 @@ public interface Service {
 
     @POST("endTripGuide")
     Call<EndTripGuideResponse> getEndTripGuideData(@Body Map<String,String> map);
+
+
+    @POST("getTripsMemberSupervisor")
+    Call<GetTripsMemberSupervisorResponse> getTripsMemberSupervisorData(@Body Map<String,String> map);
 }

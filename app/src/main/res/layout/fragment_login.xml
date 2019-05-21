@@ -56,6 +56,7 @@
             android:backgroundTint="#fff"
             android:maxLines="1"
 
+
             />
     </android.support.v7.widget.CardView>
 
@@ -78,16 +79,51 @@
             android:hint="@string/Password"
             android:textColorHint="#bababa"
             android:textColor="#bababa"
-            android:paddingStart="@dimen/_13sdp"
-            android:paddingEnd="@dimen/_13sdp"
+            android:paddingRight="@dimen/_13sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             android:maxLines="1"
+            app:passwordToggleEnabled="true"
+            android:inputType="numberPassword"
+            android:gravity="end"
 
 
             />
     </android.support.v7.widget.CardView>
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_text_input_layout"
+        android:layout_below="@+id/login_cardV_user_name"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="#fff"
+        >
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/path3762"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:id="@+id/pass_img"
+            android:layout_centerVertical="true"/>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:layout_toRightOf="@id/pass_img"
+            android:hint="كلمة المرور"
+            >
 
+            <EditText
+                android:id="@+id/login_Etext_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="#bababa"
+                />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+-->
     <Button
         android:id="@+id/login_btn_register"
         android:layout_width="@dimen/_72sdp"

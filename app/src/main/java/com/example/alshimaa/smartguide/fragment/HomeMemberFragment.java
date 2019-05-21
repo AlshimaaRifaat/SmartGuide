@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.example.alshimaa.smartguide.adapter.HomeMemberAdapter;
 import com.example.alshimaa.smartguide.model.HomeMemberData;
 import com.example.alshimaa.smartguide.presenter.HomeDriverPresenter;
 import com.example.alshimaa.smartguide.presenter.HomeMemberPresenter;
+import com.example.alshimaa.smartguide.view.DetailsHomeMemberView;
 import com.example.alshimaa.smartguide.view.HomeDriverView;
 import com.example.alshimaa.smartguide.view.HomeMemberView;
 
@@ -34,7 +36,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeMemberFragment extends Fragment implements HomeMemberView {
+public class HomeMemberFragment extends Fragment implements HomeMemberView ,DetailsHomeMemberView {
     @BindView(R.id.home_member_recycler)
     RecyclerView recyclerViewHomeMember;
     @BindView(R.id.home_member_tool_bar)
@@ -93,8 +95,8 @@ View view;
     @Override
     public void showHomeMemberList(List<HomeMemberData> homeMemberDataList) {
         homeMemberAdapter=new HomeMemberAdapter( getContext(),homeMemberDataList );
-       // homeMemberDataList.onClick(this);
-        recyclerViewHomeMember.setLayoutManager( new GridLayoutManager(getContext(),2));
+      homeMemberAdapter.onClick(this);
+        recyclerViewHomeMember.setLayoutManager( new LinearLayoutManager(getContext()));
         recyclerViewHomeMember.setAdapter( homeMemberAdapter );
 
     }
@@ -102,5 +104,15 @@ View view;
     @Override
     public void showHomeMemberError() {
 
+    }
+
+    @Override
+    public void showDetailsHomeMember(HomeMemberData homeMemberData) {
+        GetTripsMemberSupervisorFragment getTripsMemberSupervisorFragment=new GetTripsMemberSupervisorFragment();
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("member_item",homeMemberData);
+        getTripsMemberSupervisorFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.content_navigation_member,
+                getTripsMemberSupervisorFragment ).addToBackStack(null).commit();
     }
 }
