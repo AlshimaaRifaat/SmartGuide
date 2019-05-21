@@ -106,4 +106,7 @@ public interface Service {
 
     @POST("getTripsMemberSupervisor")
     Call<GetTripsMemberSupervisorResponse> getTripsMemberSupervisorData(@Body Map<String,String> map);
+
+    @POST("startTripGuide")
+    Call<StartTripResponse> getstartTripGuideData(@Body Map<String,String> map);
 }

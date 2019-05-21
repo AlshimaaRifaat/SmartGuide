@@ -17,8 +17,10 @@ import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.presenter.EndTripDriverPresenter;
 import com.example.alshimaa.smartguide.presenter.EndTripGuidePresenter;
+import com.example.alshimaa.smartguide.presenter.StartTripGuidePresenter;
 import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
 import com.example.alshimaa.smartguide.view.EndTripGuideView;
+import com.example.alshimaa.smartguide.view.StartTripGuideView;
 import com.example.alshimaa.smartguide.view.StartTripView;
 
 import butterknife.BindView;
@@ -28,7 +30,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsHomeGuideFragment extends Fragment implements StartTripView,EndTripGuideView {
+public class DetailsHomeGuideFragment extends Fragment implements StartTripGuideView,EndTripGuideView,StartTripView {
 
     @BindView(R.id.details_home_guide_trip_name)
     TextView tripNameTxt;
@@ -60,7 +62,7 @@ public class DetailsHomeGuideFragment extends Fragment implements StartTripView,
 
     public static String TripName,GuideName,BusNumber,DriverName,From,To,StartDate,EndDate,TripId
             ,StatusId,CompanyId,StartLat,StartLng,EndLat,EndLng;
-    StartTripPresenter startTripPresenter;
+    StartTripGuidePresenter startTripGuidePresenter;
     EndTripGuidePresenter endTripGuidePresenter;
     public DetailsHomeGuideFragment() {
         // Required empty public constructor
@@ -208,8 +210,8 @@ View view;
 
     private void performStartTripGuide() {
        // Toast.makeText(getContext(), SplashActivity.Guide_user_token, Toast.LENGTH_SHORT).show();
-        startTripPresenter=new StartTripPresenter(getContext(),this);
-        startTripPresenter.getStartTripResult(SplashActivity.Guide_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+        startTripGuidePresenter=new StartTripGuidePresenter(getContext(),this);
+        startTripGuidePresenter.getStartTripGuideResult(SplashActivity.Guide_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
         pauseTripBtn.setVisibility(View.VISIBLE);
     }
 
@@ -223,10 +225,9 @@ View view;
 
     }
 
+
     @Override
     public void showStartTripMsg(String Msg) {
-        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
-
 
     }
 
@@ -276,6 +277,16 @@ View view;
 
     @Override
     public void showEndTripGuideError() {
+
+    }
+
+    @Override
+    public void showStartTripGuideMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showStartTripGuideError() {
 
     }
 }

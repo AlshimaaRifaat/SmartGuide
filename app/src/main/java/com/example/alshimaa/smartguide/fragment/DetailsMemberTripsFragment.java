@@ -121,7 +121,7 @@ View view;
             endDateTxt.setTypeface(customFontBold);
 
         }
-        Toast.makeText(getContext(), "done ", Toast.LENGTH_SHORT).show();
+
         viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
