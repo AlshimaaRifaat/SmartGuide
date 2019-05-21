@@ -30,6 +30,7 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
+import com.example.alshimaa.smartguide.activity.NavigationMemberActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -120,36 +121,28 @@ public class ViewOnMapMemberFragment extends Fragment implements OnMapReadyCallb
 
 
 
-        NavigationActivity.toggle = new ActionBarDrawerToggle(
-                getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+       /* NavigationMemberActivity.toggle_member = new ActionBarDrawerToggle(
+                getActivity(), NavigationMemberActivity.drawer_member, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
-        NavigationActivity.toggle.syncState();
+        NavigationMemberActivity.drawer_member.addDrawerListener(NavigationMemberActivity.toggle_member);
+        NavigationMemberActivity.toggle_member.syncState();
 
-        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
+        NavigationMemberActivity.toggle_member.setDrawerIndicatorEnabled(false);
         toolbar.setNavigationIcon(R.drawable.group151);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
-                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
+                if (NavigationMemberActivity.drawer_member.isDrawerOpen(GravityCompat.START)) {
+                    NavigationMemberActivity.drawer_member.closeDrawer(GravityCompat.START);
                 } else {
-                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
+                    NavigationMemberActivity.drawer_member.openDrawer(GravityCompat.START);
                 }
             }
         });
-        iconPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_navigation,new
-                        NewTripFragment()).addToBackStack(null).commit();
-            }
-        });
 
-
-
+*/
         startGettingLocations();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         getMarkers();

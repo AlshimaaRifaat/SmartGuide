@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
@@ -120,6 +121,7 @@ View view;
             endDateTxt.setTypeface(customFontBold);
 
         }
+        Toast.makeText(getContext(), "done ", Toast.LENGTH_SHORT).show();
         viewOnMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
