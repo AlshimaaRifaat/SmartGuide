@@ -45,6 +45,8 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus
             ,TripName,GuideName,DriverName,From,To,StartDate,EndDate,StatusId;
     StartTripPresenter startTripPresenter;
+
+
     public DetailsFollowFlightsFragment() {
         // Required empty public constructor
     }
@@ -149,6 +151,8 @@ View view;
         {
             viewOnMapBtn.setVisibility(View.VISIBLE);
             finishTripBtn.setVisibility(View.VISIBLE);
+
+
             //startTripBtn.setVisibility(View.VISIBLE);
         }if(StatusId.equals("7"))
         {
@@ -200,8 +204,18 @@ View view;
         startTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startTripBtn.setVisibility(View.INVISIBLE);
                 finishTripBtn.setVisibility(View.VISIBLE);
+                pauseTripBtn.setVisibility(View.VISIBLE);
                performStartTrip();
+            }
+        });
+        finishTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishTripBtn.setVisibility(View.INVISIBLE);
+                startTripBtn.setVisibility(View.VISIBLE);
+                performEndTrip();
             }
         });
         pauseTripBtn.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +225,12 @@ View view;
             }
         });
         return view;
+    }
+
+    private void performEndTrip() {
+        startTripPresenter=new StartTripPresenter(getContext(),this);
+        startTripPresenter.getEndTripResult(SplashActivity.Login,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+
     }
 
     private void performPauseTrip() {
@@ -242,7 +262,7 @@ View view;
     @Override
     public void showStartTripMsg(String Msg) {
         Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
-        pauseTripBtn.setVisibility(View.VISIBLE);
+      //  pauseTripBtn.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -279,6 +299,17 @@ View view;
 
     @Override
     public void showRequestPauseTripGuideError() {
+
+    }
+
+    @Override
+    public void showEndTripMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        pauseTripBtn.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showEndTripError() {
 
     }
 }

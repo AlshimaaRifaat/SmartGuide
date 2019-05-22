@@ -3,6 +3,7 @@ package com.example.alshimaa.smartguide.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,24 +39,42 @@ View view;
         oldestRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentManager fm = getFragmentManager(); // or 'getSupportFragmentManager();'
+                int count = fm.getBackStackEntryCount();
+                if(count!=0) {
+                    for (int i = 0; i < count; ++i) {
+                        fm.popBackStack();
+                    }
+                }
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
 
                 bundle.putString("old","old");
                 followFlightsFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,
-                        followFlightsFragment).addToBackStack(null).commit();
+                        followFlightsFragment).commit();
+
+
             }
         });
 
         recentRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentManager fm = getFragmentManager(); // or 'getSupportFragmentManager();'
+                int count = fm.getBackStackEntryCount();
+                if(count!=0) {
+                    for (int i = 0; i < count; ++i) {
+                        fm.popBackStack();
+                    }
+                }
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
 
                 bundle.putString("new","new");
                 followFlightsFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,
-                        followFlightsFragment).addToBackStack(null).commit();
+                        followFlightsFragment).commit();
+
+
             }
         });
         return view;

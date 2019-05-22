@@ -16,8 +16,11 @@ import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.presenter.EndTripDriverPresenter;
+import com.example.alshimaa.smartguide.presenter.StartTripDriverPresenter;
+import com.example.alshimaa.smartguide.presenter.StartTripGuidePresenter;
 import com.example.alshimaa.smartguide.presenter.StartTripPresenter;
 import com.example.alshimaa.smartguide.view.EndTripDriverView;
+import com.example.alshimaa.smartguide.view.StartTripDriverView;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -34,7 +37,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsHomeDriverFragment extends Fragment implements EndTripDriverView{
+public class DetailsHomeDriverFragment extends Fragment implements EndTripDriverView,StartTripDriverView{
 
     @BindView(R.id.details_home_driver_trip_name)
     TextView tripNameTxt;
@@ -69,6 +72,7 @@ public class DetailsHomeDriverFragment extends Fragment implements EndTripDriver
 
     private DatabaseReference mDatabase;
     EndTripDriverPresenter endTripDriverPresenter;
+    StartTripDriverPresenter startTripDriverPresenter;
     public DetailsHomeDriverFragment() {
         // Required empty public constructor
     }
@@ -199,8 +203,20 @@ View view;
                         viewOnMapDriverFragment).addToBackStack(null).commit();
             }
         });
-
+        startTripBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endTripBtn.setVisibility(View.VISIBLE);
+                performStartTripDriver();
+            }
+        });
         return view;
+    }
+
+    private void performStartTripDriver() {
+        startTripDriverPresenter=new StartTripDriverPresenter(getContext(),this);
+        startTripDriverPresenter.getStartTripDriverResult(SplashActivity.Member_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+       // pauseTripBtn.setVisibility(View.VISIBLE);
     }
 
     private void performEndTrip() {
@@ -259,6 +275,16 @@ View view;
 
     @Override
     public void showEndTripError() {
+
+    }
+
+    @Override
+    public void showStartTripDriverMsg(String Msg) {
+        Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showStartTripDriverError() {
 
     }
 }

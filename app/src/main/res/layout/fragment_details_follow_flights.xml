@@ -238,7 +238,7 @@
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/_11sdp"
             android:visibility="gone"
-            android:clickable="true"
+
             />
        <!-- <Button
             android:id="@+id/details_follow_flights_btn_request_suspension"
@@ -300,7 +300,7 @@
                 android:textSize="@dimen/_13sdp"
                 android:textColor="#fff"
                 android:text="@string/finish_trip"
-                android:visibility="gone"
+               android:visibility="gone"
                 android:clickable="true"
 
               />

@@ -109,4 +109,11 @@ public interface Service {
 
     @POST("startTripGuide")
     Call<StartTripResponse> getstartTripGuideData(@Body Map<String,String> map);
+
+
+    @POST("startTripDriver")
+    Call<StartTripResponse> getstartTripDriverData(@Body Map<String,String> map);
+
+    @POST("endTripSupervisor")
+    Call<StartTripResponse> getendTripSupervisorData(@Body Map<String,String> map);
 }

@@ -138,4 +138,33 @@ public class StartTripPresenter {
             }
         } );
     }
+
+    public void getEndTripResult(String user_token,String trip_id,String headings,String message)
+    {
+        HashMap<String,String> hashMap=new HashMap<>(  );
+        hashMap.put("user_token",user_token);
+        hashMap.put("trip_id",trip_id);
+        hashMap.put("headings",headings);
+        hashMap.put("message",message);
+        // hashMap.put("id",ID);
+
+        Service service= Client.getClient().create( Service.class );
+        Call<StartTripResponse> call=service.getendTripSupervisorData( hashMap );
+
+        call.enqueue( new Callback<StartTripResponse>() {
+            @Override
+            public void onResponse(Call<StartTripResponse> call, Response<StartTripResponse> response) {
+                if(response.isSuccessful())
+                {
+                    startTripView.showStartTripMsg( response.body().getData() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StartTripResponse> call, Throwable t) {
+                startTripView.showStartTripError();
+            }
+        } );
+    }
+
 }

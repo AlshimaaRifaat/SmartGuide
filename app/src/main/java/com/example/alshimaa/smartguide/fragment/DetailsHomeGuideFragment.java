@@ -269,6 +269,16 @@ View view;
 
     }
 
+    @Override
+    public void showEndTripMsg(String Msg) {
+
+    }
+
+    @Override
+    public void showEndTripError() {
+
+    }
+
 
     @Override
     public void showEndTripGuideMsg(String Msg) {

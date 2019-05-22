@@ -79,13 +79,15 @@
             android:hint="@string/Password"
             android:textColorHint="#bababa"
             android:textColor="#bababa"
-            android:paddingRight="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_14sdp"
+            android:paddingStart="@dimen/_14sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
             android:maxLines="1"
             app:passwordToggleEnabled="true"
-            android:inputType="numberPassword"
-            android:gravity="end"
+            android:gravity="right"
+            android:inputType="textPassword"
+
 
 
             />

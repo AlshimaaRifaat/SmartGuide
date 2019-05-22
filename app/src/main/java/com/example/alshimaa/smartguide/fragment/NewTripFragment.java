@@ -102,7 +102,7 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
     @BindView(R.id.new_trip_Etext_trip_arabic_name)EditText tripArabicName;
     @BindView(R.id.new_trip_Etext_trip_Latin_name)EditText tripLatinName;
 
-
+    Context context;
     Button addTripBtn;
     AddTripPresenter addTripPresenter;
 
@@ -147,6 +147,7 @@ View view;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_new_trip, container, false);
+        context=this.getActivity();
         unbinder= ButterKnife.bind(this,view);
         init();
         sharedPreferences_company_id=this.getActivity().getSharedPreferences("def", Context.MODE_PRIVATE);
@@ -471,31 +472,30 @@ View view;
         {
             guidesName.add( getGuideNameDataList.get( i ).getName() );
         }
-        guideNameSpinnerAdapter =new GuideNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        guideNameSpinnerAdapter.addAll( guidesName );
-       guideNameSpinnerAdapter.add( "اسم المرشد");
-        guideNameSpinner.setAdapter( guideNameSpinnerAdapter );
-        guideNameSpinner.setPrompt("اسم المرشد");
-        guideNameSpinner.setSelection( guideNameSpinnerAdapter.getCount() );
-        guideNameSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (guideNameSpinner.getSelectedItem()=="اسم المرشد")
-                {
+        if(context!=null) {
+            guideNameSpinnerAdapter = new GuideNameSpinnerAdapter(context, R.layout.guide_name_spinner_item);
+            guideNameSpinnerAdapter.addAll(guidesName);
 
-                }
-                else
-                {
-                    GuideNameModel=guideNameSpinner.getSelectedItem().toString();
-                    for ( i=0;i<getGuideNameDataList.size();i++)
-                    {
-                        if(getGuideNameDataList.get(i).getName().equals(GuideNameModel))
-                        {
-                            GuideNameModelID=Integer.valueOf(getGuideNameDataList.get(i).getId());
+            guideNameSpinnerAdapter.add("اسم المرشد");
+            guideNameSpinner.setAdapter(guideNameSpinnerAdapter);
+            guideNameSpinner.setPrompt("اسم المرشد");
+            guideNameSpinner.setSelection(guideNameSpinnerAdapter.getCount());
+            guideNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (guideNameSpinner.getSelectedItem() == "اسم المرشد") {
+
+                    } else {
+                        GuideNameModel = guideNameSpinner.getSelectedItem().toString();
+                        for (i = 0; i < getGuideNameDataList.size(); i++) {
+                            if (getGuideNameDataList.get(i).getName().equals(GuideNameModel)) {
+                                GuideNameModelID = Integer.valueOf(getGuideNameDataList.get(i).getId());
+
+                            }
+
 
                         }
 
-                    }
 
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
@@ -504,17 +504,19 @@ View view;
                             LocationModelID=locationDatalist.get(i).getId();
                         }
                     }*/
-                   // Toast.makeText(getContext(),String.valueOf(GuideNameModelID), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(),String.valueOf(GuideNameModelID), Toast.LENGTH_SHORT).show();
+
+                    }
+
 
                 }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        } );
+                }
+            });
+        }
 
     }
 
@@ -525,22 +527,20 @@ View view;
         {
             buses.add( getBusNumberDataListt.get( i ).getName() );
         }
-        busNumberSpinnerAdapter =new BusNumberSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        busNumberSpinnerAdapter.addAll( buses );
-        busNumberSpinnerAdapter.add( "رقم الحافلة");
-        busNumberSpinner.setAdapter( busNumberSpinnerAdapter );
-        busNumberSpinner.setPrompt("رقم الحافلة");
-        busNumberSpinner.setSelection( busNumberSpinnerAdapter.getCount() );
-        busNumberSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (busNumberSpinner.getSelectedItem()=="رقم الحافلة")
-                {
+        if(context!=null) {
+            busNumberSpinnerAdapter = new BusNumberSpinnerAdapter(context, R.layout.guide_name_spinner_item);
+            busNumberSpinnerAdapter.addAll(buses);
+            busNumberSpinnerAdapter.add("رقم الحافلة");
+            busNumberSpinner.setAdapter(busNumberSpinnerAdapter);
+            busNumberSpinner.setPrompt("رقم الحافلة");
+            busNumberSpinner.setSelection(busNumberSpinnerAdapter.getCount());
+            busNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (busNumberSpinner.getSelectedItem() == "رقم الحافلة") {
 
-                }
-                else
-                {
-                    BusNumberModel=busNumberSpinner.getSelectedItem().toString();
+                    } else {
+                        BusNumberModel = busNumberSpinner.getSelectedItem().toString();
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))
@@ -548,25 +548,24 @@ View view;
                             LocationModelID=locationDatalist.get(i).getId();
                         }
                     }*/
-                    for ( i=0;i<getBusNumberDataListt.size();i++)
-                    {
-                        if(getBusNumberDataListt.get(i).getName().equals(BusNumberModel))
-                        {
-                            BusNumberModelID=Integer.valueOf(getBusNumberDataListt.get(i).getId());
+                        for (i = 0; i < getBusNumberDataListt.size(); i++) {
+                            if (getBusNumberDataListt.get(i).getName().equals(BusNumberModel)) {
+                                BusNumberModelID = Integer.valueOf(getBusNumberDataListt.get(i).getId());
+                            }
                         }
-                    }
 
-                   // Toast.makeText(getContext(),"id in bus "+String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
-                   // getBusNumberPresenter.getBusNumberResult("ar",String.valueOf(DriverNameModelID));
+                        // Toast.makeText(getContext(),"id in bus "+String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
+                        // getBusNumberPresenter.getBusNumberResult("ar",String.valueOf(DriverNameModelID));
+
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        } );
+            });
+        }
 
     }
 
@@ -577,41 +576,38 @@ View view;
         {
             DriverNames.add( getDriverNameDataList.get( i ).getName() );
         }
-        driverNameSpinnerAdapter =new DriverNameSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        driverNameSpinnerAdapter.addAll( DriverNames );
-        driverNameSpinnerAdapter.add( "اسم السائق");
-        driverNameSpinner.setAdapter(  driverNameSpinnerAdapter );
-        driverNameSpinner.setPrompt("اسم السائق");
-        driverNameSpinner.setSelection(  driverNameSpinnerAdapter.getCount() );
-        driverNameSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if ( driverNameSpinner.getSelectedItem()=="اسم السائق")
-                {
+        if(context!=null) {
+            driverNameSpinnerAdapter = new DriverNameSpinnerAdapter(context, R.layout.guide_name_spinner_item);
+            driverNameSpinnerAdapter.addAll(DriverNames);
+            driverNameSpinnerAdapter.add("اسم السائق");
+            driverNameSpinner.setAdapter(driverNameSpinnerAdapter);
+            driverNameSpinner.setPrompt("اسم السائق");
+            driverNameSpinner.setSelection(driverNameSpinnerAdapter.getCount());
+            driverNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (driverNameSpinner.getSelectedItem() == "اسم السائق") {
 
-                }
-                else
-                {
-                    DriverNameModel=driverNameSpinner.getSelectedItem().toString();
-                    for ( i=0;i<getDriverNameDataList.size();i++)
-                    {
-                        if(getDriverNameDataList.get(i).getName().equals(DriverNameModel))
-                        {
-                            DriverNameModelID=Integer.valueOf(getDriverNameDataList.get(i).getId());
+                    } else {
+                        DriverNameModel = driverNameSpinner.getSelectedItem().toString();
+                        for (i = 0; i < getDriverNameDataList.size(); i++) {
+                            if (getDriverNameDataList.get(i).getName().equals(DriverNameModel)) {
+                                DriverNameModelID = Integer.valueOf(getDriverNameDataList.get(i).getId());
 
+                            }
+                            //Toast.makeText(getContext(),String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
                         }
-                        //Toast.makeText(getContext(),String.valueOf(DriverNameModelID), Toast.LENGTH_SHORT).show();
+
+                        getBusNumberPresenter.getBusNumberResult("ar", String.valueOf(DriverNameModelID));
                     }
-
-                    getBusNumberPresenter.getBusNumberResult("ar",String.valueOf(DriverNameModelID));
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        } );
+                }
+            });
+        }
 
     }
 
@@ -692,40 +688,36 @@ View view;
 
     @Override
     public void showGetPathList(final List<GetPathData> getPathDataList) {
-        ArrayList<String> Pathes=new ArrayList<>(  );
-        for(int i=0;i<getPathDataList.size();i++)
-        {
-            Pathes.add( getPathDataList.get( i ).getFromTo() );
+        ArrayList<String> Pathes = new ArrayList<>();
+        for (int i = 0; i < getPathDataList.size(); i++) {
+            Pathes.add(getPathDataList.get(i).getFromTo());
         }
-        pathSpinnerAdapter =new PathSpinnerAdapter( getContext(), R.layout.guide_name_spinner_item);
-        pathSpinnerAdapter.addAll( Pathes );
-        pathSpinnerAdapter.add( "المسار");
-        pathSpinner.setAdapter( pathSpinnerAdapter );
-        pathSpinner.setPrompt("المسار");
-        pathSpinner.setSelection( pathSpinnerAdapter.getCount() );
-        pathSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (pathSpinner.getSelectedItem()=="اسم المرشد")
-                {
+        if (context != null) {
+            {
+                pathSpinnerAdapter = new PathSpinnerAdapter(context, R.layout.guide_name_spinner_item);
+                pathSpinnerAdapter.addAll(Pathes);
+                pathSpinnerAdapter.add("المسار");
+                pathSpinner.setAdapter(pathSpinnerAdapter);
+                pathSpinner.setPrompt("المسار");
+                pathSpinner.setSelection(pathSpinnerAdapter.getCount());
+                pathSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if (pathSpinner.getSelectedItem() == "اسم المرشد") {
 
-                }
-                else
-                {
-                    PathModel=pathSpinner.getSelectedItem().toString();
-                    for ( i=0;i<getPathDataList.size();i++)
-                    {
-                        if(getPathDataList.get(i).getFromTo().equals(PathModel))
-                        {
-                            PathModelID=Integer.valueOf(getPathDataList.get(i).getId());
-                            Price=Double.parseDouble(getPathDataList.get(i).getPrice());
+                        } else {
+                            PathModel = pathSpinner.getSelectedItem().toString();
+                            for (i = 0; i < getPathDataList.size(); i++) {
+                                if (getPathDataList.get(i).getFromTo().equals(PathModel)) {
+                                    PathModelID = Integer.valueOf(getPathDataList.get(i).getId());
+                                    Price = Double.parseDouble(getPathDataList.get(i).getPrice());
 
 
-                        }
+                                }
 
 
-                    }
-                   // Toast.makeText(getContext(),String.valueOf(Price), Toast.LENGTH_SHORT).show();
+                            }
+                            // Toast.makeText(getContext(),String.valueOf(Price), Toast.LENGTH_SHORT).show();
                     /*for (i=0;i<locationDatalist.size();i++)
                     {
                         if(locationDatalist.get(i).getCountry().equals( LocationModel ))
@@ -735,16 +727,18 @@ View view;
                     }*/
 
 
-                }
+                        }
 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        } );
-
+        }
     }
 
     @Override
