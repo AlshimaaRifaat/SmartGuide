@@ -7,10 +7,10 @@
     tools:context=".fragment.TripsInProgressFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=" trips in progress"
-        android:textColor="#000" />
+        android:textColor="#000" />-->
 
 </FrameLayout>

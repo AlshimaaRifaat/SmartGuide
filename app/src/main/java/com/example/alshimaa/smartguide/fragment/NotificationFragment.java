@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
@@ -47,6 +48,8 @@ public class NotificationFragment extends Fragment implements NotificationsView{
     NotificationsPresenter notificationsPresenter;
 
     NetworkConnection networkConnection;
+    Bundle bundle;
+    String NotificationFrom;
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -59,9 +62,14 @@ View view;
         view= inflater.inflate(R.layout.fragment_notification, container, false);
         unbinder= ButterKnife.bind(this,view);
         //homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
+        bundle=this.getArguments();
+        if (bundle!=null) {
+            NotificationFrom = bundle.getString("guide");
+        }
+      //  Toast.makeText(getContext(), NotificationFrom, Toast.LENGTH_SHORT).show();
 
 
-        NavigationActivity.toggle = new ActionBarDrawerToggle(
+      /*  NavigationActivity.toggle = new ActionBarDrawerToggle(
                 getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
@@ -80,7 +88,7 @@ View view;
                     NavigationActivity.drawer.openDrawer(GravityCompat.START);
                 }
             }
-        });
+        });*/
         networkConnection=new NetworkConnection( getContext() );
         Notifications();
 
@@ -89,7 +97,12 @@ View view;
 
     private void Notifications() {
         notificationsPresenter=new NotificationsPresenter(getContext(),this);
-        notificationsPresenter.getNotificationsResult( SplashActivity.Login,"supervisors");
+        if(NotificationFrom.equals("guide_notification"))
+        {
+            notificationsPresenter.getNotificationsResult( SplashActivity.Guide_user_token,"guides");
+        }else {
+            notificationsPresenter.getNotificationsResult(SplashActivity.Login, "supervisors");
+        }
     }
 
 

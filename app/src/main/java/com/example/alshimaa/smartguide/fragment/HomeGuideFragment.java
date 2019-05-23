@@ -47,7 +47,7 @@ public class HomeGuideFragment extends Fragment implements HomeGuideView,Details
 
     NetworkConnection networkConnection;
 
-
+    String GuideNotification;
 
     public HomeGuideFragment() {
         // Required empty public constructor
@@ -88,8 +88,12 @@ View view;
         iconNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,new
-                        NotificationFragment()).addToBackStack(null).commit();
+                NotificationFragment notificationFragment=new NotificationFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("guide","guide_notification");
+                notificationFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation_guide,
+                        notificationFragment).addToBackStack(null).commit();
 
             }
         });

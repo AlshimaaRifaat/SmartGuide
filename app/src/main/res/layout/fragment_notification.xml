@@ -20,24 +20,24 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/notification_icon_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_11sdp"
                 android:src="@drawable/notifications_button"
-                />
+                />-->
 
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/TripsNotifications"
-                android:layout_toLeftOf="@+id/notification_icon_notification"
-                android:layout_marginRight="@dimen/_73sdp"
+                android:layout_centerHorizontal="true"
                 android:textColor="#fff"
                 android:textSize="@dimen/_14sdp"/>
         </RelativeLayout>

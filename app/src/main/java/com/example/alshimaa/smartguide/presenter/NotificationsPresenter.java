@@ -42,10 +42,10 @@ public class NotificationsPresenter {
 
                     notificationsView.showNotificationList( response.body().getData());
 
-                }else if(response.code()==400)
+                }else if(response.code()==400||response.code()==404)
                 {
                     //loginView.showError();
-                    Toast.makeText(context, "عفوا,لا توجد اشعارات!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "عفوا,لا تتواجد اشعارات!", Toast.LENGTH_SHORT).show();
                 }
             }
 

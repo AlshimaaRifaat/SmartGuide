@@ -27,20 +27,20 @@
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
                      />-->
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/details_follow_flights_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_11sdp"
                     android:src="@drawable/notifications_button"
-                    />
+                    />-->
                 <ImageView
                     android:id="@+id/details_follow_flights_icon_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/details_follow_flights_notification"
-                    android:layout_marginRight="@dimen/_14sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_11sdp"
                     android:src="@drawable/edit"
                     />
                 <TextView

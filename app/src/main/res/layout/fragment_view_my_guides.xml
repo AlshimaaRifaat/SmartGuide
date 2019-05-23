@@ -7,10 +7,10 @@
     tools:context=".fragment.ViewMyGuidesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <!-- TODO: Update blank fragment layout -->
+        &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_guides_tool_bar"
@@ -21,13 +21,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <!-- <ImageView
+                &lt;!&ndash; <ImageView
                      android:id="@+id/home_image_favrite_heart"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_alignParentLeft="true"
                      android:background="@drawable/favorite_heart_button"
-                     />-->
+                     />&ndash;&gt;
                 <ImageView
                     android:id="@+id/my_guides_icon_notification"
                     android:layout_width="wrap_content"
@@ -65,5 +65,5 @@
             android:layout_marginEnd="@dimen/_10sdp"
             ></android.support.v7.widget.RecyclerView>
     </RelativeLayout>
-
+-->
 </ScrollView>
