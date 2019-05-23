@@ -48,13 +48,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+              /*  FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("mosnda","1");
@@ -69,13 +69,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+              /*  FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("kayd_tnfez","2");
@@ -89,13 +89,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+               /* FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("moalaq","3");
@@ -109,13 +109,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+               /* FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("malghia","4");
@@ -129,13 +129,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+                /*FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("mokfl_nhaey","5");
@@ -149,13 +149,13 @@ public class SortByStatusFragment extends Fragment {
             public void onClick(View v) {
 
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+               /* FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("mokfl_gozey","6");
@@ -168,13 +168,13 @@ public class SortByStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
+               /* FragmentManager fm = getChildFragmentManager(); // or 'getSupportFragmentManager();'
                 int count = fm.getBackStackEntryCount();
                 if(count!=0) {
                     for (int i = 0; i < count; ++i) {
                         fm.popBackStack();
                     }
-                }
+                }*/
                 FollowFlightsFragment followFlightsFragment=new FollowFlightsFragment();
                 bundle=new Bundle();
                 bundle.putString("mogdwla","7");

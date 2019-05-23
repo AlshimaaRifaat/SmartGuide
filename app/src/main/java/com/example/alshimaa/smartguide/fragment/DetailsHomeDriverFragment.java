@@ -64,7 +64,7 @@ public class DetailsHomeDriverFragment extends Fragment implements EndTripDriver
 
     FollowFlightsData followFlightsData;
     Bundle bundle;
-   public static String clicked;
+  // public static String clicked;
 
 
     public static String TripName,GuideName,BusNumber,DriverName,From,To,StartDate,EndDate,TripId
@@ -155,26 +155,28 @@ View view;
         checkStatusFromFirebase();
 
 
-       startTripBtn.setOnClickListener(new View.OnClickListener() {
+       /*startTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clicked="start_clicked";
+               *//* clicked="start_clicked";*//*
                 endTripBtn.setVisibility(View.VISIBLE);
-                if (clicked.equals("start_clicked")) {
+               *//* if (clicked.equals("start_clicked")) {
                     mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("status").setValue("on");
-                }
+                }*//*
             }
-        });
+        });*/
 
         endTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 performEndTrip();
-                clicked="end_clicked";
-                startTripBtn.setVisibility(View.VISIBLE);
-                if (clicked.equals("end_clicked")) {
+                endTripBtn.setVisibility(View.INVISIBLE);
+                startTripBtn.setVisibility(View.INVISIBLE);
+               /* clicked="end_clicked";
+                startTripBtn.setVisibility(View.VISIBLE);*/
+                /*if (clicked.equals("end_clicked")) {
                     mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("status").setValue("off");
-                }
+                }*/
               //  Toast.makeText(getContext(),String.valueOf(clicked) , Toast.LENGTH_SHORT).show();
 
             }
@@ -215,7 +217,7 @@ View view;
 
     private void performStartTripDriver() {
         startTripDriverPresenter=new StartTripDriverPresenter(getContext(),this);
-        startTripDriverPresenter.getStartTripDriverResult(SplashActivity.Member_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
+        startTripDriverPresenter.getStartTripDriverResult(SplashActivity.Driver_user_token,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
        // pauseTripBtn.setVisibility(View.VISIBLE);
     }
 

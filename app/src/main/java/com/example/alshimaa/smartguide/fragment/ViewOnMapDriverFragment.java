@@ -103,6 +103,7 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
 
 
 
+
     public ViewOnMapDriverFragment() {
         // Required empty public constructor
     }
@@ -168,60 +169,63 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     }*/
 
     public void buildApiClint(){
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
+        if(context!=null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(context)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
+        }
 
 
     }
 
     private void startGettingLocations() {
-        LocationManager lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if (context!=null) {
+            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-        boolean isGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean isNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        boolean canGetLocation = true;
-        int ALL_PERMISSIONS_RESULT = 101;
-        long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;// Distance in meters
-        long MIN_TIME_BW_UPDATES = 1000 * 10;// Time in milliseconds
+            boolean isGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            boolean canGetLocation = true;
+            int ALL_PERMISSIONS_RESULT = 101;
+            long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;// Distance in meters
+            long MIN_TIME_BW_UPDATES = 1000 * 10;// Time in milliseconds
 
-        ArrayList<String> permissions = new ArrayList<>();
-        ArrayList<String> permissionsToRequest;
+            ArrayList<String> permissions = new ArrayList<>();
+            ArrayList<String> permissionsToRequest;
 
-        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
-        permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-        permissionsToRequest = findUnAskedPermissions(permissions);
+            permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+            permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            permissionsToRequest = findUnAskedPermissions(permissions);
 
-        //Check if GPS and Network are on, if not asks the user to turn on
-        if (!isGPS && !isNetwork) {
-            showSettingsAlert();
-        } else {
-            // check permissions
+            //Check if GPS and Network are on, if not asks the user to turn on
+            if (!isGPS && !isNetwork) {
+                showSettingsAlert();
+            } else {
+                // check permissions
 
-            // check permissions for later versions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (permissionsToRequest.size() > 0) {
-                    checkUserLocationPermission();
+                // check permissions for later versions
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (permissionsToRequest.size() > 0) {
+                        checkUserLocationPermission();
                   /*  requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]),
                             ALL_PERMISSIONS_RESULT);
                     canGetLocation = false;*/
+                    }
                 }
             }
-        }
 
         //Checks if FINE LOCATION and COARSE Location were granted
-        if (ActivityCompat.checkSelfPermission(getContext(),
+        if (ActivityCompat.checkSelfPermission(context,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
 
-            Toast.makeText(getContext(), "Permissão negada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Permissão negada", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        }
         //Starts requesting location updates
 
     }
@@ -229,7 +233,7 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     private void showSettingsAlert() {
 
 
-        Toast.makeText(getContext(), "showSettingsAlert Dialog", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "showSettingsAlert Dialog", Toast.LENGTH_SHORT).show();
     }
 
     private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
@@ -247,7 +251,7 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     private boolean hasPermission(String perm) {
         if (canAskPermission()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                return (getContext().checkSelfPermission(perm) == PackageManager.PERMISSION_GRANTED);
+                return (context.checkSelfPermission(perm) == PackageManager.PERMISSION_GRANTED);
             }
         }
         return true;
@@ -292,7 +296,9 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
       //  buildApiClint();
         mGoogleMap=googleMap;
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (context!=null)
+        {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -302,27 +308,38 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
             // for ActivityCompat#requestPermissions for more details.
             buildApiClint();
             mGoogleMap.setMyLocationEnabled(true);
-           mGoogleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            mGoogleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 
                 @Override
                 public void onMyLocationChange(Location location) {
                     // TODO Auto-generated method stub
-if (currentLocationMaker!=null) {
-    currentLocationMaker.remove();
-}
-    currentLocationMaker=mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
+                    if (currentLocationMaker != null) {
+                        currentLocationMaker.remove();
+                    }
+                    currentLocationMaker = mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
 
                 /*Toast.makeText(context, String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
                     Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.CompanyId) , Toast.LENGTH_SHORT).show();
                     Toast.makeText(context,String.valueOf(DetailsHomeDriverFragment.TripId) , Toast.LENGTH_SHORT).show();*/
-                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lat").setValue(String.valueOf(location.getLatitude()));
-                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lng").setValue(String.valueOf(location.getLongitude()));
+                    if (String.valueOf(location.getLatitude()) != null && String.valueOf(location.getLongitude()) != null) {
+                        mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lat").setValue(String.valueOf(location.getLatitude()));
+                        mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("lng").setValue(String.valueOf(location.getLongitude()));
+                    }
+                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("speed").setValue(Integer.valueOf("0"));
+                    // Toast.makeText(context, DetailsHomeDriverFragment.clicked, Toast.LENGTH_SHORT).show();
+                /*if (DetailsHomeDriverFragment.clicked.equals("start_clicked")) {
+                        mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("status").setValue("on");
+                    }else if (DetailsHomeDriverFragment.clicked.equals("end_clicked")) {
+                        mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("status").setValue("off");
+                    }*/
+
+                    mDatabase.child("buses").child(DetailsHomeDriverFragment.CompanyId).child(DetailsHomeDriverFragment.TripId).child("status").setValue("off");
 
 
                 }
             });
 
-
+        }
 
         }
 
@@ -503,10 +520,12 @@ public boolean checkUserLocationPermission()
 
     @Override
     public void onRoutingFailure(RouteException e) {
-        if(e != null) {
-            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(getContext(), "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+        if (context!=null) {
+            if (e != null) {
+                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -543,11 +562,15 @@ public boolean checkUserLocationPermission()
             int colorIndex = i % COLORS.length;
 
             PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getContext().getResources().getColor(COLORS[colorIndex]));
+            if (context != null) {
+                polyOptions.color(context.getResources().getColor(COLORS[colorIndex]));
+
+            }
             polyOptions.width(10 + i * 3);
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mGoogleMap.addPolyline(polyOptions);
             polylines.add(polyline);
+
 
             // Toast.makeText(getContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }

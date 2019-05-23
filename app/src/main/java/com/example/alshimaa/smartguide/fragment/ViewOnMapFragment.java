@@ -104,7 +104,7 @@ Context context;
     protected LatLng start;
     protected LatLng end;
     Marker m;
-    Integer BusSpeed;
+   // Integer BusSpeed;
     protected GoogleApiClient mGoogleApiClient;
 
 
@@ -373,7 +373,7 @@ Context context;
                 {
                    BusLat=Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
                    BusLng=Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
-                   BusSpeed=Integer.parseInt(dataSnapshot.child("speed").getValue().toString());
+                  // BusSpeed=Integer.parseInt(dataSnapshot.child("speed").getValue().toString());
 
                     //getAllLocations((Map<String,Object>) dataSnapshot.getValue());
                     LatLng BusLatLng=new LatLng(BusLat,BusLng);
