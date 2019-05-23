@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
+import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.activity.NavigationGuideActivity;
 import com.example.alshimaa.smartguide.adapter.HomeGuideAdapter;
 import com.example.alshimaa.smartguide.adapter.NotificationsAdapter;
@@ -60,27 +61,26 @@ View view;
         //homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
 
 
-        NavigationGuideActivity.toggle_guide = new ActionBarDrawerToggle(
-                getActivity(), NavigationGuideActivity.drawer_guide, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        NavigationActivity.toggle = new ActionBarDrawerToggle(
+                getActivity(), NavigationActivity.drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        NavigationGuideActivity.drawer_guide.addDrawerListener(NavigationGuideActivity.toggle_guide);
-        NavigationGuideActivity.toggle_guide.syncState();
+        NavigationActivity.drawer.addDrawerListener(NavigationActivity.toggle);
+        NavigationActivity.toggle.syncState();
 
-        NavigationGuideActivity.toggle_guide.setDrawerIndicatorEnabled(false);
+        NavigationActivity.toggle.setDrawerIndicatorEnabled(false);
         toolbar.setNavigationIcon(R.drawable.group151);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (NavigationGuideActivity.drawer_guide.isDrawerOpen(GravityCompat.START)) {
-                    NavigationGuideActivity.drawer_guide.closeDrawer(GravityCompat.START);
+                if (NavigationActivity.drawer.isDrawerOpen(GravityCompat.START)) {
+                    NavigationActivity.drawer.closeDrawer(GravityCompat.START);
                 } else {
-                    NavigationGuideActivity.drawer_guide.openDrawer(GravityCompat.START);
+                    NavigationActivity.drawer.openDrawer(GravityCompat.START);
                 }
             }
         });
-
         networkConnection=new NetworkConnection( getContext() );
         Notifications();
 
@@ -89,7 +89,7 @@ View view;
 
     private void Notifications() {
         notificationsPresenter=new NotificationsPresenter(getContext(),this);
-        notificationsPresenter.getNotificationsResult( SplashActivity.Guide_user_token,"guides");
+        notificationsPresenter.getNotificationsResult( SplashActivity.Login,"supervisors");
     }
 
 

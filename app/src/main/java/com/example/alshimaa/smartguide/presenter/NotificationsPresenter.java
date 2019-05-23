@@ -45,7 +45,7 @@ public class NotificationsPresenter {
                 }else if(response.code()==400)
                 {
                     //loginView.showError();
-                    Toast.makeText(context, "البريد الالكترونى او كلمه المرور غير صحيح!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "عفوا,لا توجد اشعارات!", Toast.LENGTH_SHORT).show();
                 }
             }
 

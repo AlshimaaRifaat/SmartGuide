@@ -41,6 +41,7 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
 public class FollowFlightsFragment extends Fragment implements FollowFlightsView
         ,DetailsFollowFlightsView {
     @BindView(R.id.follow_flights_icon_plus) ImageView iconPlus;
+    @BindView(R.id.follow_flights_notification) ImageView iconNotification;
     @BindView(R.id.relative_sort_by) RelativeLayout sortByRelative;
     private Unbinder unbinder;
 
@@ -148,7 +149,13 @@ View view;
 
         Toast.makeText(getContext(),"USER   "+ SplashActivity.Login, Toast.LENGTH_SHORT).show();
 */
-
+         iconNotification.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                         new NotificationFragment()).addToBackStack(null).commit();
+             }
+         });
 
         return view;
     }
