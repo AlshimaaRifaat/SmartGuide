@@ -40,6 +40,9 @@ public class HomeDriverFragment extends Fragment implements HomeDriverView,Detai
     RecyclerView recyclerViewHomeDriver;
     @BindView(R.id.home_driver_tool_bar)
     Toolbar toolbar;
+
+    @BindView(R.id.home_driver_notification)
+    ImageView notificationIcon;
     Unbinder unbinder;
 
     NetworkConnection networkConnection;
@@ -81,6 +84,17 @@ View view;
         networkConnection=new NetworkConnection( getContext() );
 
         HomeDriverTrips();
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationFragment notificationFragment=new NotificationFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("module","driver_notification");
+                notificationFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation_driver,
+                        notificationFragment).addToBackStack(null).commit();
+            }
+        });
         return view;
     }
 

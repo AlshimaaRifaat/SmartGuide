@@ -64,7 +64,8 @@ View view;
         //homeGuidePresenter=new HomeGuidePresenter(getContext(),this);
         bundle=this.getArguments();
         if (bundle!=null) {
-            NotificationFrom = bundle.getString("guide");
+            NotificationFrom = bundle.getString("module");
+
         }
       //  Toast.makeText(getContext(), NotificationFrom, Toast.LENGTH_SHORT).show();
 
@@ -100,7 +101,11 @@ View view;
         if(NotificationFrom.equals("guide_notification"))
         {
             notificationsPresenter.getNotificationsResult( SplashActivity.Guide_user_token,"guides");
-        }else {
+        }else if(NotificationFrom.equals("driver_notification"))
+        {
+            notificationsPresenter.getNotificationsResult( SplashActivity.Driver_user_token,"drivers");
+        }
+            else {
             notificationsPresenter.getNotificationsResult(SplashActivity.Login, "supervisors");
         }
     }
