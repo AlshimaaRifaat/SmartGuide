@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
+       <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.NavigationActivity"
             android:label="@string/title_activity_navigation"

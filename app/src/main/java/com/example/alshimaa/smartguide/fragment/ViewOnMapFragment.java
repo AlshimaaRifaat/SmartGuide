@@ -299,34 +299,35 @@ Context context;
                 .bearing(8).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));*/
        // Toast.makeText(getContext(), DetailsFollowFlightsFragment.StartLat, Toast.LENGTH_SHORT).show();
-         start = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.StartLat), Double.parseDouble(DetailsFollowFlightsFragment.StartLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(start).title("موضع بدء الرحله"));
+        if(DetailsFollowFlightsFragment.StartLat!=null&&DetailsFollowFlightsFragment.StartLng!=null
+                &&DetailsFollowFlightsFragment.EndLat!=null&&DetailsFollowFlightsFragment.EndLng!=null) {
+            start = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.StartLat), Double.parseDouble(DetailsFollowFlightsFragment.StartLng));
+            mGoogleMap.addMarker(new MarkerOptions().position(start).title("موضع بدء الرحله"));
 
-        CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
+            CameraPosition cameraPosition1 = new CameraPosition.Builder().target(start).build();
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition1));
 
-         end = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.EndLat), Double.parseDouble(DetailsFollowFlightsFragment.EndLng));
-        mGoogleMap.addMarker(new MarkerOptions().position(end).title("موضع انهاء الرحله"));
+            end = new LatLng(Double.parseDouble(DetailsFollowFlightsFragment.EndLat), Double.parseDouble(DetailsFollowFlightsFragment.EndLng));
+            mGoogleMap.addMarker(new MarkerOptions().position(end).title("موضع انهاء الرحله"));
 
-        CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
+            CameraPosition cameraPosition2 = new CameraPosition.Builder().target(end).build();
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition2));
 
-        getMarkers();
+            getMarkers();
 
         /*LatLng a=new LatLng(30.132419, 31.321792);
         LatLng b=new LatLng(30.113533, 31.286533);*/
 
 
-
-
-        Routing routing = new Routing.Builder()
-                .travelMode(AbstractRouting.TravelMode.DRIVING)
-                .withListener(this)
-                .key("AIzaSyCaf2jejQzVtF7myO4R-P2mEFmGoiom1Pc")
-                .alternativeRoutes(false)
-                .waypoints(start, end)
-                .build();
-        routing.execute();
+            Routing routing = new Routing.Builder()
+                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .withListener(this)
+                    .key("AIzaSyCaf2jejQzVtF7myO4R-P2mEFmGoiom1Pc")
+                    .alternativeRoutes(false)
+                    .waypoints(start, end)
+                    .build();
+            routing.execute();
+        }
 
 
     }

@@ -210,7 +210,7 @@ public class NavigationActivity extends AppCompatActivity
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add( R.id.content_navigation,fragment )
-                .addToBackStack( null ).commit();
+                .commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );

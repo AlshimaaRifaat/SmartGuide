@@ -214,7 +214,7 @@ View view;
             @Override
             public void onClick(View v) {
                 finishTripBtn.setVisibility(View.INVISIBLE);
-                startTripBtn.setVisibility(View.VISIBLE);
+                startTripBtn.setVisibility(View.INVISIBLE);
                 performEndTrip();
             }
         });
