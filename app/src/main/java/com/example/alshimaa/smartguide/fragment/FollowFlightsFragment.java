@@ -139,6 +139,18 @@ View view;
         {
             FollowFlights();
         }
+        iconNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationFragment notificationFragment=new NotificationFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("module","supervisor_notification");
+                notificationFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.content_navigation,
+                        notificationFragment).addToBackStack(null).commit();
+
+            }
+        });
        /* Toast.makeText(getContext(),"mos "+ Mosnda, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(),"kayd " +Kayd_tnfez, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(),"moalaq "+ Moalaq, Toast.LENGTH_SHORT).show();
@@ -149,13 +161,7 @@ View view;
 
         Toast.makeText(getContext(),"USER   "+ SplashActivity.Login, Toast.LENGTH_SHORT).show();
 */
-         iconNotification.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 getFragmentManager().beginTransaction().replace(R.id.content_navigation,
-                         new NotificationFragment()).addToBackStack(null).commit();
-             }
-         });
+        
 
         return view;
     }

@@ -105,7 +105,7 @@ View view;
         {
             notificationsPresenter.getNotificationsResult( SplashActivity.Driver_user_token,"drivers");
         }
-            else {
+            else if(NotificationFrom.equals("supervisor_notification")) {
             notificationsPresenter.getNotificationsResult(SplashActivity.Login, "supervisors");
         }
     }

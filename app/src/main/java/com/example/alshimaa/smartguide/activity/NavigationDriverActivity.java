@@ -184,7 +184,7 @@ public class NavigationDriverActivity extends AppCompatActivity
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add( R.id.content_navigation_driver,fragment )
-                .addToBackStack( null ).commit();
+                .commit();
 
 
         drawer_driver = (DrawerLayout) findViewById( R.id.drawer_layout );

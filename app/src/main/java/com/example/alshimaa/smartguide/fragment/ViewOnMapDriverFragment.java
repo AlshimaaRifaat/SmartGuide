@@ -169,21 +169,21 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
     }*/
 
     public void buildApiClint(){
-        if(context!=null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(context)
+
+            mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
             mGoogleApiClient.connect();
-        }
+
 
 
     }
 
     private void startGettingLocations() {
-        if (context!=null) {
-            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+            LocationManager lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
             boolean isGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
             boolean isNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -217,15 +217,15 @@ public class ViewOnMapDriverFragment extends Fragment implements OnMapReadyCallb
             }
 
         //Checks if FINE LOCATION and COARSE Location were granted
-        if (ActivityCompat.checkSelfPermission(context,
+        if (ActivityCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
 
-            Toast.makeText(context, "Permissão negada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Permissão negada", Toast.LENGTH_SHORT).show();
             return;
         }
-        }
+
         //Starts requesting location updates
 
     }

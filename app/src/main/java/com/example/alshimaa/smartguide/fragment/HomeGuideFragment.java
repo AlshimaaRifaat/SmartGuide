@@ -39,7 +39,7 @@ public class HomeGuideFragment extends Fragment implements HomeGuideView,Details
     @BindView(R.id.home_guide_recycler)   RecyclerView recyclerViewHomeGuide;
     @BindView(R.id.home_guide_tool_bar)  Toolbar toolbar;
     @BindView(R.id.home_guide_notification)
-    ImageView iconNotification;;
+    ImageView iconNotification;
     Unbinder unbinder;
 
     HomeGuideAdapter homeGuideAdapter;

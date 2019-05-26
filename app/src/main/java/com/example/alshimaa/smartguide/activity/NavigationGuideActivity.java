@@ -188,7 +188,7 @@ public class NavigationGuideActivity extends AppCompatActivity
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add( R.id.content_navigation_guide,fragment )
-                .addToBackStack( null ).commit();
+                .commit();
 
 
          drawer_guide = (DrawerLayout) findViewById( R.id.drawer_layout );
