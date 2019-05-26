@@ -125,7 +125,6 @@ public class NewTripFragment extends Fragment implements GetGuideNameView,GetBus
 
     String[] statusValueSpinner = {
             "مسندة",
-            "معلق",
             "مجدولة",
             "فوريه"
     };
@@ -390,12 +389,12 @@ View view;
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "1");
                     }
-                    else if (statusSelectedItemSpinner=="معلق") {
+                   /* else if (statusSelectedItemSpinner=="معلق") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "3");
-                    } else if (statusSelectedItemSpinner=="مجدولة") {
+                    }*/ else if (statusSelectedItemSpinner=="مجدولة") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()

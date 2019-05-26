@@ -68,7 +68,7 @@
         android:text="@string/save"
         android:textAllCaps="false"
         android:layout_below="@id/edit_trip_cardV_trip_status"
-
+        android:clickable="true"
         />
 
     <!-- TODO: Update blank fragment layout -->

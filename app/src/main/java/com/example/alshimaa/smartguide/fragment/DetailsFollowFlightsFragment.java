@@ -1,9 +1,12 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alshimaa.smartguide.NetworkConnection;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
@@ -25,7 +29,8 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFollowFlightsFragment extends Fragment implements StartTripView {
+public class DetailsFollowFlightsFragment extends Fragment implements StartTripView
+        {
 
 TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
         ,fromTxt,toTxt,startDateTxt,endDateTxt
@@ -34,16 +39,20 @@ TextView flightNameTxt,guideNameTxt,busNumberTxt,driverNameTxt
     @BindView(R.id.details_follow_flights_btn_start_trip) Button startTripBtn;
     @BindView(R.id.details_follow_flights_btn_pause_trip) Button pauseTripBtn;
     @BindView(R.id.details_follow_flights_btn_finish_trip) Button finishTripBtn;
+   // @BindView(R.id.details_swip_refresh) SwipeRefreshLayout swipeRefreshLayout;
     Unbinder unbinder;
 
 
-
+    NetworkConnection networkConnection;
     FollowFlightsData followFlightsData;
     Bundle bundle;
 
     Button viewOnMapBtn;
     public static String StartLat,StartLng,EndLat,EndLng,CompanyId,BusName,TripId,TripStatus
             ,TripName,GuideName,DriverName,From,To,StartDate,EndDate,StatusId;
+
+    SharedPreferences sharedPreferences_status;
+
     StartTripPresenter startTripPresenter;
 
 
@@ -59,6 +68,11 @@ View view;
         view= inflater.inflate(R.layout.fragment_details_follow_flights, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
+        networkConnection=new NetworkConnection( getContext() );
+       // swipRefresh();
+        sharedPreferences_status=getContext().getSharedPreferences("status", Context.MODE_PRIVATE);
+        TripStatus=sharedPreferences_status.getString("trip_status",null);
+
         bundle=this.getArguments();
         if (bundle!=null)
         {
@@ -88,7 +102,9 @@ View view;
             endDateTxt.setText("تاريخ نهايه الرحله:"+EndDate);
 
             logoBusNumberTxt.setText(BusName);
-            TripStatus=followFlightsData.getStatus();
+          // TripStatus=followFlightsData.getStatus();
+
+
             logoStatusTxt.setText(TripStatus);
 
 
@@ -122,7 +138,9 @@ View view;
             logoBusNumberTxt.setTypeface(customFontBold);
             logoStatusTxt.setTypeface(customFontBold);
 
+
         }
+       // swipeRefreshLayout.setRefreshing( false );
         if(StatusId.equals("1"))
         {
             startTripBtn.setVisibility(View.VISIBLE);
@@ -227,6 +245,28 @@ View view;
         return view;
     }
 
+   /* private void swipRefresh() {
+        swipeRefreshLayout.setColorSchemeResources( android.R.color.holo_blue_dark );
+        swipeRefreshLayout.setEnabled( true );
+        swipeRefreshLayout.setOnRefreshListener( this );
+        swipeRefreshLayout.post( new Runnable() {
+            @Override
+            public void run() {
+                if(networkConnection.isNetworkAvailable( getContext() ))
+                {
+
+                   swipeRefreshLayout.setRefreshing( true );
+                    TripStatus=sharedPreferences_status.getString("trip_status",null);
+                    logoStatusTxt.setText(TripStatus);
+
+                }else
+                {
+                    Toast.makeText(getContext(), getResources().getString(R.string.checkNetworkConnection), Toast.LENGTH_SHORT).show();
+                }
+            }
+        } );
+    }
+*/
     private void performEndTrip() {
         startTripPresenter=new StartTripPresenter(getContext(),this);
         startTripPresenter.getEndTripResult(SplashActivity.Login,TripId,"مرحبا بك سوف تبدا الرحلة الان","تفاصيل ابن الوسخة بقى زى ما هو عاوز");
@@ -312,4 +352,23 @@ View view;
     public void showEndTripError() {
 
     }
+
+   /* @Override
+    public void onRefresh() {
+        if(networkConnection.isNetworkAvailable( getContext() ))
+        {
+            *//*TripStatus=followFlightsData.getStatus();
+            swipeRefreshLayout.setRefreshing( true );
+
+*//*
+            swipeRefreshLayout.setRefreshing( true );
+            TripStatus=sharedPreferences_status.getString("trip_status",null);
+            logoStatusTxt.setText(TripStatus);
+        }else
+        {
+            Toast.makeText(getContext(), getResources().getString(R.string.checkNetworkConnection), Toast.LENGTH_SHORT).show();
+        }
+
+
+    }*/
 }

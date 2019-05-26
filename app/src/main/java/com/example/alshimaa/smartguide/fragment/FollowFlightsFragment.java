@@ -1,6 +1,8 @@
 package com.example.alshimaa.smartguide.fragment;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -57,6 +59,7 @@ Toolbar toolbar;
     Bundle bundle;
     String Mosnda,Kayd_tnfez,Moalaq,Malghia,
             Mokfl_nhaey,Mokfl_gozey,Mogdwla,Old,New;
+    SharedPreferences.Editor sharedPref_status;
 
     //List<FollowFlightsData> listAfterRemoveItems=new ArrayList<>() ;
 
@@ -72,6 +75,7 @@ View view;
         view =inflater.inflate(R.layout.fragment_follow_flights, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
+        sharedPref_status=getContext().getSharedPreferences("status", Context.MODE_PRIVATE).edit();
         followFlightsPresenter=new FollowFlightsPresenter(getContext(),this);
 
 
@@ -161,7 +165,7 @@ View view;
 
         Toast.makeText(getContext(),"USER   "+ SplashActivity.Login, Toast.LENGTH_SHORT).show();
 */
-        
+
 
         return view;
     }
@@ -266,6 +270,11 @@ View view;
         DetailsFollowFlightsFragment detailsFollowFlightsFragment=new DetailsFollowFlightsFragment();
         Bundle bundle=new Bundle();
         bundle.putParcelable("follow_flight_item",followFlightsData);
+
+   sharedPref_status.putString("trip_status", followFlightsData.getStatus());
+        sharedPref_status.apply();
+        DetailsFollowFlightsFragment.TripStatus = followFlightsData.getStatus();
+
         detailsFollowFlightsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.content_navigation,
                detailsFollowFlightsFragment ).addToBackStack(null).commit();

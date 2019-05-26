@@ -250,6 +250,7 @@
             android:layout_below="@id/request_pause_guide_card_msg"
             android:text="@string/Send"
             android:textAllCaps="false"
+            android:clickable="true"
             />
     </RelativeLayout>
 

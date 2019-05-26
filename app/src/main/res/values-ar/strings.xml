@@ -60,4 +60,5 @@
     <string name="finish_trip">انهاء الرحلة</string>
     <string name="nextTrip">الرحله القادمه</string>
     <string name="delivering_done">تم استلام الحجاج بنجاح</string>
+    <string name="checkNetworkConnection">افحص اتصالك بالانترنت!</string>
 </resources>

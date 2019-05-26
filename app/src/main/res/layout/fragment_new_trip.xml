@@ -498,6 +498,7 @@
         android:textAllCaps="false"
         android:layout_below="@id/new_trip_cardV_trip_end_date"
         android:layout_marginBottom="@dimen/_32sdp"
+       android:clickable="true"
         />
 </RelativeLayout>
     </ScrollView>
