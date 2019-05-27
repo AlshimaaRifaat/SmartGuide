@@ -51,10 +51,6 @@ public class HomeDriverAdapter extends RecyclerView.Adapter<HomeDriverAdapter.Vi
         holder.status.setTypeface( customFontBold );
 
 
-
-
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
