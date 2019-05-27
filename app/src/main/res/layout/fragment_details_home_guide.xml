@@ -193,6 +193,22 @@
                  android:layout_marginBottom="@dimen/_11sdp"
                  />-->
 
+
+            <Button
+                android:id="@+id/details_home_guide_btn_view_on_map"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:background="@drawable/btn_register"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_32sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                android:text="@string/ViewPath"
+                android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:clickable="true"
+
+                />
             <Button
 
                 android:id="@+id/details_home_guide_btn_pause_trip"
@@ -206,26 +222,10 @@
                 android:textColor="#fff"
                 android:text="@string/request_suspension"
                 android:textAllCaps="false"
-                android:visibility="gone"
-                android:layout_marginBottom="@dimen/_11sdp"
-                android:clickable="true"
-                />
-            <Button
-                android:id="@+id/details_home_guide_btn_view_on_map"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_32sdp"
-                android:background="@drawable/btn_register"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_32sdp"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="#fff"
-                android:text="@string/ViewPath"
-                android:textAllCaps="false"
+               android:layout_below="@+id/details_home_guide_btn_view_on_map"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_below="@+id/details_home_guide_btn_pause_trip"
-               android:visibility="gone"
                 android:clickable="true"
-
+                android:visibility="gone"
                 />
             <Button
                 android:id="@+id/details_home_guide_btn_finish_trip"

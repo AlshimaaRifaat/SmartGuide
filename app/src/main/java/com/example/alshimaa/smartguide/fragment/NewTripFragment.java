@@ -383,18 +383,14 @@ View view;
 
                         SplashActivity.Login!=null &&
                         String.valueOf(Price)!=null) {
+
                     if (statusSelectedItemSpinner=="مسندة") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "1");
                     }
-                   /* else if (statusSelectedItemSpinner=="معلق") {
-                        addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
-                                tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
-                                , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
-                                , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "3");
-                    }*/ else if (statusSelectedItemSpinner=="مجدولة") {
+                   else if (statusSelectedItemSpinner=="مجدولة") {
                         addTripPresenter.getAddTripResult(tripLatinName.getText().toString(),
                                 tripArabicName.getText().toString(), String.valueOf(GuideNameModelID), String.valueOf(DriverNameModelID)
                                 , String.valueOf(BusNumberModelID), startDateTxt.getText().toString(), endDateTxt.getText().toString()
@@ -407,6 +403,9 @@ View view;
                                 , String.valueOf(PathModelID), CompanyId, SplashActivity.Login, String.valueOf(Price), "8");
                     }
                     // still not done
+                }else
+                {
+                    Toast.makeText(context, "من فضلك,ادخل بيانات الرحله كاملة!", Toast.LENGTH_SHORT).show();
                 }
 
 

@@ -181,7 +181,9 @@ View view;
         startTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startTripBtn.setVisibility(View.INVISIBLE);
                 finishTripBtn.setVisibility(View.VISIBLE);
+                pauseTripBtn.setVisibility(View.VISIBLE);
                 performStartTripGuide();
             }
         });
@@ -195,7 +197,9 @@ View view;
         finishTripBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTripBtn.setVisibility(View.VISIBLE);
+                finishTripBtn.setVisibility(View.INVISIBLE);
+                startTripBtn.setVisibility(View.INVISIBLE);
+                pauseTripBtn.setVisibility(View.GONE);
                 performEndTripGuide();
             }
         });
@@ -283,6 +287,7 @@ View view;
     @Override
     public void showEndTripGuideMsg(String Msg) {
         Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
+        pauseTripBtn.setVisibility(View.INVISIBLE);
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.presenter.FollowFlightsPresenter;
 import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 import com.example.alshimaa.smartguide.view.FollowFlightsView;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,13 @@ View view;
         view =inflater.inflate(R.layout.fragment_follow_flights, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
+
+            // TODO: Add OneSignal initialization here
+            OneSignal.startInit(getContext())
+                    .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                    .unsubscribeWhenNotificationsAreDisabled(true)
+                    .init();
+
         sharedPref_status=getContext().getSharedPreferences("status", Context.MODE_PRIVATE).edit();
         followFlightsPresenter=new FollowFlightsPresenter(getContext(),this);
 

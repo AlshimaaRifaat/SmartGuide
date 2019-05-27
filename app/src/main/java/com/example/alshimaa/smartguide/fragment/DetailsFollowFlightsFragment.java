@@ -233,6 +233,7 @@ View view;
             public void onClick(View v) {
                 finishTripBtn.setVisibility(View.INVISIBLE);
                 startTripBtn.setVisibility(View.INVISIBLE);
+                pauseTripBtn.setVisibility(View.INVISIBLE);
                 performEndTrip();
             }
         });

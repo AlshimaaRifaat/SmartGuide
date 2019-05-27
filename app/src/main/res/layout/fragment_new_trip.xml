@@ -115,6 +115,7 @@
             android:paddingEnd="@dimen/_22sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
+            android:inputType="text"
 
 
             />
@@ -145,6 +146,8 @@
             android:paddingEnd="@dimen/_22sdp"
             android:textSize="@dimen/_13sdp"
             android:backgroundTint="#fff"
+            android:inputType="text"
+
             />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
