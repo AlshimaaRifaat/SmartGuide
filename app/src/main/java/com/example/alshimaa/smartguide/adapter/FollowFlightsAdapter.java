@@ -44,32 +44,20 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
     public void onBindViewHolder(@NonNull FollowFlightsAdapter.ViewHolder holder, final int position) {
        /* Glide.with( context ).load( "http://omelqoura.com"
                 +followFlightsDataList.get( position ).getImg() ).into(holder.imageView);*/
-        holder.busNumber.setText(followFlightsDataList.get( position ).getBusName());
+        holder.path.setText("( "+followFlightsDataList.get( position ).getFrom()+" – "+followFlightsDataList.get( position ).getTo()+" )");
         holder.status.setText(followFlightsDataList.get( position ).getStatus());
         // Typeface customFontBold = Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
        /* holder.address.setText(currentExhibtionDataList.get( position ).getAddress());*/
 
         Typeface customFontBold= Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
-        holder.busNumber.setTypeface( customFontBold );
+        holder.path.setTypeface( customFontBold );
         holder.status.setTypeface( customFontBold );
-
-       /* holder.address.setTypeface( customFontRegular );*/
-
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   FollowFlightsData followFlightsData=new FollowFlightsData();
-                followFlightsData.setTripName(followFlightsDataList.get(position).getTripName());
-                followFlightsData.setGuideName(followFlightsDataList.get(position).getGuideName());
-                followFlightsData.setBusName(followFlightsDataList.get(position).getBusName());
-                followFlightsData.setDriverName(followFlightsDataList.get(position).getDriverName());
-                followFlightsData.setFrom(followFlightsDataList.get(position).getFrom());
-                followFlightsData.setTo(followFlightsDataList.get(position).getTo());
-                followFlightsData.setDateStart(followFlightsDataList.get(position).getDateStart());
-                followFlightsData.setDateEnd(followFlightsDataList.get(position).getDateEnd());*/
+
                 detailsFollowFlightsView.showDetailsFollowFlights(followFlightsDataList.get(position));
             }
         });
@@ -83,14 +71,14 @@ public class FollowFlightsAdapter extends RecyclerView.Adapter<FollowFlightsAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView busNumber;
+        private TextView path;
         private TextView status;
        // RelativeLayout relativeItem;
 
         public ViewHolder(View itemView) {
             super( itemView );
 
-            busNumber=itemView.findViewById(R.id.row_follow_flights_bus_number);
+            path=itemView.findViewById(R.id.row_follow_flights_path);
             status=itemView.findViewById(R.id.row_follow_flights_status);
          //   relativeItem=itemView.findViewById(R.id.row_follow_flights_relative_item);
 

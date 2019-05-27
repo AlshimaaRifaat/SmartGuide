@@ -17,23 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.alshimaa.smartguide.R;
 import com.example.alshimaa.smartguide.fragment.FollowFlightsFragment;
 import com.example.alshimaa.smartguide.fragment.LoginFragment;
 import com.example.alshimaa.smartguide.fragment.OldRequestsPauseTripSupervisorFragment;
-import com.example.alshimaa.smartguide.fragment.OldTripFragment;
-import com.example.alshimaa.smartguide.fragment.RequestPauseTripFragment;
-import com.example.alshimaa.smartguide.fragment.RequestPauseTripGuideFragment;
-import com.example.alshimaa.smartguide.fragment.TripsInProgressFragment;
-import com.example.alshimaa.smartguide.fragment.ViewMyGuidesFragment;
-import com.example.alshimaa.smartguide.fragment.ViewOnMapFragment;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

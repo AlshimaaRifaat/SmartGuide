@@ -33,11 +33,11 @@
             >
 
             <TextView
-                android:id="@+id/row_home_driver_bus_number"
+                android:id="@+id/row_home_driver_path"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="سلطه خضراء"
+                android:text="المسار"
                 android:textColor="#fff"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -47,7 +47,7 @@
                 android:id="@+id/row_home_driver_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/row_home_driver_bus_number"
+                android:layout_below="@+id/row_home_driver_path"
                 android:layout_centerHorizontal="true"
                 android:text="50 dollar"
                 android:textSize="@dimen/_10sdp"

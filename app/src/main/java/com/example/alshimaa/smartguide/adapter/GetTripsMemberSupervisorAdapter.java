@@ -44,13 +44,13 @@ public class GetTripsMemberSupervisorAdapter extends RecyclerView.Adapter<GetTri
     public void onBindViewHolder(@NonNull GetTripsMemberSupervisorAdapter.ViewHolder holder, final int position) {
        /* Glide.with( context ).load( "http://omelqoura.com"
                 +followFlightsDataList.get( position ).getImg() ).into(holder.imageView);*/
-        holder.busNumber.setText(getTripsMemberSupervisorDataList.get( position ).getBusName());
+        holder.path.setText("( "+getTripsMemberSupervisorDataList.get( position ).getFrom()+" – "+getTripsMemberSupervisorDataList.get( position ).getTo()+" )");
         holder.status.setText(getTripsMemberSupervisorDataList.get( position ).getStatus());
         // Typeface customFontBold = Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
         /* holder.address.setText(currentExhibtionDataList.get( position ).getAddress());*/
 
         Typeface customFontBold= Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
-        holder.busNumber.setTypeface( customFontBold );
+        holder.path.setTypeface( customFontBold );
         holder.status.setTypeface( customFontBold );
 
         /* holder.address.setTypeface( customFontRegular );*/
@@ -74,14 +74,14 @@ public class GetTripsMemberSupervisorAdapter extends RecyclerView.Adapter<GetTri
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView busNumber;
+        private TextView path;
         private TextView status;
         // RelativeLayout relativeItem;
 
         public ViewHolder(View itemView) {
             super( itemView );
 
-            busNumber=itemView.findViewById(R.id.row_get_trips_member_bus_number);
+            path=itemView.findViewById(R.id.row_get_trips_member_path);
             status=itemView.findViewById(R.id.row_get_trips_member_status);
             //   relativeItem=itemView.findViewById(R.id.row_follow_flights_relative_item);
 

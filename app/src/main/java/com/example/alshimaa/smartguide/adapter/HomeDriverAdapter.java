@@ -42,12 +42,12 @@ public class HomeDriverAdapter extends RecyclerView.Adapter<HomeDriverAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull HomeDriverAdapter.ViewHolder holder, final int position) {
 
-        holder.busNumber.setText(followFlightsDataList.get( position ).getBusName());
+        holder.path.setText("( "+followFlightsDataList.get( position ).getFrom()+" – "+followFlightsDataList.get( position ).getTo()+" )");
         holder.status.setText(followFlightsDataList.get( position ).getStatus());
 
 
         Typeface customFontBold= Typeface.createFromAsset( context.getAssets(), "DroidKufi-Bold.ttf" );
-        holder.busNumber.setTypeface( customFontBold );
+        holder.path.setTypeface( customFontBold );
         holder.status.setTypeface( customFontBold );
 
 
@@ -72,14 +72,14 @@ public class HomeDriverAdapter extends RecyclerView.Adapter<HomeDriverAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView busNumber;
+        private TextView path;
         private TextView status;
         // RelativeLayout relativeItem;
 
         public ViewHolder(View itemView) {
             super( itemView );
 
-            busNumber=itemView.findViewById(R.id.row_home_driver_bus_number);
+            path=itemView.findViewById(R.id.row_home_driver_path);
             status=itemView.findViewById(R.id.row_home_driver_status);
             //   relativeItem=itemView.findViewById(R.id.row_follow_flights_relative_item);
 

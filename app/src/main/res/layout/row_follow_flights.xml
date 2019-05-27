@@ -34,7 +34,7 @@
         >
 
         <TextView
-            android:id="@+id/row_follow_flights_bus_number"
+            android:id="@+id/row_follow_flights_path"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
             android:id="@+id/row_follow_flights_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/row_follow_flights_bus_number"
+            android:layout_below="@+id/row_follow_flights_path"
             android:layout_centerHorizontal="true"
             android:text="50 dollar"
             android:textSize="@dimen/_10sdp"
