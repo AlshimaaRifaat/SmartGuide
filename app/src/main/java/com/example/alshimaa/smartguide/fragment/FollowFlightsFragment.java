@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
@@ -24,9 +25,13 @@ import com.example.alshimaa.smartguide.SplashActivity;
 import com.example.alshimaa.smartguide.activity.NavigationActivity;
 import com.example.alshimaa.smartguide.adapter.FollowFlightsAdapter;
 import com.example.alshimaa.smartguide.model.FollowFlightsData;
+import com.example.alshimaa.smartguide.model.NotificationsData;
 import com.example.alshimaa.smartguide.presenter.FollowFlightsPresenter;
+import com.example.alshimaa.smartguide.presenter.NotificationsPresenter;
 import com.example.alshimaa.smartguide.view.DetailsFollowFlightsView;
 import com.example.alshimaa.smartguide.view.FollowFlightsView;
+import com.example.alshimaa.smartguide.view.NotificationNumbersView;
+import com.example.alshimaa.smartguide.view.NotificationsView;
 import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
@@ -42,10 +47,11 @@ import static com.example.alshimaa.smartguide.activity.NavigationActivity.toolba
  * A simple {@link Fragment} subclass.
  */
 public class FollowFlightsFragment extends Fragment implements FollowFlightsView
-        ,DetailsFollowFlightsView {
+        ,DetailsFollowFlightsView,NotificationsView{
     @BindView(R.id.follow_flights_icon_plus) ImageView iconPlus;
-    @BindView(R.id.follow_flights_notification) ImageView iconNotification;
+   public static   ImageView iconNotification;
     @BindView(R.id.relative_sort_by) RelativeLayout sortByRelative;
+     public static TextView textView;
     private Unbinder unbinder;
 
 Toolbar toolbar;
@@ -62,6 +68,8 @@ Toolbar toolbar;
             Mokfl_nhaey,Mokfl_gozey,Mogdwla,Old,New;
     SharedPreferences.Editor sharedPref_status;
 
+    NotificationsPresenter notificationsPresenter;
+
     //List<FollowFlightsData> listAfterRemoveItems=new ArrayList<>() ;
 
     public FollowFlightsFragment() {
@@ -76,7 +84,8 @@ View view;
         view =inflater.inflate(R.layout.fragment_follow_flights, container, false);
         unbinder= ButterKnife.bind(this,view);
         init();
-
+        notificationsPresenter=new NotificationsPresenter(getContext(),this);
+        notificationsPresenter.getNotificationsResult(SplashActivity.Login, "supervisors");
             // TODO: Add OneSignal initialization here
             OneSignal.startInit(getContext())
                     .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -175,6 +184,10 @@ View view;
 */
 
 
+            /*TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
+            View tabView = tab.getCustomView();*/
+
+
         return view;
     }
 
@@ -219,6 +232,9 @@ View view;
         toolbar=view.findViewById(R.id.follow_flights_tool_bar);
        // iconPlus=view.findViewById(R.id.follow_flights_icon_plus);
         recyclerViewFollowFlights=view.findViewById(R.id.follow_flights_recycler);
+                iconNotification=view.findViewById(R.id.follow_flights_notification);
+        textView=view.findViewById(R.id.notification_num);
+
 
     }
 
@@ -286,5 +302,26 @@ View view;
         detailsFollowFlightsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.content_navigation,
                detailsFollowFlightsFragment ).addToBackStack(null).commit();
+    }
+
+
+
+
+
+
+    @Override
+    public void showNotificationList(List<NotificationsData> notificationsDataList) {
+        if (notificationsDataList.size() >= 0) {
+            /*TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
+            View tabView = tab.getCustomView();*/
+            textView.setVisibility(View.VISIBLE);
+            Toast.makeText(getContext(), String.valueOf(notificationsDataList.size()), Toast.LENGTH_SHORT).show();
+            textView.setText(notificationsDataList.size() + "");
+        }
+    }
+
+    @Override
+    public void showNotificationError() {
+
     }
 }

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alshimaa.smartguide.NetworkConnection;
@@ -25,6 +26,7 @@ import com.example.alshimaa.smartguide.model.FollowFlightsData;
 import com.example.alshimaa.smartguide.model.NotificationsData;
 import com.example.alshimaa.smartguide.presenter.HomeGuidePresenter;
 import com.example.alshimaa.smartguide.presenter.NotificationsPresenter;
+import com.example.alshimaa.smartguide.view.NotificationNumbersView;
 import com.example.alshimaa.smartguide.view.NotificationsView;
 
 import java.util.List;
@@ -36,7 +38,8 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationFragment extends Fragment implements NotificationsView{
+public class NotificationFragment extends Fragment implements NotificationsView
+,NotificationNumbersView{
 
     @BindView(R.id.notification_recycler)
     RecyclerView recyclerViewNotification;
@@ -113,14 +116,34 @@ View view;
 
     @Override
     public void showNotificationList(List<NotificationsData> notificationsDataList) {
+
         notificationsAdapter=new NotificationsAdapter( getContext(),notificationsDataList );
        // homeGuideAdapter.onClick(this);
+
+
         recyclerViewNotification.setLayoutManager( new LinearLayoutManager(getContext()));
         recyclerViewNotification.setAdapter( notificationsAdapter );
     }
 
     @Override
     public void showNotificationError() {
+
+    }
+
+    @Override
+    public void showNotificationNumbersList(List<NotificationsData> notificationsDataList) {
+        /*if(notificationsDataList.size()>=0) {
+            *//*TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
+            View tabView = tab.getCustomView();*//*
+           //FollowFlightsFragment.textView.setVisibility(View.VISIBLE);
+            Toast.makeText(getContext(), String.valueOf(notificationsDataList.size()), Toast.LENGTH_SHORT).show();
+            //FollowFlightsFragment.textView.setText(notificationsDataList.size()+"");
+
+        }*/
+    }
+
+    @Override
+    public void showNotificationNumbersError() {
 
     }
 }
